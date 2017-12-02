@@ -1,0 +1,9 @@
+.background {
+  background: url("https://placeimg.com/1200/300/animals") no-repeat center;
+  min-height: 20em;
+  padding: 3em;
+}
+
+.background .header {
+  color: #ffffff;
+}

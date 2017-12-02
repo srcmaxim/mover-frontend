@@ -9,6 +9,7 @@ import { SemanticDropdownDirective } from './layouts/directives/semantic-dropdow
 import { LeadComponent } from './entities/lead/lead.component';
 import { CustomerComponent } from './entities/customer/customer.component';
 import { EmployeeComponent } from './entities/employee/employee.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmployeeComponent } from './entities/employee/employee.component';
     SemanticDropdownDirective,
     LeadComponent,
     CustomerComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule
