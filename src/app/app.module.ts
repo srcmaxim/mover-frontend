@@ -8,6 +8,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { SemanticDropdownDirective } from './layouts/directives/semantic-dropdown.directive';
 import { LeadComponent } from './entities/lead/lead.component';
 import { CustomerComponent } from './entities/customer/customer.component';
+import { EmployeeComponent } from './entities/employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CustomerComponent } from './entities/customer/customer.component';
     FooterComponent,
     SemanticDropdownDirective,
     LeadComponent,
-    CustomerComponent
+    CustomerComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule

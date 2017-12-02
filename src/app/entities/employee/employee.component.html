@@ -1,0 +1,47 @@
+<h1 class="ui button right floated">Create new Employee</h1>
+<h1 class="ui header">
+  Employees
+  <div class="sub header">A employee represents a person that works in the company</div>
+</h1>
+
+<div class="ui inverted section divider"></div>
+
+<table class="ui striped table">
+  <thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+
+    <th>Email</th>
+    <th>Phone</th>
+
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of employees">
+    <td>{{employee.firstName}}</td>
+    <td>{{employee.lastName}}</td>
+
+    <td>{{employee.email}}</td>
+    <td>{{employee.phone}}</td>
+
+    <td>
+      <div class="ui mini buttons">
+        <button class="ui blue compact button">
+          <i class="unhide icon"></i>
+          View
+        </button>
+        <button class="ui green compact button">
+          <i class="write icon"></i>
+          Edit
+        </button>
+        <button class="ui red compact button">
+          <i class="remove icon"> </i>
+          Delete
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
