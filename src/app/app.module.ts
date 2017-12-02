@@ -11,6 +11,7 @@ import { CustomerComponent } from './entities/customer/customer.component';
 import { EmployeeComponent } from './entities/employee/employee.component';
 import { HomeComponent } from './home/home.component';
 import { LeadDetailComponent } from './entities/lead/lead-detail.component';
+import { CustomerDetailComponent } from './entities/customer/customer-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LeadDetailComponent } from './entities/lead/lead-detail.component';
     CustomerComponent,
     EmployeeComponent,
     HomeComponent,
-    LeadDetailComponent
+    LeadDetailComponent,
+    CustomerDetailComponent
   ],
   imports: [
     BrowserModule

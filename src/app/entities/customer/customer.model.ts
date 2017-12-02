@@ -4,7 +4,7 @@ export class Customer {
   lastName: string;
   email: string;
   phone: string;
-  LeadIds: number[];
+  leadIds: number[];
 
   constructor(obj: any) {
     this.id         = obj && obj.id         || null;
@@ -12,6 +12,6 @@ export class Customer {
     this.lastName   = obj && obj.lastName   || '';
     this.email      = obj && obj.email      || '';
     this.phone      = obj && obj.phone      || '';
-    this.LeadIds    = obj && obj.LeadIds    || [];
+    this.leadIds    = obj && obj.leadIds    || [];
   }
 }
