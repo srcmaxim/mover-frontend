@@ -48,8 +48,8 @@ export class Lead {
 
 export class Address {
   constructor(public address: string,
-              longitude: number,
-              latitude: number) {
+              public longitude: number,
+              public latitude: number) {
   }
 }
 
