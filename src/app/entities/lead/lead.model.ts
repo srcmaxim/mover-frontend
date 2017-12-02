@@ -24,17 +24,17 @@ export class Lead {
   inventories: Inventory[];
 
   constructor(obj: any) {
-    this.id = obj && obj.id || null;
-    this.start = obj && obj.start || new Date();
-    this.end = obj && obj.end || new Date();
-    this.origin = obj && obj.origin || new Address('', 0, 0);
-    this.destination = obj && obj.destination || new Address('', 0, 0);
-    this.type = obj && obj.type || Type.LOCAL;
-    this.status = obj && obj.status || Status.PENDING;
-    this.customerId = obj && obj.customerId || null;
-    this.assignedToIds = obj && obj.assignedToIds || [];
-    this.estimates = obj && obj.estimates || [];
-    this.inventories = obj && obj.inventories || [];
+    this.id             = obj && obj.id             || null;
+    this.start          = obj && obj.start          || new Date();
+    this.end            = obj && obj.end            || new Date();
+    this.origin         = obj && obj.origin         || new Address('', 0, 0);
+    this.destination    = obj && obj.destination    || new Address('', 0, 0);
+    this.type           = obj && obj.type           || Type.LOCAL;
+    this.status         = obj && obj.status         || Status.PENDING;
+    this.customerId     = obj && obj.customerId     || null;
+    this.assignedToIds  = obj && obj.assignedToIds  || [];
+    this.estimates      = obj && obj.estimates      || [];
+    this.inventories    = obj && obj.inventories    || [];
   }
 
   public getEnd(): string {
