@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { LeadDetailComponent } from './entities/lead/lead-detail.component';
 import { CustomerDetailComponent } from './entities/customer/customer-detail.component';
 import { EmployeeDetailComponent } from './entities/employee/employee-detail.component';
+import { LeadDeleteDialogComponent } from './entities/lead/lead-delete-dialog.component';
+import { SemanticModalDirective } from './layouts/directives/semantic-modal.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EmployeeDetailComponent } from './entities/employee/employee-detail.com
     HomeComponent,
     LeadDetailComponent,
     CustomerDetailComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    LeadDeleteDialogComponent,
+    SemanticModalDirective
   ],
   imports: [
     BrowserModule
