@@ -1,0 +1,36 @@
+<h1 class="ui header">
+  Employee
+  <div class="sub header">A employee represents a person that works in the company</div>
+</h1>
+
+<div class="ui inverted section divider"></div>
+
+<dl>
+  <dt><h3>First Name</h3></dt>
+  <dd><span>{{employee.firstName}}</span></dd>
+
+  <dt><h3>Last Name</h3></dt>
+  <dd><span>{{employee.lastName}}</span></dd>
+
+  <dt><h3>Email</h3></dt>
+  <dd><span>{{employee.email}}</span></dd>
+
+  <dt><h3>Phone</h3></dt>
+  <dd><span>{{employee.phone}}</span></dd>
+
+  <dt *ngIf="employee.leadIds"><h3>Leads</h3></dt>
+  <dd *ngFor="let leadId of employee.leadIds"><span>{{leadId}}</span></dd>
+</dl>
+
+<br>
+
+<div class="ui mini buttons">
+  <button class="ui blue compact button">
+    <i class="reply icon"> </i>
+    Back
+  </button>
+  <button class="ui green compact button">
+    <i class="write icon"></i>
+    Edit
+  </button>
+</div>

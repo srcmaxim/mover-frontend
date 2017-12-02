@@ -12,6 +12,7 @@ import { EmployeeComponent } from './entities/employee/employee.component';
 import { HomeComponent } from './home/home.component';
 import { LeadDetailComponent } from './entities/lead/lead-detail.component';
 import { CustomerDetailComponent } from './entities/customer/customer-detail.component';
+import { EmployeeDetailComponent } from './entities/employee/employee-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CustomerDetailComponent } from './entities/customer/customer-detail.com
     EmployeeComponent,
     HomeComponent,
     LeadDetailComponent,
-    CustomerDetailComponent
+    CustomerDetailComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule
