@@ -1,10 +1,12 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {customerRoute} from './customer.route';
-import {CustomerComponent} from './customer.component';
-import {CustomerDetailComponent} from './customer-detail.component';
-import {CustomerDialogComponent} from './customer-dialog.component';
-import {CustomerDeleteDialogComponent} from './customer-delete-dialog.component';
+import {
+  customerRoute,
+  CustomerComponent,
+  CustomerDetailComponent,
+  CustomerDialogComponent,
+  CustomerDeleteDialogComponent
+} from './';
 import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [

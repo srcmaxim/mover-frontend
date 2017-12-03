@@ -1,5 +1,7 @@
 import { NgModule, Sanitizer } from '@angular/core';
-import {SharedLibsModule} from './shared-libs.module';
+import {
+  SharedLibsModule
+} from './';
 
 @NgModule({
   imports: [

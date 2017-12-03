@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {SharedLibsModule} from './shared-libs.module';
-import {SharedCommonModule} from './shared-common.module';
+import {
+  SharedLibsModule,
+  SharedCommonModule
+} from './';
 
 @NgModule({
   imports: [
