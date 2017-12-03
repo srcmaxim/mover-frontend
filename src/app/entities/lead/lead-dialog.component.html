@@ -1,0 +1,99 @@
+<div class="ui modal" appModal>
+  <div class="header">
+    Create or edit a Lead
+  </div>
+  <div class="content">
+
+    <form class="ui equal width form">
+
+      <h3 class="header formHeader">Range</h3>
+      <div class="ui form">
+        <div class="two fields formFields">
+          <div class="field">
+            <label>Start date</label>
+            <div class="ui calendar" id="rangeStart" appCalendar>
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" placeholder="Start">
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>End date</label>
+            <div class="ui calendar" id="rangeEnd" appCalendar>
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" placeholder="End">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="header formHeader">Location</h3>
+      <div class="fields">
+        <div class="field">
+          <label>Origin</label>
+          <input type="text" placeholder="Origin">
+        </div>
+        <div class="field">
+          <label>Destination</label>
+          <input type="text" placeholder="Destination">
+        </div>
+      </div>
+
+
+      <div class="inline field">
+        <label class="horizontal">Type</label>
+        <div class="ui selection dropdown" appDropdown>
+          <input type="hidden" name="type">
+          <i class="dropdown icon"></i>
+          <div class="default text">Type</div>
+          <div class="menu">
+            <div class="item" data-value="0">LOCAL</div>
+            <div class="item" data-value="1">DISTANCE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline field">
+        <label class="horizontal">Status</label>
+        <div class="ui selection dropdown" appDropdown>
+          <input type="hidden" name="gender">
+          <i class="dropdown icon"></i>
+          <div class="default text">Status</div>
+          <div class="menu">
+            <div class="item" data-value="0">PENDING</div>
+            <div class="item" data-value="1">ASSIGNED</div>
+            <div class="item" data-value="2">QUALIFIED</div>
+            <div class="item" data-value="3">CONVERTED</div>
+            <div class="item" data-value="4">CLOSED</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline field">
+        <label class="horizontal">Customer</label>
+        <div class="ui selection dropdown" appDropdown>
+          <input type="hidden" name="type">
+          <i class="dropdown icon"></i>
+          <div class="default text">Customer</div>
+          <div class="menu">
+            <div class="item" data-value="0">Duglas Costa</div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
