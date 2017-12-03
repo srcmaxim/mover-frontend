@@ -19,6 +19,7 @@ import { CustomerDeleteDialogComponent } from './entities/customer/customer-dele
 import { EmployeeDeleteDialogComponent } from './entities/employee/employee-delete-dialog.component';
 import { LeadDialogComponent } from './entities/lead/lead-dialog.component';
 import { SemanticCalendarDirective } from './layouts/directives/semantic-calendar.directive';
+import { CustomerDialogComponent } from './entities/customer/customer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SemanticCalendarDirective } from './layouts/directives/semantic-calenda
     CustomerDeleteDialogComponent,
     EmployeeDeleteDialogComponent,
     LeadDialogComponent,
-    SemanticCalendarDirective
+    SemanticCalendarDirective,
+    CustomerDialogComponent
   ],
   imports: [
     BrowserModule

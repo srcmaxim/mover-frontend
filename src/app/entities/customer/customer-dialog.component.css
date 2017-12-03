@@ -1,0 +1,15 @@
+.horizontal {
+  width: 10% !important;
+  text-align: left;
+}
+.formHeader {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.formFields {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.headerMargin {
+  margin-bottom: 4px;
+}
