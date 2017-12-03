@@ -14,12 +14,14 @@ export class LeadComponent implements OnInit {
   constructor() {
     this.leads = [
       new Lead({
+        id: 1,
         start: new Date(),
         end: new Date(),
         origin: new Address('123, Brick st., LA', 0, 0),
         destination: new Address('123, Mac st., LA', 0, 0)
       }),
       new Lead({
+        id: 2,
         start: new Date(),
         end: new Date(),
         origin: new Address('27, Tree st., LA', 0, 0),
