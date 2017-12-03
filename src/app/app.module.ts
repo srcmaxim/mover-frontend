@@ -1,53 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
+import {LayoutRoutingModule} from './layouts/layout-routing.module';
 
-import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { MainComponent } from './layouts/main/main.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { SemanticDropdownDirective } from './layouts/directives/semantic-dropdown.directive';
-import { LeadComponent } from './entities/lead/lead.component';
-import { CustomerComponent } from './entities/customer/customer.component';
-import { EmployeeComponent } from './entities/employee/employee.component';
-import { HomeComponent } from './home/home.component';
-import { LeadDetailComponent } from './entities/lead/lead-detail.component';
-import { CustomerDetailComponent } from './entities/customer/customer-detail.component';
-import { EmployeeDetailComponent } from './entities/employee/employee-detail.component';
-import { LeadDeleteDialogComponent } from './entities/lead/lead-delete-dialog.component';
-import { SemanticModalDirective } from './layouts/directives/semantic-modal.directive';
-import { CustomerDeleteDialogComponent } from './entities/customer/customer-delete-dialog.component';
-import { EmployeeDeleteDialogComponent } from './entities/employee/employee-delete-dialog.component';
-import { LeadDialogComponent } from './entities/lead/lead-dialog.component';
-import { SemanticCalendarDirective } from './layouts/directives/semantic-calendar.directive';
-import { CustomerDialogComponent } from './entities/customer/customer-dialog.component';
-import { EmployeeDialogComponent } from './entities/employee/employee-dialog.component';
+import {MoverHomeModule} from './home/home.module';
+import {MoverEntityModule} from './entities/entity.module';
+import {MainComponent} from './layouts/main/main.component';
+import {NavbarComponent} from './layouts/navbar/navbar.component';
+import {FooterComponent} from './layouts/footer/footer.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
+  imports: [
+    SharedModule,
+    LayoutRoutingModule,
+    MoverHomeModule,
+    MoverEntityModule
+  ],
   declarations: [
     NavbarComponent,
     MainComponent,
-    FooterComponent,
-    SemanticDropdownDirective,
-    LeadComponent,
-    CustomerComponent,
-    EmployeeComponent,
-    HomeComponent,
-    LeadDetailComponent,
-    CustomerDetailComponent,
-    EmployeeDetailComponent,
-    LeadDeleteDialogComponent,
-    SemanticModalDirective,
-    CustomerDeleteDialogComponent,
-    EmployeeDeleteDialogComponent,
-    LeadDialogComponent,
-    SemanticCalendarDirective,
-    CustomerDialogComponent,
-    EmployeeDialogComponent
+    FooterComponent
   ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [MainComponent]
+  bootstrap: [ MainComponent ]
 })
-export class AppModule { }
+export class MoverModule {}

@@ -1,8 +1,9 @@
 <div class="ui secondary  menu">
-  <a class="active item"> Mover </a>
-  <a class="item"> Leads </a>
-  <a class="item"> Customers </a>
-  <a class="item"> Employees </a>
+  <a class="item" [routerLink]="['/']"         [routerLinkActive]="['active']"
+     [routerLinkActiveOptions]="{exact: true}"> Mover </a>
+  <a class="item" [routerLink]="['/lead']"     [routerLinkActive]="['active']"> Leads </a>
+  <a class="item" [routerLink]="['/customer']" [routerLinkActive]="['active']"> Customers </a>
+  <a class="item" [routerLink]="['/employee']" [routerLinkActive]="['active']"> Employees </a>
 
   <div class="right menu">
     <div class="ui text menu">

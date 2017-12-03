@@ -1,11 +1,11 @@
 <div>
-  <app-navbar></app-navbar>
+  <router-outlet name="navbar"></router-outlet>
 </div>
 <div>
   <div class="main ui container full">
-    <app-employee></app-employee>
+    <router-outlet></router-outlet>
   </div>
-  <app-employee-dialog></app-employee-dialog>
+  <router-outlet name="popup"></router-outlet>
   <br>
   <app-footer></app-footer>
 </div>
