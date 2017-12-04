@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Address, Lead,  Type, Status} from './lead.model';
+import {
+  Lead,
+  Type,
+  Status,
+  Address
+} from './';
 
 @Component({
   selector: 'app-lead-detail',

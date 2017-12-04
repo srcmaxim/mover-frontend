@@ -1,5 +1,7 @@
-import {Estimate} from './estimate.model';
-import {Inventory} from './inventory.model';
+import {
+  Estimate,
+  Inventory
+} from './';
 
 export class Lead {
   private static DATE_FORMAT_OPTIONS = {

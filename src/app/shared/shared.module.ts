@@ -1,8 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {
-  SharedLibsModule,
-  SharedCommonModule
-} from './';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {SharedCommonModule, SharedLibsModule} from './';
 
 @NgModule({
   imports: [
@@ -16,4 +13,5 @@ import {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class SharedModule {}
+export class SharedModule {
+}

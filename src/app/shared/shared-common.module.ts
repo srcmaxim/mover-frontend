@@ -1,7 +1,5 @@
-import { NgModule, Sanitizer } from '@angular/core';
-import {
-  SharedLibsModule
-} from './';
+import {NgModule} from '@angular/core';
+import {SharedLibsModule} from './';
 
 @NgModule({
   imports: [
@@ -13,4 +11,5 @@ import {
     SharedLibsModule,
   ]
 })
-export class SharedCommonModule {}
+export class SharedCommonModule {
+}

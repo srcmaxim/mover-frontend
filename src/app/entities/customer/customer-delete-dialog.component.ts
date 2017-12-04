@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer} from './customer.model';
+import {Customer} from './';
 
 @Component({
   selector: 'app-customer-delete-dialog',

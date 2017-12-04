@@ -1,7 +1,9 @@
 import {Routes} from '@angular/router';
-import {EmployeeComponent} from './employee.component';
-import {EmployeeDetailComponent} from './employee-detail.component';
-import {EmployeeDeleteDialogComponent} from "./employee-delete-dialog.component";
+import {
+  EmployeeComponent,
+  EmployeeDetailComponent,
+  EmployeeDeleteDialogComponent
+} from './';
 
 export const employeeRoute: Routes = [
   {

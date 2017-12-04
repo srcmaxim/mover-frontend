@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Employee} from './employee.model';
+import {Employee} from './';
 
 @Component({
   selector: 'app-employee-delete-dialog',

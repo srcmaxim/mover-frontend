@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {navbarRoute} from '../app.route';
 
-
 const LAYOUT_ROUTES = [
-    navbarRoute,
+  navbarRoute,
 ];
 
 @NgModule({
@@ -15,4 +14,5 @@ const LAYOUT_ROUTES = [
     RouterModule
   ]
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule {
+}

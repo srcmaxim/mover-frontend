@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Lead} from './lead.model';
+import {Lead} from './';
 
 @Component({
   selector: 'app-lead-delete-dialog',

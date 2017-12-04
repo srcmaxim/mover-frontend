@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Type, Status, Address, Lead} from '../lead/lead.model';
+import {Component, OnInit} from '@angular/core';
+import {Address, Lead} from '../lead/';
 
 @Component({
   selector: 'app-customer-dialog',
