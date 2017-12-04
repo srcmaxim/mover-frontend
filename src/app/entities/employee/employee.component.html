@@ -32,18 +32,18 @@
           <i class="unhide icon"></i>
           View
         </a>
-        <button class="ui green compact button"
+        <a class="ui green compact button"
                 [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/edit'} }]"
                 replaceUrl="true">
           <i class="write icon"></i>
           Edit
-        </button>
-        <button class="ui red compact button"
+        </a>
+        <a class="ui red compact button"
                 [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/delete'} }]"
                 replaceUrl="true">
           <i class="remove icon"> </i>
           Delete
-        </button>
+        </a>
       </div>
     </td>
   </tr>
