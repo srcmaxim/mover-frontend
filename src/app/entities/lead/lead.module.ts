@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   leadRoute,
+  leadPopupRoute,
   LeadComponent,
   LeadDetailComponent,
   LeadDialogComponent,
@@ -11,6 +12,7 @@ import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [
   ...leadRoute,
+  ...leadPopupRoute
 ];
 
 @NgModule({
