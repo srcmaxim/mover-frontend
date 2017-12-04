@@ -1,19 +1,22 @@
-<div class="ui basic modal" appModal>
-  <div class="ui icon header">
-    <i class="archive icon"></i>
-    Delete Customer
-  </div>
-  <div class="content">
-    <p>Permanent delete of a Customer, you can not restore deleted Customer. Are you sure?</p>
-  </div>
-  <div class="actions">
-    <div class="ui green basic cancel inverted button">
-      <i class="reply icon"></i>
-      No
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui basic modal transition visible active"
+       style="margin-top: -8em; display: block !important;">
+    <div class="ui icon header">
+      <i class="archive icon"></i>
+      Delete Customer
     </div>
-    <div class="ui red ok inverted button">
-      <i class="remove icon"></i>
-      Yes
+    <div class="content">
+      <p style="text-align: center;">Permanent delete of a Customer, you can not restore deleted Customer. Are you sure?</p>
+    </div>
+    <div class="actions">
+      <div class="ui green basic cancel inverted button" (click)="onDeny()">
+        <i class="reply icon"></i>
+        No
+      </div>
+      <div class="ui red ok inverted button" (click)="onApprove()">
+        <i class="remove icon"></i>
+        Yes
+      </div>
     </div>
   </div>
 </div>

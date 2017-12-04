@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   customerRoute,
+  customerPopupRoute,
   CustomerComponent,
   CustomerDetailComponent,
   CustomerDialogComponent,
@@ -11,6 +12,7 @@ import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [
   ...customerRoute,
+  ...customerPopupRoute
 ];
 
 @NgModule({

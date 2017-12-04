@@ -36,7 +36,9 @@
           <i class="write icon"></i>
           Edit
         </button>
-        <button class="ui red compact button">
+        <button class="ui red compact button"
+                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/delete'} }]"
+                replaceUrl="true">
           <i class="remove icon"> </i>
           Delete
         </button>
