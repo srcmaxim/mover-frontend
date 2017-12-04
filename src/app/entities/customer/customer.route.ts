@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {
   CustomerComponent,
   CustomerDetailComponent,
+  CustomerDialogComponent,
   CustomerDeleteDialogComponent
 } from './';
 
@@ -16,6 +17,11 @@ export const customerRoute: Routes = [
 ];
 
 export const customerPopupRoute: Routes = [
+  {
+    path: 'customer/:id/edit',
+    component: CustomerDialogComponent,
+    outlet: 'popup'
+  },
   {
     path: 'customer/:id/delete',
     component: CustomerDeleteDialogComponent,

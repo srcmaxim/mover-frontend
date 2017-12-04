@@ -1,80 +1,84 @@
-<div class="ui modal" appModal>
-  <div class="header">
-    Create or edit a Customer
-  </div>
-  <div class="content">
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui fullscreen modal transition visible active"
+       style="margin-top: -20em; display: block !important;">
 
-    <form class="ui equal width form">
+    <div class="header">
+      Create or edit a Customer
+    </div>
+    <div class="content">
 
-      <h3 class="header formHeader">Name</h3>
-      <div class="fields">
-        <div class="field">
-          <label>First Name</label>
-          <input type="text" placeholder="First Name">
+      <form class="ui equal width form">
+
+        <h3 class="header formHeader">Name</h3>
+        <div class="fields">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" placeholder="First Name">
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last Name">
+          </div>
         </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" placeholder="Last Name">
+
+        <h3 class="header formHeader">Contacts</h3>
+        <div class="fields">
+          <div class="field">
+            <label>Email</label>
+            <input type="text" placeholder="Email">
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="text" placeholder="Phone">
+          </div>
         </div>
+
+      </form>
+
+      <div>
+
+        <h3 class="header formHeader headerMargin">Leads</h3>
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Lead"/>
+          <div class="ui button">Add</div>
+        </div>
+
+        <table class="ui striped table">
+          <thead>
+          <tr>
+            <th>Range</th>
+
+            <th>Location</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lead of leads">
+            <td>{{lead.getStart()+' - '+lead.getEnd()}}</td>
+
+            <td>{{lead.origin.address+' - '+lead.destination.address}}</td>
+
+            <td>
+              <button class="ui mini red compact button">
+                <i class="remove icon"> </i>
+                Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
       </div>
-
-      <h3 class="header formHeader">Contacts</h3>
-      <div class="fields">
-        <div class="field">
-          <label>Email</label>
-          <input type="text" placeholder="Email">
-        </div>
-        <div class="field">
-          <label>Phone</label>
-          <input type="text" placeholder="Phone">
-        </div>
-      </div>
-
-    </form>
-
-    <div>
-
-      <h3 class="header formHeader headerMargin">Leads</h3>
-      <div class="ui fluid action input">
-        <input type="text" placeholder="Lead"/>
-        <div class="ui button">Add</div>
-      </div>
-
-      <table class="ui striped table">
-        <thead>
-        <tr>
-          <th>Range</th>
-
-          <th>Location</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let lead of leads">
-          <td>{{lead.getStart()+' - '+lead.getEnd()}}</td>
-
-          <td>{{lead.origin.address+' - '+lead.destination.address}}</td>
-
-          <td>
-            <button class="ui mini red compact button">
-              <i class="remove icon"> </i>
-              Delete
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
 
     </div>
-
-  </div>
-  <div class="actions">
-    <div class="ui black deny button">
-      Cancel
-    </div>
-    <div class="ui positive right labeled icon button">
-      Save
-      <i class="checkmark icon"></i>
+    <div class="actions">
+      <div class="ui black deny button" (click)="onDeny()">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button" (click)="onApprove()">
+        Save
+        <i class="checkmark icon"></i>
+      </div>
     </div>
   </div>
 </div>
