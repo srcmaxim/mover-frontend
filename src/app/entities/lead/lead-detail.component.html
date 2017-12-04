@@ -52,8 +52,16 @@
     <i class="reply icon"> </i>
     Back
   </a>
-  <button class="ui green compact button">
+  <button class="ui green compact button"
+          [routerLink]="['/', { outlets: { popup: 'lead/'+ lead.id + '/edit'} }]"
+          replaceUrl="true">
     <i class="write icon"></i>
     Edit
+  </button>
+  <button class="ui red compact button"
+          [routerLink]="['/', { outlets: { popup: 'lead/'+ lead.id + '/delete'} }]"
+          replaceUrl="true">
+    <i class="remove icon"> </i>
+    Delete
   </button>
 </div>

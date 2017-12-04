@@ -1,15 +1,15 @@
-import {Directive, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
+import 'rxjs/add/operator/filter';
+import {Loader} from './loader.model';
 
 declare var jQuery: any;
 
 /**
- * SemanticCalendarDirective is used for initializing Semantic UI calendar.
- * Additional for using calendar requires #rangeStart, #rangeEnd ids.
+ * SemanticCalendarLoader is used for initializing Semantic UI calendar.
+ * Additional for using calendar requires #rangeStart, #rangeEnd ids and [appCalendar].
  */
-@Directive({
-  selector: '[appCalendar]'
-})
-export class SemanticCalendarDirective implements OnInit {
+@Injectable()
+export class SemanticCalendarLoader implements Loader {
 
   private CALENDAR_SETTINGS = {
     firstDayOfWeek: 1,
@@ -22,7 +22,7 @@ export class SemanticCalendarDirective implements OnInit {
     hour12: false
   };
 
-  ngOnInit(): void {
+  public load(): void {
     /* used for async initialization of calendar */
     setTimeout(() => {
       this.setupRangeStartCalendar();
@@ -31,17 +31,17 @@ export class SemanticCalendarDirective implements OnInit {
   }
 
   private setupRangeEndCalendar() {
-    jQuery('#rangeEnd').calendar(
+    jQuery('#rangeEnd[appCalendar]').calendar(
       Object.assign({}, this.CALENDAR_SETTINGS, {
-        startCalendar: jQuery('#rangeStart')
+        startCalendar: jQuery('#rangeStart[appCalendar]')
       })
     );
   }
 
   private setupRangeStartCalendar() {
-    jQuery('#rangeStart').calendar(
+    jQuery('#rangeStart[appCalendar]').calendar(
       Object.assign({}, this.CALENDAR_SETTINGS, {
-        endCalendar: jQuery('#rangeEnd')
+        endCalendar: jQuery('#rangeEnd[appCalendar]')
       })
     );
   }

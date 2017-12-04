@@ -42,7 +42,9 @@
           <i class="unhide icon"></i>
           View
         </a>
-        <button class="ui green compact button">
+        <button class="ui green compact button"
+                [routerLink]="['/', { outlets: { popup: 'lead/'+ lead.id + '/edit'} }]"
+                replaceUrl="true">
           <i class="write icon"></i>
           Edit
         </button>

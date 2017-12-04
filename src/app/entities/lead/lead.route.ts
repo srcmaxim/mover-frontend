@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {
   LeadComponent,
   LeadDetailComponent,
+  LeadDialogComponent,
   LeadDeleteDialogComponent
 } from './';
 
@@ -16,6 +17,11 @@ export const leadRoute: Routes = [
 ];
 
 export const leadPopupRoute: Routes = [
+  {
+    path: 'lead/:id/edit',
+    component: LeadDialogComponent,
+    outlet: 'popup'
+  },
   {
     path: 'lead/:id/delete',
     component: LeadDeleteDialogComponent,
