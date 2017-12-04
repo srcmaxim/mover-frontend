@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {
   EmployeeComponent,
   EmployeeDetailComponent,
+  EmployeeDialogComponent,
   EmployeeDeleteDialogComponent
 } from './';
 
@@ -16,6 +17,11 @@ export const employeeRoute: Routes = [
 ];
 
 export const employeePopupRoute: Routes = [
+  {
+    path: 'employee/:id/edit',
+    component: EmployeeDialogComponent,
+    outlet: 'popup'
+  },
   {
     path: 'employee/:id/delete',
     component: EmployeeDeleteDialogComponent,

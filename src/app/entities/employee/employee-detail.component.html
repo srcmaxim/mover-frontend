@@ -18,8 +18,8 @@
   <dt><h3>Phone</h3></dt>
   <dd><span>{{employee.phone}}</span></dd>
 
-  <dt *ngIf="employee.leadIds"><h3>Leads</h3></dt>
-  <dd *ngFor="let leadId of employee.leadIds"><span>{{leadId}}</span></dd>
+  <dt *ngIf="employee.employeeIds"><h3>Leads</h3></dt>
+  <dd *ngFor="let employeeId of employee.employeeIds"><span>{{employeeId}}</span></dd>
 </dl>
 
 <br>
@@ -29,8 +29,16 @@
     <i class="reply icon"> </i>
     Back
   </a>
-  <button class="ui green compact button">
+  <button class="ui green compact button"
+          [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/edit'} }]"
+          replaceUrl="true">
     <i class="write icon"></i>
     Edit
+  </button>
+  <button class="ui red compact button"
+          [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/delete'} }]"
+          replaceUrl="true">
+    <i class="remove icon"> </i>
+    Delete
   </button>
 </div>
