@@ -1,6 +1,6 @@
 <div class="ui dimmer modals page transition visible active" style="display: block !important;">
   <div appmodal class="ui fullscreen modal transition visible active"
-       style="margin-top: -17em; display: block !important;">
+       style="margin-top: -22em; display: block !important;">
 
     <div class="header">
       Create or edit a Lead
@@ -75,19 +75,85 @@
           </div>
         </div>
 
-        <div class="inline field">
-          <label class="horizontal">Customer</label>
-          <div class="ui selection dropdown" appDropdown>
-            <input type="hidden" name="type">
-            <i class="dropdown icon"></i>
-            <div class="default text">Customer</div>
-            <div class="menu">
-              <div class="item" data-value="0">Duglas Costa</div>
-            </div>
-          </div>
+      </form>
+
+      <div class="assignedForm">
+
+        <h3 class="header searchHeader">Customer</h3>
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Customer"/>
+          <div class="ui button">Add</div>
         </div>
 
-      </form>
+        <table class="ui striped table">
+          <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{customer.firstName}}</td>
+            <td>{{customer.lastName}}</td>
+
+            <td>{{customer.email}}</td>
+            <td>{{customer.phone}}</td>
+
+            <td>
+              <button class="ui mini red compact button">
+                <i class="remove icon"> </i>
+                Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="assignedForm">
+
+        <h3 class="header searchHeader">Assigned to</h3>
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Employee"/>
+          <div class="ui button">Add</div>
+        </div>
+
+        <table class="ui striped table">
+          <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+
+            <td>{{employee.email}}</td>
+            <td>{{employee.phone}}</td>
+
+            <td>
+              <button class="ui mini red compact button">
+                <i class="remove icon"> </i>
+                Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
 
     </div>
     <div class="actions">

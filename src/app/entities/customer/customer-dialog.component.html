@@ -46,17 +46,21 @@
         <table class="ui striped table">
           <thead>
           <tr>
-            <th>Range</th>
+            <th>Start</th>
+            <th>End</th>
 
-            <th>Location</th>
+            <th>Origin</th>
+            <th>Destination</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let lead of leads">
-            <td>{{lead.getStart()+' - '+lead.getEnd()}}</td>
+            <td>{{lead.getStart()}}</td>
+            <td>{{lead.getEnd()}}</td>
 
-            <td>{{lead.origin.address+' - '+lead.destination.address}}</td>
+            <td>{{lead.origin.address}}</td>
+            <td>{{lead.destination.address}}</td>
 
             <td>
               <button class="ui mini red compact button">
