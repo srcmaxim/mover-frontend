@@ -1,14 +1,17 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {
-  leadRoute,
-  leadPopupRoute,
-  LeadComponent,
+  InMemoryLeadService,
   LeadDetailComponent,
+  LeadComponent,
+  LeadDeleteDialogComponent,
   LeadDialogComponent,
-  LeadDeleteDialogComponent
+  leadPopupRoute,
+  leadRoute,
+  LeadService
 } from './';
-import {SharedModule} from '../../shared/shared.module';
+import {SharedModule} from '../../shared/';
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 
 const ENTITY_STATES = [
   ...leadRoute,
@@ -18,7 +21,8 @@ const ENTITY_STATES = [
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forRoot(ENTITY_STATES)
+    RouterModule.forRoot(ENTITY_STATES),
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryLeadService),
   ],
   declarations: [
     LeadComponent,
@@ -31,7 +35,10 @@ const ENTITY_STATES = [
     LeadDialogComponent,
     LeadDeleteDialogComponent,
   ],
-  providers: [],
+  providers: [
+    LeadService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MoverLeadModule {}
+export class MoverLeadModule {
+}

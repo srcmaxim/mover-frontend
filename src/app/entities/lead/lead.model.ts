@@ -19,7 +19,7 @@ export class Lead {
   origin: Address;
   destination: Address;
   type: Type;
-  status: string;
+  status: Status;
   customerId: number;
   assignedToIds: number[];
   estimates: Estimate[];

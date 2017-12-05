@@ -1,14 +1,14 @@
 export class Inventory {
   id: number;
-  category: Catagory;
+  category: Category;
   name: string;
   quantity: number;
   weight: number;
   volume: number;
 
-  constructor(obj: any) {
+  constructor(obj?: any) {
     this.id         = obj && obj.id         || null;
-    this.category   = obj && obj.category   || Catagory.ANY;
+    this.category   = obj && obj.category   || Category.ANY;
     this.name       = obj && obj.name       || '';
     this.quantity   = obj && obj.quantity   || 0;
     this.weight     = obj && obj.weight     || 0;
@@ -16,6 +16,6 @@ export class Inventory {
   }
 }
 
-export enum Catagory {
+export enum Category {
   ANY, LIVING, BED, OFFICE, KITCHEN, BATH, ATTIC, DINNING, BASEMENT
 }
