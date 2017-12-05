@@ -1,7 +1,10 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {Address, Category, Estimate, Inventory, Lead, Status, Type} from "./";
+import {Customer} from "./customer";
+import {Address, Lead, Type, Status} from "./lead/lead.model";
+import {Estimate} from "./lead/estimate.model";
+import {Category, Inventory} from "./lead/inventory.model";
 
-export class InMemoryLeadService implements InMemoryDbService {
+export class InMemoryEntitiesService implements InMemoryDbService {
   createDb() {
     let leads = [
       new Lead({
@@ -91,6 +94,24 @@ export class InMemoryLeadService implements InMemoryDbService {
         ]
       })
     ];
-    return {leads};
+    let customers = [
+      new Customer({
+        id: 1,
+        firstName: 'Duglas',
+        lastName: 'Costa',
+        email: 'duglas-costa@gmail.com',
+        phone: '+380-637-5413',
+        leadIds: [1]
+      }),
+      new Customer({
+        id: 2,
+        firstName: 'Jerar',
+        lastName: 'Pike',
+        email: 'jerar.pike@gmail.com',
+        phone: '+380-512-1718',
+        leadIds: [2]
+      })
+    ];
+    return {leads, customers};
   }
 }

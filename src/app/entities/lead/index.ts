@@ -6,5 +6,4 @@ export * from './lead-delete-dialog.component';
 export * from './lead-detail.component';
 export * from './lead.component';
 export * from './lead.route';
-export * from './lead.in-memory.service';
 export * from './lead.service';

@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  Lead,
-  Type,
-  Status,
-  LeadService
-} from './';
 import {Observable} from "rxjs/Observable";
+import {LeadService} from "./lead.service";
+import {Lead, Status, Type} from './';
 
 @Component({
   selector: 'app-lead',

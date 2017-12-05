@@ -3,13 +3,16 @@ import {MoverLeadModule} from './lead/lead.module';
 import {MoverCustomerModule} from './customer/customer.module';
 import {MoverEmployeeModule} from './employee/employee.module';
 import {SharedModule} from "../shared/index";
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import {InMemoryEntitiesService} from "./entities.in-memory.service";
 
 @NgModule({
   imports: [
     SharedModule,
     MoverLeadModule,
     MoverCustomerModule,
-    MoverEmployeeModule
+    MoverEmployeeModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryEntitiesService),
   ],
   declarations: [],
   entryComponents: [],

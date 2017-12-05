@@ -1,7 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {
-  InMemoryLeadService,
   LeadDetailComponent,
   LeadComponent,
   LeadDeleteDialogComponent,
@@ -11,7 +10,6 @@ import {
   LeadService
 } from './';
 import {SharedModule} from '../../shared/';
-import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 
 const ENTITY_STATES = [
   ...leadRoute,
@@ -21,8 +19,7 @@ const ENTITY_STATES = [
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forRoot(ENTITY_STATES),
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryLeadService),
+    RouterModule.forRoot(ENTITY_STATES)
   ],
   declarations: [
     LeadComponent,

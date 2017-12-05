@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {CustomerService} from "./customer.service";
 import {Customer} from './';
 
 @Component({
@@ -7,28 +9,15 @@ import {Customer} from './';
 })
 export class CustomerComponent implements OnInit {
 
-  private customers: Customer[];
+  private customers: Observable<Customer[]>;
 
-  constructor() {
-    this.customers = [
-      new Customer({
-        id: 1,
-        firstName: 'Duglas',
-        lastName: 'Costa',
-        email: 'duglas-costa@gmail.com',
-        phone: '+380-637-5413'
-      }),
-      new Customer({
-        id: 2,
-        firstName: 'Jerar',
-        lastName: 'Pike',
-        email: 'jerar.pike@gmail.com',
-        phone: '+380-512-1718'
-      })
-    ];
+  constructor(private customerService: CustomerService) {
   }
 
   ngOnInit() {
+    this.customers = this.customerService.query();
+    this.customers.subscribe(
+      data => console.log(JSON.stringify(data))
+    );
   }
-
 }
