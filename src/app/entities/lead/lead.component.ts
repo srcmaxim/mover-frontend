@@ -17,9 +17,7 @@ export class LeadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.leads = this.leadService.query();
-    this.leads.subscribe(
-      data => console.log(JSON.stringify(data))
-    );
+    this.leads = this.leadService.change;
+    this.leadService.query();
   }
 }

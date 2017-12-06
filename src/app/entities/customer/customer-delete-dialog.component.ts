@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer} from './';
+import {CustomerService} from "./customer.service";
 
 @Component({
   selector: 'app-customer-delete-dialog',
@@ -9,17 +9,18 @@ import {Customer} from './';
 export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
 
   routeSub: any;
-  customer: Customer;
+  customerId: number;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private customerService: CustomerService) {
   }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.customer = new Customer({id: id});
+        this.customerId = id;
       }
     });
   }
@@ -33,6 +34,8 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   onApprove() {
-    this.router.navigate([{outlets: {popup: null}}]);
+    this.customerService.delete(this.customerId);
+    this.customerService.change.subscribe(() =>
+      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

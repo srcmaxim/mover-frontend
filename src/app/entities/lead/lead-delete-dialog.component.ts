@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Lead} from './';
+import {LeadService} from "./lead.service";
 
 @Component({
   selector: 'app-lead-delete-dialog',
@@ -9,17 +9,18 @@ import {Lead} from './';
 export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
 
   routeSub: any;
-  lead: Lead;
+  leadId: number;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private leadService: LeadService) {
   }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.lead = new Lead({id: id});
+        this.leadId = id;
       }
     });
   }
@@ -33,7 +34,9 @@ export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   onApprove() {
-    this.router.navigate([{outlets: {popup: null}}]);
+    this.leadService.delete(this.leadId);
+    this.leadService.change.subscribe(() =>
+      this.router.navigate([{outlets: {popup: null}}]));
   }
 }
 

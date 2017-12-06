@@ -15,9 +15,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employees = this.employeeService.query();
-    this.employees.subscribe(
-      data => console.log(JSON.stringify(data))
-    );
+    this.employees = this.employeeService.change;
+    this.employeeService.query();
   }
 }

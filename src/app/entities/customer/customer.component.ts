@@ -15,9 +15,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customers = this.customerService.query();
-    this.customers.subscribe(
-      data => console.log(JSON.stringify(data))
-    );
+    this.customers = this.customerService.change;
+    this.customerService.query();
   }
 }
