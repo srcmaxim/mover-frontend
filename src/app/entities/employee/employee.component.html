@@ -1,4 +1,6 @@
-<h1 class="ui button right floated">Create new Employee</h1>
+<h1 class="ui button right floated"
+    [routerLink]="['/', { outlets: { popup: 'employee/new'} }]"
+    replaceUrl="true">Create new Employee</h1>
 <h1 class="ui header">
   Employees
   <div class="sub header">A employee represents a person that works in the company</div>

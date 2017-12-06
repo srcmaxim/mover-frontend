@@ -18,6 +18,11 @@ export const employeeRoute: Routes = [
 
 export const employeePopupRoute: Routes = [
   {
+    path: 'employee/new',
+    component: EmployeeDialogComponent,
+    outlet: 'popup'
+  },
+  {
     path: 'employee/:id/edit',
     component: EmployeeDialogComponent,
     outlet: 'popup'

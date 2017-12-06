@@ -1,4 +1,6 @@
-<h1 class="ui button right floated">Create new Lead</h1>
+<h1 class="ui button right floated"
+    [routerLink]="['/', { outlets: { popup: 'lead/new'} }]"
+    replaceUrl="true">Create new Lead</h1>
 <h1 class="ui header">
   Leads
   <div class="sub header">A lead represents a route from origin to destination in a specific time</div>

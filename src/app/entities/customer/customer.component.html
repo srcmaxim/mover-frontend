@@ -1,4 +1,6 @@
-<h1 class="ui button right floated">Create new Customer</h1>
+<h1 class="ui button right floated"
+    [routerLink]="['/', { outlets: { popup: 'customer/new'} }]"
+    replaceUrl="true">Create new Customer</h1>
 <h1 class="ui header">
   Customers
   <div class="sub header">A customer represents a person that uses company's service</div>

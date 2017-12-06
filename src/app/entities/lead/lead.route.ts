@@ -18,6 +18,11 @@ export const leadRoute: Routes = [
 
 export const leadPopupRoute: Routes = [
   {
+    path: 'lead/new',
+    component: LeadDialogComponent,
+    outlet: 'popup'
+  },
+  {
     path: 'lead/:id/edit',
     component: LeadDialogComponent,
     outlet: 'popup'

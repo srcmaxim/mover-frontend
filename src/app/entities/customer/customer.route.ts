@@ -18,6 +18,11 @@ export const customerRoute: Routes = [
 
 export const customerPopupRoute: Routes = [
   {
+    path: 'customer/new',
+    component: CustomerDialogComponent,
+    outlet: 'popup'
+  },
+  {
     path: 'customer/:id/edit',
     component: CustomerDialogComponent,
     outlet: 'popup'
