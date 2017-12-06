@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Lead} from './';
-import {
-  SemanticCalendarLoader,
-  SemanticDropdownLoader
-} from '../../layouts/';
+import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts/';
 import {Employee} from '../employee/';
-import {Customer} from '../customer/';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {LeadService} from "./lead.service";
+import {Customer} from "../customer/customer.model";
 
 @Component({
   selector: 'app-lead-dialog',
@@ -15,63 +14,59 @@ import {Customer} from '../customer/';
 })
 export class LeadDialogComponent implements OnInit, OnDestroy {
 
-  routeSub: any;
-  lead: Lead;
-  employees: Employee[];
-  customers: Customer[];
+  private lead: FormGroup;
+  private origin: FormGroup;
+  private destination: FormGroup;
+  private customers: Customer[];
+  private employees: Employee[];
+  private routeSubscription: any;
+  private createSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private leadService: LeadService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.dropdownLoader.load();
     this.calendarLoader.load();
 
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.lead = new Lead({id: id});
-        this.customers = [
-          new Customer({
-            id: 1,
-            firstName: 'Duglas',
-            lastName: 'Costa',
-            email: 'duglas-costa@gmail.com',
-            phone: '+380-637-5413'
-          }),
-          new Customer({
-            id: 2,
-            firstName: 'Jerar',
-            lastName: 'Pike',
-            email: 'jerar.pike@gmail.com',
-            phone: '+380-512-1718'
-          })
-        ];
-        this.employees = [
-          new Employee({
-            id: 1,
-            firstName: 'Sesk',
-            lastName: 'Fabrigas',
-            email: 'sesk_fabrigas@gmail.com',
-            phone: '+380-333-2013'
-          }),
-          new Employee({
-            id: 2,
-            firstName: 'Samuel',
-            lastName: 'Untity',
-            email: 'samuel.untity@gmail.com',
-            phone: '+380-314-1515'
-          })
-        ];
+      } else {
+        this.initForm(new Lead({}));
+        this.customers = [];
+        this.employees = [];
       }
     });
   }
 
+  initForm(lead: Lead) {
+    this.origin = this.formBuilder.group({
+      address: lead.origin.address
+    });
+    this.destination = this.formBuilder.group({
+      address: lead.destination.address
+    });
+    this.lead = this.formBuilder.group({
+      start: lead.start,
+      end: lead.end,
+      origin: this.origin,
+      destination: this.destination,
+      type: lead.type,
+      status: lead.status
+    });
+  }
+
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    if (this.createSubscription) {
+      this.createSubscription.unsubscribe();
+    }
   }
 
   onDeny() {
@@ -79,6 +74,11 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   }
 
   onApprove() {
-    this.router.navigate([{outlets: {popup: null}}]);
+    if (this.lead.value.id) {
+    } else {
+      this.leadService.create(this.lead.value);
+    }
+    this.createSubscription = this.leadService.change.subscribe(() =>
+      this.router.navigateByUrl('/lead'));
   }
 }

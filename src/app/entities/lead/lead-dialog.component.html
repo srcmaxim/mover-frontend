@@ -3,11 +3,11 @@
        style="margin-top: -22em; display: block !important;">
 
     <div class="header">
-      Create or edit a Lead
+      Create or edit a Lead: {{lead.value | json}} -- {{lead.status | json}}
     </div>
     <div class="scrolling content">
 
-      <form class="ui equal width form">
+      <form [formGroup]="lead" class="ui equal width form">
 
         <h3 class="header formHeader">Range</h3>
         <div class="ui form">
@@ -17,7 +17,7 @@
               <div class="ui calendar" id="rangeStart" appCalendar>
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
-                  <input type="text" placeholder="Start">
+                  <input formControlName="start" type="text" placeholder="Start">
                 </div>
               </div>
             </div>
@@ -26,7 +26,7 @@
               <div class="ui calendar" id="rangeEnd" appCalendar>
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
-                  <input type="text" placeholder="End">
+                  <input formControlName="end" type="text" placeholder="End">
                 </div>
               </div>
             </div>
@@ -35,13 +35,15 @@
 
         <h3 class="header formHeader">Location</h3>
         <div class="fields">
-          <div class="field">
+          <div [formGroup]="origin"
+               class="field">
             <label>Origin</label>
-            <input type="text" placeholder="Origin">
+            <input formControlName="address" type="text" placeholder="Origin">
           </div>
-          <div class="field">
+          <div [formGroup]="destination"
+               class="field">
             <label>Destination</label>
-            <input type="text" placeholder="Destination">
+            <input formControlName="address" type="text" placeholder="Destination">
           </div>
         </div>
 
@@ -49,12 +51,12 @@
         <div class="inline field">
           <label class="horizontal">Type</label>
           <div class="ui selection dropdown" appDropdown>
-            <input type="hidden" name="type">
+            <input formControlName="type" type="hidden" name="type">
             <i class="dropdown icon"></i>
             <div class="default text">Type</div>
             <div class="menu">
-              <div class="item" data-value="0">LOCAL</div>
-              <div class="item" data-value="1">DISTANCE</div>
+              <div class="item" data-value="0" (click)="lead.value.type = 0">LOCAL</div>
+              <div class="item" data-value="1" (click)="lead.value.type = 1">DISTANCE</div>
             </div>
           </div>
         </div>
@@ -62,15 +64,15 @@
         <div class="inline field">
           <label class="horizontal">Status</label>
           <div class="ui selection dropdown" appDropdown>
-            <input type="hidden" name="gender">
+            <input formControlName="status"  type="hidden" name="status">
             <i class="dropdown icon"></i>
             <div class="default text">Status</div>
             <div class="menu">
-              <div class="item" data-value="0">PENDING</div>
-              <div class="item" data-value="1">ASSIGNED</div>
-              <div class="item" data-value="2">QUALIFIED</div>
-              <div class="item" data-value="3">CONVERTED</div>
-              <div class="item" data-value="4">CLOSED</div>
+              <div class="item" data-value="0" (click)="lead.value.status = 0">PENDING</div>
+              <div class="item" data-value="1" (click)="lead.value.status = 1">ASSIGNED</div>
+              <div class="item" data-value="2" (click)="lead.value.status = 2">QUALIFIED</div>
+              <div class="item" data-value="3" (click)="lead.value.status = 3">CONVERTED</div>
+              <div class="item" data-value="4" (click)="lead.value.status = 4">CLOSED</div>
             </div>
           </div>
         </div>
