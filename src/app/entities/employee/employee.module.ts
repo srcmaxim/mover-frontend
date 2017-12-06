@@ -6,7 +6,8 @@ import {
   EmployeeComponent,
   EmployeeDetailComponent,
   EmployeeDialogComponent,
-  EmployeeDeleteDialogComponent
+  EmployeeDeleteDialogComponent,
+  EmployeeService
 } from './';
 import {SharedModule} from '../../shared/shared.module';
 
@@ -31,7 +32,9 @@ const ENTITY_STATES = [
     EmployeeDialogComponent,
     EmployeeDeleteDialogComponent,
   ],
-  providers: [],
+  providers: [
+    EmployeeService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MoverEmployeeModule {}

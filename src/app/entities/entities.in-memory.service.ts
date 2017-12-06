@@ -3,6 +3,7 @@ import {Customer} from "./customer";
 import {Address, Lead, Type, Status} from "./lead/lead.model";
 import {Estimate} from "./lead/estimate.model";
 import {Category, Inventory} from "./lead/inventory.model";
+import {Employee} from "./employee/employee.model";
 
 export class InMemoryEntitiesService implements InMemoryDbService {
   createDb() {
@@ -112,6 +113,24 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         leadIds: [2]
       })
     ];
-    return {leads, customers};
+    let employees = [
+      new Employee({
+        id: 1,
+        firstName: 'Sesk',
+        lastName: 'Fabrigas',
+        email: 'sesk_fabrigas@gmail.com',
+        phone: '+380-333-2013',
+        leadsIds: [1]
+      }),
+      new Employee({
+        id: 2,
+        firstName: 'Samuel',
+        lastName: 'Untity',
+        email: 'samuel.untity@gmail.com',
+        phone: '+380-314-1515',
+        leadsIds: [2]
+      })
+    ];
+    return {leads, customers, employees};
   }
 }

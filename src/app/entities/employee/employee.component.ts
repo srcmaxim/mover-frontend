@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {EmployeeService} from "./employee.service";
 import {Employee} from './';
 
 @Component({
@@ -7,28 +9,15 @@ import {Employee} from './';
 })
 export class EmployeeComponent implements OnInit {
 
-  private employees: Employee[];
+  private employees: Observable<Employee[]>;
 
-  constructor() {
-    this.employees = [
-      new Employee({
-        id: 1,
-        firstName: 'Sesk',
-        lastName: 'Fabrigas',
-        email: 'sesk_fabrigas@gmail.com',
-        phone: '+380-333-2013'
-      }),
-      new Employee({
-        id: 2,
-        firstName: 'Samuel',
-        lastName: 'Untity',
-        email: 'samuel.untity@gmail.com',
-        phone: '+380-314-1515'
-      })
-    ];
+  constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit() {
+    this.employees = this.employeeService.query();
+    this.employees.subscribe(
+      data => console.log(JSON.stringify(data))
+    );
   }
-
 }
