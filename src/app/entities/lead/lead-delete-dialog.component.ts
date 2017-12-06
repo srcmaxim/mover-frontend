@@ -8,8 +8,9 @@ import {LeadService} from "./lead.service";
 })
 export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
 
-  routeSub: any;
-  leadId: number;
+  private leadId: number;
+  private routeSubscription: any;
+  private deleteSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -17,7 +18,7 @@ export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.leadId = id;
@@ -26,7 +27,10 @@ export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    }
   }
 
   onDeny() {
@@ -35,8 +39,8 @@ export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     this.leadService.delete(this.leadId);
-    this.leadService.change.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
+    this.deleteSubscription = this.leadService.change.subscribe(() =>
+      this.router.navigateByUrl('/lead'));
   }
 }
 

@@ -12,8 +12,8 @@ import "rxjs/add/operator/map";
 export class CustomerDetailComponent implements OnInit, OnDestroy {
 
   private customer: Observable<Customer>;
-  changeSubscription: any;
-  routeSubscription: any;
+  private changeSubscription: any;
+  private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService) {

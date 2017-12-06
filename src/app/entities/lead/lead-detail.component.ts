@@ -17,8 +17,8 @@ import {LeadService} from "./lead.service";
 export class LeadDetailComponent implements OnInit, OnDestroy {
 
   private lead: Observable<Lead>;
-  changeSubscription: any;
-  routeSubscription: any;
+  private changeSubscription: any;
+  private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private leadService: LeadService) {

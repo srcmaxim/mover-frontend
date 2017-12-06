@@ -8,8 +8,9 @@ import {CustomerService} from "./customer.service";
 })
 export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
 
-  routeSub: any;
-  customerId: number;
+  private customerId: number;
+  private routeSubscription: any;
+  private deleteSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -17,7 +18,7 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.customerId = id;
@@ -26,7 +27,10 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    }
   }
 
   onDeny() {
@@ -35,7 +39,7 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     this.customerService.delete(this.customerId);
-    this.customerService.change.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
+    this.deleteSubscription = this.customerService.change.subscribe(() =>
+      this.router.navigateByUrl('/customer'));
   }
 }

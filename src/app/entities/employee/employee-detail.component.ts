@@ -11,8 +11,8 @@ import {EmployeeService} from "./employee.service";
 export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   private employee: Observable<Employee>;
-  changeSubscription: any;
-  routeSubscription: any;
+  private changeSubscription: any;
+  private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private employeeService: EmployeeService) {

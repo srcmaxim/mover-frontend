@@ -8,8 +8,9 @@ import {EmployeeService} from "./employee.service";
 })
 export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
 
-  routeSub: any;
-  employeeId: number;
+  private employeeId: number;
+  private routeSubscription: any;
+  private deleteSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -17,7 +18,7 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.employeeId = id;
@@ -26,7 +27,10 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    }
   }
 
   onDeny() {
@@ -35,7 +39,7 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
 
   onApprove() {
     this.employeeService.delete(this.employeeId);
-    this.employeeService.change.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
+    this.deleteSubscription = this.employeeService.change.subscribe(() =>
+      this.router.navigateByUrl('/employee'));
   }
 }
