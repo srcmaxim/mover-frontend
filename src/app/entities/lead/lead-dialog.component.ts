@@ -20,7 +20,7 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   private customers: Customer[];
   private employees: Employee[];
   private routeSubscription: any;
-  private createSubscription: any;
+  private editSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
@@ -37,6 +37,10 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
+        this.leadService.find(id);
+        this.leadService.change.subscribe((leads: Lead[]) => {
+          this.initForm(leads[0]);
+        });
       } else {
         this.initForm(new Lead({}));
         this.customers = [];
@@ -64,8 +68,8 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
+    if (this.editSubscription) {
+      this.editSubscription.unsubscribe();
     }
   }
 
@@ -75,10 +79,11 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     if (this.lead.value.id) {
+      this.leadService.update(this.lead.value);
     } else {
       this.leadService.create(this.lead.value);
     }
-    this.createSubscription = this.leadService.change.subscribe(() =>
+    this.editSubscription = this.leadService.change.subscribe(() =>
       this.router.navigateByUrl('/lead'));
   }
 }
