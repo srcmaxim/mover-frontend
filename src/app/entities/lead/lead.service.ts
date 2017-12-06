@@ -18,6 +18,7 @@ export class LeadService {
     const copy: Lead = Object.assign({}, lead);
     this.http.post<Lead>(this.resourceUrl, copy)
       .subscribe((lead: Lead) => {
+        lead = new Lead(lead);
         const leads: Lead[] = this.store.getValue();
         leads.push(lead);
         this.store.next(leads);
@@ -28,8 +29,9 @@ export class LeadService {
     const copy: Lead = Object.assign({}, lead);
     this.http.put<Lead>(this.resourceUrl, copy)
       .subscribe((lead: Lead) => {
+        lead = new Lead(lead);
         const leads: Lead[] = this.store.getValue();
-        leads.forEach((_, i) => {
+        leads.forEach((_: Lead, i) => {
           if (_.id == lead.id) {
             leads[i] = lead;
           }
@@ -41,13 +43,14 @@ export class LeadService {
   find(id: number) {
     this.http.get<Lead>(`${this.resourceUrl}/${id}`)
       .subscribe((lead: Lead) => {
-        this.store.next([lead]);
+        this.store.next([new Lead(lead)]);
       });
   }
 
   query(req?: any) {
     this.http.get<Lead[]>(this.resourceUrl)
       .subscribe((leads: Lead[]) => {
+        leads.forEach((lead: Lead, i) => leads[i] = new Lead(leads[i]));
         this.store.next(leads);
       });
   }
@@ -56,7 +59,7 @@ export class LeadService {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
         let leads: Lead[] = this.store.getValue();
-        leads = leads.filter(_ => _.id != id);
+        leads = leads.filter((lead: Lead) => lead.id != id);
         this.store.next(leads);
       });
   }

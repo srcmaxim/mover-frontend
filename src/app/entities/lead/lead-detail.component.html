@@ -7,42 +7,42 @@
 
 <dl>
   <dt><h3>Start</h3></dt>
-  <dd><span>{{lead.getStart()}}</span></dd>
+  <dd><span>{{(lead | async).getStart()}}</span></dd>
 
   <dt><h3>End</h3></dt>
-  <dd><span>{{lead.getStart()}}</span></dd>
+  <dd><span>{{(lead | async).getEnd()}}</span></dd>
 
   <dt><h3>Type</h3></dt>
   <dd>
-    <div class="ui blue label">{{Type[lead.type]}}</div>
+    <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
   </dd>
 
   <dt><h3>Status</h3></dt>
   <dd>
-    <div class="ui green label">{{Status[lead.status]}}</div>
+    <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
   </dd>
 
   <dt><h3>Origin</h3></dt>
-  <dd><span>{{lead.origin.address}}</span></dd>
+  <dd><span>{{(lead | async).origin.address}}</span></dd>
   <div class="nested">
     <dt><h5>Location</h5></dt>
-    <dd><span>{{lead.origin.longitude}}</span></dd>
-    <dd><span>{{lead.origin.latitude}}</span></dd>
+    <dd><span>{{(lead | async).origin.longitude}}</span></dd>
+    <dd><span>{{(lead | async).origin.latitude}}</span></dd>
   </div>
 
   <dt><h3>Destination</h3></dt>
-  <dd><span>{{lead.destination.address}}</span></dd>
+  <dd><span>{{(lead | async).destination.address}}</span></dd>
   <div class="nested">
     <dt><h5>Location</h5></dt>
-    <dd><span>{{lead.destination.longitude}}</span></dd>
-    <dd><span>{{lead.destination.latitude}}</span></dd>
+    <dd><span>{{(lead | async).destination.longitude}}</span></dd>
+    <dd><span>{{(lead | async).destination.latitude}}</span></dd>
   </div>
 
-  <dt *ngIf="lead.customerId"><h3>Customer</h3></dt>
-  <dd *ngIf="lead.customerId"><span>{{lead.customerId}}</span></dd>
+  <dt *ngIf="(lead | async).customerId"><h3>Customer</h3></dt>
+  <dd *ngIf="(lead | async).customerId"><span>{{(lead | async).customerId}}</span></dd>
 
-  <dt *ngIf="lead.assignedToIds"><h3>Assigned to</h3></dt>
-  <dd *ngFor="let assignedToId of lead.assignedToIds"><span>{{assignedToId}}</span></dd>
+  <dt *ngIf="(lead | async).assignedToIds"><h3>Assigned to</h3></dt>
+  <dd *ngFor="let assignedToId of (lead | async).assignedToIds"><span>{{assignedToId}}</span></dd>
 </dl>
 
 <br>
@@ -53,13 +53,13 @@
     Back
   </a>
   <button class="ui green compact button"
-          [routerLink]="['/', { outlets: { popup: 'lead/'+ lead.id + '/edit'} }]"
+          [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/edit'} }]"
           replaceUrl="true">
     <i class="write icon"></i>
     Edit
   </button>
   <button class="ui red compact button"
-          [routerLink]="['/', { outlets: { popup: 'lead/'+ lead.id + '/delete'} }]"
+          [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/delete'} }]"
           replaceUrl="true">
     <i class="remove icon"> </i>
     Delete

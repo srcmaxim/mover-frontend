@@ -1,34 +1,44 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   Lead,
   Type,
   Status,
   Address
 } from './';
+import {Observable} from "rxjs/Observable";
+import {ActivatedRoute} from "@angular/router";
+import {LeadService} from "./lead.service";
 
 @Component({
   selector: 'app-lead-detail',
   templateUrl: './lead-detail.component.html',
   styleUrls: ['./lead-detail.component.css']
 })
-export class LeadDetailComponent implements OnInit {
+export class LeadDetailComponent implements OnInit, OnDestroy {
 
-  private lead: Lead;
-  private Type = Type;
-  private Status = Status;
+  private lead: Observable<Lead>;
+  changeSubscription: any;
+  routeSubscription: any;
 
-  constructor() {
-    this.lead = new Lead({
-      start: new Date(),
-      end: new Date(),
-      origin: new Address('123, Brick st., LA', 0, 0),
-      destination: new Address('123, Mac st., LA', 0, 0),
-      customerId: 1,
-      assignedToIds: [1, 2, 3]
-    });
+  constructor(private route: ActivatedRoute,
+              private leadService: LeadService) {
   }
 
   ngOnInit() {
+    this.lead = this.leadService.change
+      .map((leads: Lead[]) => leads[0]);
+    this.changeSubscription = this.lead.subscribe();
+
+    this.routeSubscription = this.route.params.subscribe((params) => {
+      const id = params['id'];
+      if (id) {
+        this.leadService.find(id);
+      }
+    });
   }
 
+  ngOnDestroy(): void {
+    this.changeSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+  }
 }

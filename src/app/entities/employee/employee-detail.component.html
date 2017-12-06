@@ -7,19 +7,19 @@
 
 <dl>
   <dt><h3>First Name</h3></dt>
-  <dd><span>{{employee.firstName}}</span></dd>
+  <dd><span>{{(employee | async).firstName}}</span></dd>
 
   <dt><h3>Last Name</h3></dt>
-  <dd><span>{{employee.lastName}}</span></dd>
+  <dd><span>{{(employee | async).lastName}}</span></dd>
 
   <dt><h3>Email</h3></dt>
-  <dd><span>{{employee.email}}</span></dd>
+  <dd><span>{{(employee | async).email}}</span></dd>
 
   <dt><h3>Phone</h3></dt>
-  <dd><span>{{employee.phone}}</span></dd>
+  <dd><span>{{(employee | async).phone}}</span></dd>
 
-  <dt *ngIf="employee.employeeIds"><h3>Leads</h3></dt>
-  <dd *ngFor="let employeeId of employee.employeeIds"><span>{{employeeId}}</span></dd>
+  <dt *ngIf="(employee | async).leadIds"><h3>Leads</h3></dt>
+  <dd *ngFor="let employeeId of (employee | async).employeeIds"><span>{{employeeId}}</span></dd>
 </dl>
 
 <br>
@@ -30,13 +30,13 @@
     Back
   </a>
   <a class="ui green compact button"
-          [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/edit'} }]"
+          [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/edit'} }]"
           replaceUrl="true">
     <i class="write icon"></i>
     Edit
   </a>
   <a class="ui red compact button"
-          [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/delete'} }]"
+          [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/delete'} }]"
           replaceUrl="true">
     <i class="remove icon"> </i>
     Delete

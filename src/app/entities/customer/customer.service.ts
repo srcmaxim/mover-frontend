@@ -18,6 +18,7 @@ export class CustomerService {
     const copy: Customer = Object.assign({}, customer);
     this.http.post<Customer>(this.resourceUrl, copy)
       .subscribe((customer: Customer) => {
+        customer = new Customer(customer);
         const customers: Customer[] = this.store.getValue();
         customers.push(customer);
         this.store.next(customers);
@@ -28,8 +29,9 @@ export class CustomerService {
     const copy: Customer = Object.assign({}, customer);
     this.http.put<Customer>(this.resourceUrl, copy)
       .subscribe((customer: Customer) => {
+        customer = new Customer(customer);
         const customers: Customer[] = this.store.getValue();
-        customers.forEach((_, i) => {
+        customers.forEach((_: Customer, i) => {
           if (_.id == customer.id) {
             customers[i] = customer;
           }
@@ -41,13 +43,14 @@ export class CustomerService {
   find(id: number) {
     this.http.get<Customer>(`${this.resourceUrl}/${id}`)
       .subscribe((customer: Customer) => {
-        this.store.next([customer]);
+        this.store.next([new Customer(customer)]);
       });
   }
 
   query(req?: any) {
     this.http.get<Customer[]>(this.resourceUrl)
       .subscribe((customers: Customer[]) => {
+        customers.forEach((customer: Customer, i) => customers[i] = new Customer(customers[i]));
         this.store.next(customers);
       });
   }
@@ -56,7 +59,7 @@ export class CustomerService {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
         let customers: Customer[] = this.store.getValue();
-        customers = customers.filter(_ => _.id != id);
+        customers = customers.filter((customer: Customer) => customer.id != id);
         this.store.next(customers);
       });
   }

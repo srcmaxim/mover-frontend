@@ -18,6 +18,7 @@ export class EmployeeService {
     const copy: Employee = Object.assign({}, employee);
     this.http.post<Employee>(this.resourceUrl, copy)
       .subscribe((employee: Employee) => {
+        employee = new Employee(employee);
         const employees: Employee[] = this.store.getValue();
         employees.push(employee);
         this.store.next(employees);
@@ -28,8 +29,9 @@ export class EmployeeService {
     const copy: Employee = Object.assign({}, employee);
     this.http.put<Employee>(this.resourceUrl, copy)
       .subscribe((employee: Employee) => {
+        employee = new Employee(employee);
         const employees: Employee[] = this.store.getValue();
-        employees.forEach((_, i) => {
+        employees.forEach((_: Employee, i) => {
           if (_.id == employee.id) {
             employees[i] = employee;
           }
@@ -41,13 +43,14 @@ export class EmployeeService {
   find(id: number) {
     this.http.get<Employee>(`${this.resourceUrl}/${id}`)
       .subscribe((employee: Employee) => {
-        this.store.next([employee]);
+        this.store.next([new Employee(employee)]);
       });
   }
 
   query(req?: any) {
     this.http.get<Employee[]>(this.resourceUrl)
       .subscribe((employees: Employee[]) => {
+        employees.forEach((employee: Employee, i) => employees[i] = new Employee(employees[i]));
         this.store.next(employees);
       });
   }
@@ -56,7 +59,7 @@ export class EmployeeService {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
         let employees: Employee[] = this.store.getValue();
-        employees = employees.filter(_ => _.id != id);
+        employees = employees.filter((employee: Employee) => employee.id != id);
         this.store.next(employees);
       });
   }

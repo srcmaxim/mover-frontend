@@ -5,21 +5,21 @@
 
 <div class="ui inverted section divider"></div>
 
-<dl>
+<dl #ngFor="">
   <dt><h3>First Name</h3></dt>
-  <dd><span>{{customer.firstName}}</span></dd>
+  <dd><span>{{(customer | async).firstName}}</span></dd>
 
   <dt><h3>Last Name</h3></dt>
-  <dd><span>{{customer.lastName}}</span></dd>
+  <dd><span>{{(customer | async).lastName}}</span></dd>
 
   <dt><h3>Email</h3></dt>
-  <dd><span>{{customer.email}}</span></dd>
+  <dd><span>{{(customer | async).email}}</span></dd>
 
   <dt><h3>Phone</h3></dt>
-  <dd><span>{{customer.phone}}</span></dd>
+  <dd><span>{{(customer | async).phone}}</span></dd>
 
-  <dt *ngIf="customer.leadIds"><h3>Leads</h3></dt>
-  <dd *ngFor="let leadId of customer.leadIds"><span>{{leadId}}</span></dd>
+  <dt *ngIf="(customer | async).leadIds"><h3>Leads</h3></dt>
+  <dd *ngFor="let leadId of (customer | async).leadIds"><span>{{leadId}}</span></dd>
 </dl>
 
 <br>
@@ -30,13 +30,13 @@
     Back
   </a>
   <a class="ui green compact button"
-          [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+          [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/edit'} }]"
           replaceUrl="true">
     <i class="write icon"></i>
     Edit
   </a>
   <a class="ui red compact button"
-          [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/delete'} }]"
+          [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/delete'} }]"
           replaceUrl="true">
     <i class="remove icon"> </i>
     Delete

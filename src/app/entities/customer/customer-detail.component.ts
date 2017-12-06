@@ -1,25 +1,39 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Customer} from './';
+import {Observable} from "rxjs/Observable";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CustomerService} from "./customer.service";
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'app-customer-detail',
   templateUrl: './customer-detail.component.html'
 })
-export class CustomerDetailComponent implements OnInit {
+export class CustomerDetailComponent implements OnInit, OnDestroy {
 
-  private customer: Customer;
+  private customer: Observable<Customer>;
+  changeSubscription: any;
+  routeSubscription: any;
 
-  constructor() {
-    this.customer = new Customer({
-      firstName: 'Duglas',
-      lastName: 'Costa',
-      email: 'duglas-costa@gmail.com',
-      phone: '+380-637-5413',
-      leadIds: [1, 2, 3]
-    });
+  constructor(private route: ActivatedRoute,
+              private customerService: CustomerService) {
   }
 
   ngOnInit() {
+    this.customer = this.customerService.change
+      .map((customers: Customer[]) => customers[0]);
+    this.changeSubscription = this.customer.subscribe();
+
+    this.routeSubscription = this.route.params.subscribe((params) => {
+      const id = params['id'];
+      if (id) {
+        this.customerService.find(id);
+      }
+    });
   }
 
+  ngOnDestroy(): void {
+    this.changeSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+  }
 }
