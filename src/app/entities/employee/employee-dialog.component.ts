@@ -16,7 +16,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   private employee: FormGroup;
   private leads: Lead[];
   private routeSubscription: any;
-  private createSubscription: any;
+  private editSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
@@ -33,6 +33,10 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
+        this.employeeService.find(id);
+        this.employeeService.change.subscribe((employees: Employee[]) => {
+          this.initForm(employees[0]);
+        });
       } else {
         this.initForm(new Employee({}));
         this.leads = [];
@@ -51,8 +55,8 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
+    if (this.editSubscription) {
+      this.editSubscription.unsubscribe();
     }
   }
 
@@ -62,10 +66,11 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     if (this.employee.value.id) {
+      this.employeeService.update(this.employee.value);
     } else {
       this.employeeService.create(this.employee.value);
     }
-    this.createSubscription = this.employeeService.change.subscribe(() =>
+    this.editSubscription = this.employeeService.change.subscribe(() =>
       this.router.navigateByUrl('/employee'));
   }
 }
