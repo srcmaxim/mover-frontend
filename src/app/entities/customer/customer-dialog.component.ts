@@ -16,7 +16,7 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
   private customer: FormGroup;
   private leads: Lead[];
   private routeSubscription: any;
-  private createSubscription: any;
+  private editSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
@@ -33,6 +33,10 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
+        this.customerService.find(id);
+        this.customerService.change.subscribe((customers: Customer[]) => {
+          this.initForm(customers[0]);
+        });
       } else {
         this.initForm(new Customer({}));
         this.leads = [];
@@ -51,8 +55,8 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
+    if (this.editSubscription) {
+      this.editSubscription.unsubscribe();
     }
   }
 
@@ -62,10 +66,11 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     if (this.customer.value.id) {
+      this.customerService.update(this.customer.value);
     } else {
       this.customerService.create(this.customer.value);
     }
-    this.createSubscription = this.customerService.change.subscribe(() =>
+    this.editSubscription = this.customerService.change.subscribe(() =>
       this.router.navigateByUrl('/customer'));
   }
 }
