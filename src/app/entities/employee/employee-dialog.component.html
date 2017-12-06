@@ -3,21 +3,21 @@
        style="margin-top: -20em; display: block !important;">
 
     <div class="header">
-      Create or edit a Employee
+      Create or edit a Employee: {{employee.value | json}} -- {{employee.status | json}}
     </div>
     <div class="content">
 
-      <form class="ui equal width form">
+      <form [formGroup]="employee" class="ui equal width form">
 
         <h3 class="header formHeader">Name</h3>
         <div class="fields">
           <div class="field">
             <label>First Name</label>
-            <input type="text" placeholder="First Name">
+            <input formControlName="firstName" type="text" placeholder="First Name">
           </div>
           <div class="field">
             <label>Last Name</label>
-            <input type="text" placeholder="Last Name">
+            <input formControlName="lastName" type="text" placeholder="Last Name">
           </div>
         </div>
 
@@ -25,11 +25,11 @@
         <div class="fields">
           <div class="field">
             <label>Email</label>
-            <input type="text" placeholder="Email">
+            <input formControlName="email" type="text" placeholder="Email">
           </div>
           <div class="field">
             <label>Phone</label>
-            <input type="text" placeholder="Phone">
+            <input formControlName="phone" type="text" placeholder="Phone">
           </div>
         </div>
 

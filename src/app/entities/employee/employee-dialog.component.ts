@@ -1,14 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-Address,
-Lead
-} from '../lead/';
+import {Lead} from '../lead/';
 import {Employee} from '../employee';
-import {
-  SemanticDropdownLoader,
-  SemanticCalendarLoader
-} from '../../layouts';
+import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {EmployeeService} from "./employee.service";
 
 @Component({
   selector: 'app-employee-dialog',
@@ -17,44 +13,47 @@ import {
 })
 export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
-  routeSub: any;
-  employee: Employee;
+  private employee: FormGroup;
   private leads: Lead[];
+  private routeSubscription: any;
+  private createSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private employeeService: EmployeeService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.dropdownLoader.load();
     this.calendarLoader.load();
 
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.employee = new Employee({id: id});
-        this.leads = [
-          new Lead({
-            start: new Date(),
-            end: new Date(),
-            origin: new Address('123, Brick st., LA', 0, 0),
-            destination: new Address('123, Mac st., LA', 0, 0)
-          }),
-          new Lead({
-            start: new Date(),
-            end: new Date(),
-            origin: new Address('27, Tree st., LA', 0, 0),
-            destination: new Address('413, Oak st., LA', 0, 0)
-          })
-        ];
+      } else {
+        this.initForm(new Employee({}));
+        this.leads = [];
       }
     });
   }
 
+  initForm(employee: Employee) {
+    this.employee = this.formBuilder.group({
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phone: employee.phone
+    });
+  }
+
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    if (this.createSubscription) {
+      this.createSubscription.unsubscribe();
+    }
   }
 
   onDeny() {
@@ -62,6 +61,11 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   }
 
   onApprove() {
-    this.router.navigate([{outlets: {popup: null}}]);
+    if (this.employee.value.id) {
+    } else {
+      this.employeeService.create(this.employee.value);
+    }
+    this.createSubscription = this.employeeService.change.subscribe(() =>
+      this.router.navigateByUrl('/employee'));
   }
 }
