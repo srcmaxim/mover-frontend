@@ -7,6 +7,7 @@ import "rxjs/add/observable/fromEventPattern";
 import "rxjs/add/operator/debounce";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/mapTo";
+import {Subject} from "rxjs/Subject";
 
 declare var jQuery: any;
 
@@ -21,8 +22,10 @@ declare var jQuery: any;
 @Injectable()
 export class SemanticCalendarLoader implements Loader {
 
-  public startDateChange: any;
-  public endDateChange: any;
+  private startFirst: Subject<Date> = new Subject();
+  private endFirst: Subject<Date> = new Subject();
+  public startDateChange: Observable<Date> = this.startFirst.asObservable();
+  public endDateChange: Observable<Date> = this.endFirst.asObservable();
 
   private CALENDAR_SETTINGS = {
     firstDayOfWeek: 1,
@@ -30,46 +33,30 @@ export class SemanticCalendarLoader implements Loader {
     timePickerIncrement: 15,
     formatter: {datetime: this.formattedDateTime}
   };
-
   private START_CALENDAR_ID = '#rangeStart[appCalendar]';
   private END_CALENDAR_ID = '#rangeEnd[appCalendar]';
-  private START_ID = '#start';
-  private END_ID = '#end';
 
   public load(): void {
     this.setupRangeStartCalendar();
     this.setupRangeEndCalendar();
-    this.setupRangeEvents();
-  }
-
-  private setupRangeEndCalendar() {
-    jQuery(this.END_CALENDAR_ID).calendar(
-      Object.assign({}, this.CALENDAR_SETTINGS, {
-        startCalendar: jQuery(this.START_CALENDAR_ID)
-      })
-    );
   }
 
   private setupRangeStartCalendar() {
     jQuery(this.START_CALENDAR_ID).calendar(
       Object.assign({}, this.CALENDAR_SETTINGS, {
-        endCalendar: jQuery(this.END_CALENDAR_ID)
+        endCalendar: jQuery(this.END_CALENDAR_ID),
+        onChange: (date: Date) => this.startFirst.next(date)
       })
     );
   }
 
-  private setupRangeEvents() {
-    let body = jQuery('body');
-    let event = 'focusout';
-    this.startDateChange = this.getEvent(body, event, this.START_CALENDAR_ID, this.START_ID);
-    this.endDateChange = this.getEvent(body,event,  this.END_CALENDAR_ID, this.END_ID);
-  }
-
-  private getEvent(body, event,  calendarId, inputId) {
-    return Observable.fromEventPattern(
-      (handler) => body.on(event, calendarId, handler),
-      (handler) => body.off(event, calendarId, handler)
-    ).debounceTime(100).mapTo(() => jQuery(inputId).val());
+  private setupRangeEndCalendar() {
+    jQuery(this.END_CALENDAR_ID).calendar(
+      Object.assign({}, this.CALENDAR_SETTINGS, {
+        startCalendar: jQuery(this.START_CALENDAR_ID),
+        onChange: (date: Date) => this.endFirst.next(date)
+      })
+    );
   }
 
   private formattedDateTime(date: Date): string {

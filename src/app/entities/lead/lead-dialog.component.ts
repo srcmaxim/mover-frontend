@@ -36,10 +36,10 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dropdownLoader.load();
     this.calendarLoader.load();
-    this.calendarLoader.startDateChange
-      .subscribe((date) => this.lead.value.start = date());
-    this.calendarLoader.endDateChange
-      .subscribe((date) => this.lead.value.end = date());
+    this.startDateSubscription = this.calendarLoader.startDateChange
+      .subscribe((date) => this.lead.value.start = date);
+    this.endDateSubscription = this.calendarLoader.endDateChange
+      .subscribe((date) => this.lead.value.end = date);
 
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];

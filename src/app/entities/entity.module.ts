@@ -12,7 +12,7 @@ import {InMemoryEntitiesService} from "./entities.in-memory.service";
     MoverLeadModule,
     MoverCustomerModule,
     MoverEmployeeModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryEntitiesService, {delay: 200}),
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryEntitiesService, {delay: 500}),
   ],
   declarations: [],
   entryComponents: [],
