@@ -15,7 +15,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customers = this.customerService.change;
+    this.customers = this.customerService.multiChange;
     this.customerService.query();
   }
 }

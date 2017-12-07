@@ -12,7 +12,6 @@ import "rxjs/add/operator/map";
 export class CustomerDetailComponent implements OnInit, OnDestroy {
 
   private customer: Observable<Customer>;
-  private changeSubscription: any;
   private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
@@ -20,9 +19,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.customer = this.customerService.change
-      .map((customers: Customer[]) => customers[0]);
-    this.changeSubscription = this.customer.subscribe();
+    this.customer = this.customerService.singleChange;
 
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
@@ -33,7 +30,6 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.changeSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
   }
 }

@@ -39,7 +39,7 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     this.customerService.delete(this.customerId);
-    this.deleteSubscription = this.customerService.change.subscribe(() =>
+    this.deleteSubscription = this.customerService.multiChange.subscribe(() =>
       this.router.navigateByUrl('/customer'));
   }
 }

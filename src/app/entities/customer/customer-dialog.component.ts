@@ -34,8 +34,8 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
       const id = params['id'];
       if (id) {
         this.customerService.find(id);
-        this.customerService.change.subscribe((customers: Customer[]) => {
-          this.initForm(customers[0]);
+        this.customerService.singleChange.subscribe((customer: Customer) => {
+          this.initForm(customer);
         });
       } else {
         this.initForm(new Customer({}));
@@ -71,7 +71,7 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
     } else {
       this.customerService.create(this.customer.value);
     }
-    this.editSubscription = this.customerService.change.subscribe(() =>
-      this.router.navigateByUrl('/customer'));
+    this.editSubscription = this.customerService.singleChange.subscribe(() =>
+      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

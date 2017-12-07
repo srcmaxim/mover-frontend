@@ -8,8 +8,10 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 export class CustomerService {
 
   private resourceUrl = 'api/customers';
-  private store: BehaviorSubject<Customer[]> = new BehaviorSubject([]);
-  public change: Observable<Customer[]> = this.store.asObservable();
+  private collection: BehaviorSubject<Customer[]> = new BehaviorSubject([]);
+  private first: BehaviorSubject<Customer> = new BehaviorSubject(new Customer({}));
+  public multiChange: Observable<Customer[]> = this.collection.asObservable();
+  public singleChange: Observable<Customer> = this.first.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -18,49 +20,93 @@ export class CustomerService {
     const copy: Customer = Object.assign({}, customer);
     this.http.post<Customer>(this.resourceUrl, copy)
       .subscribe((customer: Customer) => {
-        customer = new Customer(customer);
-        const customers: Customer[] = this.store.getValue();
-        customers.push(customer);
-        this.store.next(customers);
+        this.createSingle(customer);
+        this.createMulti(customer);
       });
+  }
+
+  private createSingle(customer: Customer) {
+    this.first.next(new Customer(customer));
+  }
+
+  private createMulti(customer: Customer) {
+    customer = new Customer(customer);
+    const customers: Customer[] = this.collection.getValue();
+    customers.push(customer);
+    this.collection.next(customers);
   }
 
   update(customer: Customer) {
     const copy: Customer = Object.assign({}, customer);
     this.http.put<Customer>(this.resourceUrl, copy)
-      .subscribe((customer: Customer) => {
-        customer = new Customer(customer);
-        const customers: Customer[] = this.store.getValue();
-        customers.forEach((_: Customer, i) => {
-          if (_.id == customer.id) {
-            customers[i] = customer;
-          }
-        });
-        this.store.next(customers);
+      .subscribe(() => {
+        this.updateSingle(customer);
+        this.updateMulti(customer);
       });
+  }
+
+  private updateSingle(customer: Customer) {
+    this.first.next(new Customer(customer));
+  }
+
+  private updateMulti(customer: Customer) {
+    customer = new Customer(customer);
+    const customers: Customer[] = this.collection.getValue();
+    for (let i = 0; i < customers.length; i++) {
+      if (customers[i].id == customer.id) {
+        customers[i] = customer;
+        break;
+      }
+    }
+    this.collection.next(customers);
   }
 
   find(id: number) {
     this.http.get<Customer>(`${this.resourceUrl}/${id}`)
       .subscribe((customer: Customer) => {
-        this.store.next([new Customer(customer)]);
+        this.findSingle(customer);
       });
+  }
+
+  private findSingle(customer: Customer) {
+    this.first.next(new Customer(customer));
   }
 
   query(req?: any) {
     this.http.get<Customer[]>(this.resourceUrl)
       .subscribe((customers: Customer[]) => {
-        customers.forEach((customer: Customer, i) => customers[i] = new Customer(customers[i]));
-        this.store.next(customers);
+        if (customers.length > 1) {
+          this.queryMulti(customers);
+        } else {
+          this.querySingle(new Customer(customers[0]));
+        }
       });
+  }
+
+  private querySingle(customer: Customer) {
+    this.first.next(new Customer(customer));
+  }
+
+  private queryMulti(customers: Customer[]) {
+    customers.forEach((customer: Customer, i) => customers[i] = new Customer(customers[i]));
+    this.collection.next(customers);
   }
 
   delete(id: number) {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
-        let customers: Customer[] = this.store.getValue();
-        customers = customers.filter((customer: Customer) => customer.id != id);
-        this.store.next(customers);
+        this.deleteMulti(id);
+        this.deleteSingle();
       });
+  }
+
+  private deleteSingle() {
+    this.first.next(new Customer({}));
+  }
+
+  private deleteMulti(id: number) {
+    let customers: Customer[] = this.collection.getValue();
+    customers = customers.filter((customer: Customer) => customer.id != id);
+    this.collection.next(customers);
   }
 }
