@@ -17,7 +17,7 @@ export class LeadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.leads = this.leadService.change;
+    this.leads = this.leadService.multiChange;
     this.leadService.query();
   }
 }

@@ -38,8 +38,8 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
       const id = params['id'];
       if (id) {
         this.leadService.find(id);
-        this.leadService.change.subscribe((leads: Lead[]) => {
-          this.initForm(leads[0]);
+        this.leadService.singleChange.subscribe((lead: Lead) => {
+          this.initForm(lead);
         });
       } else {
         this.initForm(new Lead({}));
@@ -84,7 +84,7 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
     } else {
       this.leadService.create(this.lead.value);
     }
-    this.editSubscription = this.leadService.change.subscribe(() =>
-      this.router.navigateByUrl('/lead'));
+    this.editSubscription = this.leadService.singleChange.subscribe(() =>
+      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

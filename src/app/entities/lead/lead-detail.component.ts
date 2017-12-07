@@ -17,7 +17,6 @@ import {LeadService} from "./lead.service";
 export class LeadDetailComponent implements OnInit, OnDestroy {
 
   private lead: Observable<Lead>;
-  private changeSubscription: any;
   private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
@@ -25,9 +24,7 @@ export class LeadDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.lead = this.leadService.change
-      .map((leads: Lead[]) => leads[0]);
-    this.changeSubscription = this.lead.subscribe();
+    this.lead = this.leadService.singleChange;
 
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
@@ -38,7 +35,6 @@ export class LeadDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.changeSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
   }
 }

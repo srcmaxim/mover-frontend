@@ -8,8 +8,10 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 export class LeadService {
 
   private resourceUrl = 'api/leads';
-  private store: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
-  public change: Observable<Lead[]> = this.store.asObservable();
+  private collection: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
+  private first: BehaviorSubject<Lead> = new BehaviorSubject(new Lead({}));
+  public multiChange: Observable<Lead[]> = this.collection.asObservable();
+  public singleChange: Observable<Lead> = this.first.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -18,49 +20,93 @@ export class LeadService {
     const copy: Lead = Object.assign({}, lead);
     this.http.post<Lead>(this.resourceUrl, copy)
       .subscribe((lead: Lead) => {
-        lead = new Lead(lead);
-        const leads: Lead[] = this.store.getValue();
-        leads.push(lead);
-        this.store.next(leads);
+        this.createSingle(lead);
+        this.createMulti(lead);
       });
+  }
+
+  private createSingle(lead: Lead) {
+    this.first.next(new Lead(lead));
+  }
+
+  private createMulti(lead: Lead) {
+    lead = new Lead(lead);
+    const leads: Lead[] = this.collection.getValue();
+    leads.push(lead);
+    this.collection.next(leads);
   }
 
   update(lead: Lead) {
     const copy: Lead = Object.assign({}, lead);
     this.http.put<Lead>(this.resourceUrl, copy)
-      .subscribe((lead: Lead) => {
-        lead = new Lead(lead);
-        const leads: Lead[] = this.store.getValue();
-        leads.forEach((_: Lead, i) => {
-          if (_.id == lead.id) {
-            leads[i] = lead;
-          }
-        });
-        this.store.next(leads);
+      .subscribe(() => {
+        this.updateSingle(lead);
+        this.updateMulti(lead);
       });
+  }
+
+  private updateSingle(lead: Lead) {
+    this.first.next(new Lead(lead));
+  }
+
+  private updateMulti(lead: Lead) {
+    lead = new Lead(lead);
+    const leads: Lead[] = this.collection.getValue();
+    for (let i = 0; i < leads.length; i++) {
+      if (leads[i].id == lead.id) {
+        leads[i] = lead;
+        break;
+      }
+    }
+    this.collection.next(leads);
   }
 
   find(id: number) {
     this.http.get<Lead>(`${this.resourceUrl}/${id}`)
       .subscribe((lead: Lead) => {
-        this.store.next([new Lead(lead)]);
+        this.findSingle(lead);
       });
+  }
+
+  private findSingle(lead: Lead) {
+    this.first.next(new Lead(lead));
   }
 
   query(req?: any) {
     this.http.get<Lead[]>(this.resourceUrl)
       .subscribe((leads: Lead[]) => {
-        leads.forEach((lead: Lead, i) => leads[i] = new Lead(leads[i]));
-        this.store.next(leads);
+        if (leads.length > 1) {
+          this.queryMulti(leads);
+        } else {
+          this.querySingle(new Lead(leads[0]));
+        }
       });
+  }
+
+  private querySingle(lead: Lead) {
+    this.first.next(new Lead(lead));
+  }
+
+  private queryMulti(leads: Lead[]) {
+    leads.forEach((lead: Lead, i) => leads[i] = new Lead(leads[i]));
+    this.collection.next(leads);
   }
 
   delete(id: number) {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
-        let leads: Lead[] = this.store.getValue();
-        leads = leads.filter((lead: Lead) => lead.id != id);
-        this.store.next(leads);
+        this.deleteMulti(id);
+        this.deleteSingle();
       });
+  }
+
+  private deleteSingle() {
+    this.first.next(new Lead({}));
+  }
+
+  private deleteMulti(id: number) {
+    let leads: Lead[] = this.collection.getValue();
+    leads = leads.filter((lead: Lead) => lead.id != id);
+    this.collection.next(leads);
   }
 }

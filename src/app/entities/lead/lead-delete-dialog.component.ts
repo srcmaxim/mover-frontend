@@ -39,7 +39,7 @@ export class LeadDeleteDialogComponent implements OnInit, OnDestroy {
 
   onApprove() {
     this.leadService.delete(this.leadId);
-    this.deleteSubscription = this.leadService.change.subscribe(() =>
+    this.deleteSubscription = this.leadService.multiChange.subscribe(() =>
       this.router.navigateByUrl('/lead'));
   }
 }
