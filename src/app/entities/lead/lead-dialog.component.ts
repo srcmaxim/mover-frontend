@@ -57,6 +57,7 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
       address: lead.destination.address
     });
     this.lead = this.formBuilder.group({
+      id: lead.id,
       start: lead.start,
       end: lead.end,
       origin: this.origin,

@@ -46,6 +46,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   initForm(employee: Employee) {
     this.employee = this.formBuilder.group({
+      id: employee.id,
       firstName: employee.firstName,
       lastName: employee.lastName,
       email: employee.email,

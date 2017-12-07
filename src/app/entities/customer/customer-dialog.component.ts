@@ -46,6 +46,7 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
 
   initForm(customer: Customer) {
     this.customer = this.formBuilder.group({
+      id: customer.id,
       firstName: customer.firstName,
       lastName: customer.lastName,
       email: customer.email,
