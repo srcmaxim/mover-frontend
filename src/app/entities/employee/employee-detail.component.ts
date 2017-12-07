@@ -11,7 +11,6 @@ import {EmployeeService} from "./employee.service";
 export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   private employee: Observable<Employee>;
-  private changeSubscription: any;
   private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
@@ -19,9 +18,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.employee = this.employeeService.change
-      .map((employees: Employee[]) => employees[0]);
-    this.changeSubscription = this.employee.subscribe();
+    this.employee = this.employeeService.singleChange;
 
     this.routeSubscription = this.route.params.subscribe((params) => {
       const id = params['id'];
@@ -32,7 +29,6 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.changeSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
   }
 }

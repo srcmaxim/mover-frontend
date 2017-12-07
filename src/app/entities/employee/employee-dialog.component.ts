@@ -34,8 +34,8 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       const id = params['id'];
       if (id) {
         this.employeeService.find(id);
-        this.employeeService.change.subscribe((employees: Employee[]) => {
-          this.initForm(employees[0]);
+        this.employeeService.singleChange.subscribe((employee: Employee) => {
+          this.initForm(employee);
         });
       } else {
         this.initForm(new Employee({}));
@@ -71,7 +71,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     } else {
       this.employeeService.create(this.employee.value);
     }
-    this.editSubscription = this.employeeService.change.subscribe(() =>
-      this.router.navigateByUrl('/employee'));
+    this.editSubscription = this.employeeService.singleChange.subscribe(() =>
+      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

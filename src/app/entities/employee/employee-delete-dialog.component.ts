@@ -39,7 +39,7 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
 
   onApprove() {
     this.employeeService.delete(this.employeeId);
-    this.deleteSubscription = this.employeeService.change.subscribe(() =>
+    this.deleteSubscription = this.employeeService.multiChange.subscribe(() =>
       this.router.navigateByUrl('/employee'));
   }
 }
