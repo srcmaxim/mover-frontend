@@ -7,10 +7,10 @@
 
 <dl>
   <dt><h3>Start</h3></dt>
-  <dd><span>{{(lead | async).getStart()}}</span></dd>
+  <dd><span>{{((lead | async).start | customDate)}}</span></dd>
 
   <dt><h3>End</h3></dt>
-  <dd><span>{{(lead | async).getEnd()}}</span></dd>
+  <dd><span>{{((lead | async).end | customDate)}}</span></dd>
 
   <dt><h3>Type</h3></dt>
   <dd>

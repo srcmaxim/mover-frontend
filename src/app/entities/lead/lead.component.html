@@ -25,8 +25,8 @@
   </thead>
   <tbody>
   <tr *ngFor="let lead of leads | async">
-    <td>{{lead.start}}</td>
-    <td>{{lead.end}}</td>
+    <td>{{(lead.start | customDate)}}</td>
+    <td>{{(lead.end | customDate)}}</td>
 
     <td>
       <div class="ui blue label">{{Type[lead.type]}}</div>

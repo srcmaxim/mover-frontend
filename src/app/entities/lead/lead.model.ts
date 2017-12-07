@@ -4,14 +4,6 @@ import {
 } from './';
 
 export class Lead {
-  private static DATE_FORMAT_OPTIONS = {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false
-  };
 
   id: number;
   start: Date;
@@ -37,14 +29,6 @@ export class Lead {
     this.assignedToIds  = obj && obj.assignedToIds  || [];
     this.estimates      = obj && obj.estimates      || [];
     this.inventories    = obj && obj.inventories    || [];
-  }
-
-  public getStart(): string {
-    return this.start.toLocaleString('eu', Lead.DATE_FORMAT_OPTIONS);
-  }
-
-  public getEnd(): string {
-    return this.end.toLocaleString('eu', Lead.DATE_FORMAT_OPTIONS);
   }
 
   public getTypeToString(): string {
