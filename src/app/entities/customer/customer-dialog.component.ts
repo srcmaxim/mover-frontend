@@ -14,7 +14,6 @@ import {Customer} from "./customer.model";
 export class CustomerDialogComponent implements OnInit, OnDestroy {
 
   private customer: FormGroup;
-  private leads: Lead[];
   private routeSubscription: any;
   private editSubscription: any;
 
@@ -39,7 +38,6 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
         });
       } else {
         this.initForm(new Customer({}));
-        this.leads = [];
       }
     });
   }

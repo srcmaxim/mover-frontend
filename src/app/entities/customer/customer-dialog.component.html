@@ -35,45 +35,6 @@
 
       </form>
 
-      <div>
-
-        <h3 class="header formHeader headerMargin">Leads</h3>
-        <div class="ui fluid action input">
-          <input type="text" placeholder="Lead"/>
-          <div class="ui button">Add</div>
-        </div>
-
-        <table class="ui striped table">
-          <thead>
-          <tr>
-            <th>Start</th>
-            <th>End</th>
-
-            <th>Origin</th>
-            <th>Destination</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let lead of leads">
-            <td>{{lead.getStart()}}</td>
-            <td>{{lead.getEnd()}}</td>
-
-            <td>{{lead.origin.address}}</td>
-            <td>{{lead.destination.address}}</td>
-
-            <td>
-              <button class="ui mini red compact button">
-                <i class="remove icon"> </i>
-                Delete
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
-      </div>
-
     </div>
     <div class="actions">
       <div class="ui black deny button" (click)="onDeny()">

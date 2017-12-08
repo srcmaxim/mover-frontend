@@ -17,7 +17,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         type: Type.LOCAL,
         status: Status.ASSIGNED,
         customerId: 1,
-        assignedToIds: [1, 2],
+        assignedToIds: [1],
         estimates: [
           new Estimate({
             id: 1,

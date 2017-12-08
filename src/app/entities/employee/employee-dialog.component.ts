@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Lead} from '../lead/';
 import {Employee} from '../employee';
 import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -14,7 +13,6 @@ import {EmployeeService} from "./employee.service";
 export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   private employee: FormGroup;
-  private leads: Lead[];
   private routeSubscription: any;
   private editSubscription: any;
 
@@ -39,7 +37,6 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         });
       } else {
         this.initForm(new Employee({}));
-        this.leads = [];
       }
     });
   }

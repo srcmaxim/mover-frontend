@@ -2,10 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Lead} from './';
 import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts/';
-import {Employee} from '../employee/';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LeadService} from "./lead.service";
-import {Customer} from "../customer/customer.model";
 import {CustomDate, Iso8601Date} from "../../shared/pipes/date.pipe";
 
 @Component({
@@ -18,8 +16,6 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   private lead: FormGroup;
   private origin: FormGroup;
   private destination: FormGroup;
-  private customers: Customer[];
-  private employees: Employee[];
   private routeSubscription: any;
   private editSubscription: any;
   private startDateSubscription: any;
@@ -98,8 +94,6 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
       type: lead.type,
       status: lead.status
     });
-    this.customers = [];
-    this.employees = [];
   }
 
   fromFormToEntity(): Lead {
