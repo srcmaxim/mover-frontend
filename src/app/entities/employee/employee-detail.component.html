@@ -5,40 +5,45 @@
 
 <div class="ui inverted section divider"></div>
 
-<dl>
-  <dt><h3>First Name</h3></dt>
-  <dd><span>{{(employee | async).firstName}}</span></dd>
+<div class="column">
+  <h4 class="ui top attached block header">Employee</h4>
+  <div class="ui bottom attached segment">
+    <dl>
+      <dt><h3>First Name</h3></dt>
+      <dd><span>{{(employee | async).firstName}}</span></dd>
 
-  <dt><h3>Last Name</h3></dt>
-  <dd><span>{{(employee | async).lastName}}</span></dd>
+      <dt><h3>Last Name</h3></dt>
+      <dd><span>{{(employee | async).lastName}}</span></dd>
 
-  <dt><h3>Email</h3></dt>
-  <dd><span>{{(employee | async).email}}</span></dd>
+      <dt><h3>Email</h3></dt>
+      <dd><span>{{(employee | async).email}}</span></dd>
 
-  <dt><h3>Phone</h3></dt>
-  <dd><span>{{(employee | async).phone}}</span></dd>
+      <dt><h3>Phone</h3></dt>
+      <dd><span>{{(employee | async).phone}}</span></dd>
 
-  <dt *ngIf="(employee | async).leadIds"><h3>Leads</h3></dt>
-  <dd *ngFor="let employeeId of (employee | async).employeeIds"><span>{{employeeId}}</span></dd>
-</dl>
+      <dt *ngIf="(employee | async).leadIds"><h3>Leads</h3></dt>
+      <dd *ngFor="let leadId of (employee | async).leadIds"><span>{{leadId}}</span></dd>
+    </dl>
 
-<br>
+    <br>
 
-<div class="ui mini buttons">
-  <a class="ui blue compact button" [routerLink]="['/employee']">
-    <i class="reply icon"> </i>
-    Back
-  </a>
-  <a class="ui green compact button"
-          [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/edit'} }]"
-          replaceUrl="true">
-    <i class="write icon"></i>
-    Edit
-  </a>
-  <a class="ui red compact button"
-          [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/delete'} }]"
-          replaceUrl="true">
-    <i class="remove icon"> </i>
-    Delete
-  </a>
+    <div class="ui mini buttons">
+      <a class="ui blue compact button" [routerLink]="['/employee']">
+        <i class="reply icon"> </i>
+        Back
+      </a>
+      <a class="ui green compact button"
+         [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/edit'} }]"
+         replaceUrl="true">
+        <i class="write icon"></i>
+        Edit
+      </a>
+      <a class="ui red compact button"
+         [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/delete'} }]"
+         replaceUrl="true">
+        <i class="remove icon"> </i>
+        Delete
+      </a>
+    </div>
+  </div>
 </div>
