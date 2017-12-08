@@ -1,7 +1,5 @@
-import {
-  Estimate,
-  Inventory
-} from './';
+import {Estimate} from "./estimate.model";
+import {Inventory} from "./inventory.model";
 
 export class Lead {
 

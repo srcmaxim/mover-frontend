@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Lead} from '../lead/';
 import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
 import {CustomerService} from "./customer.service";
 import {FormBuilder, FormGroup} from "@angular/forms";

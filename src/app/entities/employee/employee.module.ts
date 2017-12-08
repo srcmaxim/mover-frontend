@@ -1,15 +1,13 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  employeeRoute,
-  employeePopupRoute,
-  EmployeeComponent,
-  EmployeeDetailComponent,
-  EmployeeDialogComponent,
-  EmployeeDeleteDialogComponent,
-  EmployeeService
-} from './';
+
 import {SharedModule} from '../../shared/shared.module';
+import {employeePopupRoute, employeeRoute} from "./employee.route";
+import {EmployeeComponent} from "./employee.component";
+import {EmployeeDetailComponent} from "./employee-detail.component";
+import {EmployeeDialogComponent} from "./employee-dialog.component";
+import {EmployeeDeleteDialogComponent} from "./employee-delete-dialog.component";
+import {EmployeeService} from "./employee.service";
 
 const ENTITY_STATES = [
   ...employeeRoute,

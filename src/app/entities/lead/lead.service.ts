@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
-import {Lead} from './';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Lead} from "./lead.model";
 
 @Injectable()
 export class LeadService {

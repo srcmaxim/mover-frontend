@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Lead} from './';
 import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts/';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LeadService} from "./lead.service";
 import {CustomDate, Iso8601Date} from "../../shared/pipes/date.pipe";
+import {Lead} from "./lead.model";
 
 @Component({
   selector: 'app-lead-dialog',

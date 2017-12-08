@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
-import {Customer} from './';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Customer} from "./customer.model";
 
 @Injectable()
 export class CustomerService {

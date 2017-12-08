@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Employee} from '../employee';
 import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {EmployeeService} from "./employee.service";
+import {Employee} from "./employee.model";
 
 @Component({
   selector: 'app-employee-dialog',

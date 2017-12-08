@@ -1,9 +1,9 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {Customer} from "./customer";
 import {Address, Lead, Type, Status} from "./lead/lead.model";
 import {Estimate} from "./lead/estimate.model";
 import {Category, Inventory} from "./lead/inventory.model";
 import {Employee} from "./employee/employee.model";
+import {Customer} from "./customer/customer.model";
 
 export class InMemoryEntitiesService implements InMemoryDbService {
   createDb() {

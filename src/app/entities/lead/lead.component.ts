@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {LeadService} from "./lead.service";
-import {Lead, Status, Type} from './';
+import {Lead, Type, Status} from "./lead.model";
 
 @Component({
   selector: 'app-lead',

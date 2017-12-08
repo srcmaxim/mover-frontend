@@ -5,68 +5,124 @@
 
 <div class="ui inverted section divider"></div>
 
-<div class="column">
-  <h4 class="ui top attached block header">Employee</h4>
-  <div class="ui bottom attached segment">
-    <dl>
-      <dt><h3>Start</h3></dt>
-      <dd><span>{{((lead | async).start | customDate)}}</span></dd>
+<div class="ui three column grid">
+  <div class="column">
+    <h4 class="ui top attached block header">Lead</h4>
+    <div class="ui bottom attached segment">
+      <dl>
+        <dt><h3>Start</h3></dt>
+        <dd><span>{{((lead | async).start | customDate)}}</span></dd>
 
-      <dt><h3>End</h3></dt>
-      <dd><span>{{((lead | async).end | customDate)}}</span></dd>
+        <dt><h3>End</h3></dt>
+        <dd><span>{{((lead | async).end | customDate)}}</span></dd>
 
-      <dt><h3>Type</h3></dt>
-      <dd>
-        <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
-      </dd>
+        <dt><h3>Type</h3></dt>
+        <dd>
+          <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
+        </dd>
 
-      <dt><h3>Status</h3></dt>
-      <dd>
-        <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
-      </dd>
+        <dt><h3>Status</h3></dt>
+        <dd>
+          <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
+        </dd>
 
-      <dt><h3>Origin</h3></dt>
-      <dd><span>{{(lead | async).origin.address}}</span></dd>
-      <div class="nested">
-        <dt><h5>Location</h5></dt>
-        <dd><span>{{(lead | async).origin.longitude}}</span></dd>
-        <dd><span>{{(lead | async).origin.latitude}}</span></dd>
+        <dt><h3>Origin</h3></dt>
+        <dd><span>{{(lead | async).origin.address}}</span></dd>
+        <div class="nested">
+          <dt><h5>Location</h5></dt>
+          <dd><span>{{(lead | async).origin.longitude}}</span></dd>
+          <dd><span>{{(lead | async).origin.latitude}}</span></dd>
+        </div>
+
+        <dt><h3>Destination</h3></dt>
+        <dd><span>{{(lead | async).destination.address}}</span></dd>
+        <div class="nested">
+          <dt><h5>Location</h5></dt>
+          <dd><span>{{(lead | async).destination.longitude}}</span></dd>
+          <dd><span>{{(lead | async).destination.latitude}}</span></dd>
+        </div>
+
+        <dt *ngIf="(lead | async).customerId"><h3>Customer</h3></dt>
+        <dd *ngIf="(lead | async).customerId"><span>{{(lead | async).customerId}}</span></dd>
+
+        <dt *ngIf="(lead | async).assignedToIds"><h3>Assigned to</h3></dt>
+        <dd *ngFor="let assignedToId of (lead | async).assignedToIds"><span>{{assignedToId}}</span></dd>
+      </dl>
+
+      <br>
+
+      <div class="ui mini buttons">
+        <a class="ui blue compact button" [routerLink]="['/lead']">
+          <i class="reply icon"> </i>
+          Back
+        </a>
+        <button class="ui green compact button"
+                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/edit'} }]"
+                replaceUrl="true">
+          <i class="write icon"></i>
+          Edit
+        </button>
+        <button class="ui red compact button"
+                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/delete'} }]"
+                replaceUrl="true">
+          <i class="remove icon"> </i>
+          Delete
+        </button>
       </div>
+    </div>
+  </div>
 
-      <dt><h3>Destination</h3></dt>
-      <dd><span>{{(lead | async).destination.address}}</span></dd>
-      <div class="nested">
-        <dt><h5>Location</h5></dt>
-        <dd><span>{{(lead | async).destination.longitude}}</span></dd>
-        <dd><span>{{(lead | async).destination.latitude}}</span></dd>
+  <div class="column">
+    <h4 class="ui top attached block header">Customer</h4>
+    <div class="ui bottom attached segment">
+      <div class="ui card">
+        <div class="content">
+          <div class="header">
+            {{(customer | async).firstName}} {{(customer | async).lastName}}
+          </div>
+          <div class="meta">
+            <span class="category">{{(customer | async).phone}}</span>
+            <span class="category">{{(customer | async).email}}</span>
+          </div>
+        </div>
+        <div class="ui two mini bottom attached buttons">
+          <a [routerLink]="['/customer', (customer | async).id]" class="ui blue button">
+            <i class="unhide icon"> </i>
+            View
+          </a>
+          <a class="ui red button">
+            <i class="remove icon"> </i>
+            Delete
+          </a>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <dt *ngIf="(lead | async).customerId"><h3>Customer</h3></dt>
-      <dd *ngIf="(lead | async).customerId"><span>{{(lead | async).customerId}}</span></dd>
-
-      <dt *ngIf="(lead | async).assignedToIds"><h3>Assigned to</h3></dt>
-      <dd *ngFor="let assignedToId of (lead | async).assignedToIds"><span>{{assignedToId}}</span></dd>
-    </dl>
-
-    <br>
-
-    <div class="ui mini buttons">
-      <a class="ui blue compact button" [routerLink]="['/lead']">
-        <i class="reply icon"> </i>
-        Back
-      </a>
-      <button class="ui green compact button"
-              [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/edit'} }]"
-              replaceUrl="true">
-        <i class="write icon"></i>
-        Edit
-      </button>
-      <button class="ui red compact button"
-              [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/delete'} }]"
-              replaceUrl="true">
-        <i class="remove icon"> </i>
-        Delete
-      </button>
+  <div class="column">
+    <h4 class="ui top attached block header">Employees</h4>
+    <div class="ui bottom attached segment">
+      <div *ngFor="let employee of employees | async" class="ui card">
+        <div class="content">
+          <div class="header">
+            {{employee.firstName}} {{employee.lastName}}
+          </div>
+          <div class="meta">
+            <span class="category">{{employee.phone}}</span>
+            <span class="category">{{employee.email}}</span>
+          </div>
+        </div>
+        <div class="ui two mini bottom attached buttons">
+          <a [routerLink]="['/employee', employee.id]" class="ui blue button">
+            <i class="unhide icon"> </i>
+            View
+          </a>
+          <a class="ui red button">
+            <i class="remove icon"> </i>
+            Delete
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

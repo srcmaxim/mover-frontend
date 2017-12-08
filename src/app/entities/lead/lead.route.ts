@@ -1,10 +1,9 @@
 import {Routes} from '@angular/router';
-import {
-  LeadComponent,
-  LeadDetailComponent,
-  LeadDialogComponent,
-  LeadDeleteDialogComponent
-} from './';
+import {LeadComponent} from "./lead.component";
+import {LeadDetailComponent} from "./lead-detail.component";
+import {LeadDialogComponent} from "./lead-dialog.component";
+import {LeadDeleteDialogComponent} from "./lead-delete-dialog.component";
+
 
 export const leadRoute: Routes = [
   {

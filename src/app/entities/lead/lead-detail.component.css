@@ -1,3 +1,7 @@
 .nested {
   margin-left: 3em;
 }
+
+.ui.card {
+  width: 100%;
+}

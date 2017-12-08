@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
-import {Employee} from './';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Employee} from "./employee.model";
 
 @Injectable()
 export class EmployeeService {
@@ -73,7 +73,7 @@ export class EmployeeService {
   }
 
   query(req?: any) {
-    this.http.get<Employee[]>(this.resourceUrl)
+    this.http.get<Employee[]> (this.resourceUrl)
       .subscribe((employees: Employee[]) => {
         if (employees.length > 1) {
           this.queryMulti(employees);

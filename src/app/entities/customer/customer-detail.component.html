@@ -5,45 +5,70 @@
 
 <div class="ui inverted section divider"></div>
 
-<div class="column">
-  <h4 class="ui top attached block header">Customer</h4>
-  <div class="ui bottom attached segment">
-    <dl #ngFor="">
-      <dt><h3>First Name</h3></dt>
-      <dd><span>{{(customer | async).firstName}}</span></dd>
+<div class="ui three column grid">
+  <div class="column">
+    <h4 class="ui top attached block header">Customer</h4>
+    <div class="ui bottom attached segment">
+      <dl #ngFor="">
+        <dt><h3>First Name</h3></dt>
+        <dd><span>{{(customer | async).firstName}}</span></dd>
 
-      <dt><h3>Last Name</h3></dt>
-      <dd><span>{{(customer | async).lastName}}</span></dd>
+        <dt><h3>Last Name</h3></dt>
+        <dd><span>{{(customer | async).lastName}}</span></dd>
 
-      <dt><h3>Email</h3></dt>
-      <dd><span>{{(customer | async).email}}</span></dd>
+        <dt><h3>Email</h3></dt>
+        <dd><span>{{(customer | async).email}}</span></dd>
 
-      <dt><h3>Phone</h3></dt>
-      <dd><span>{{(customer | async).phone}}</span></dd>
+        <dt><h3>Phone</h3></dt>
+        <dd><span>{{(customer | async).phone}}</span></dd>
+      </dl>
 
-      <dt *ngIf="(customer | async).leadIds"><h3>Leads</h3></dt>
-      <dd *ngFor="let leadId of (customer | async).leadIds"><span>{{leadId}}</span></dd>
-    </dl>
+      <br>
 
-    <br>
+      <div class="ui mini buttons">
+        <a class="ui blue compact button" [routerLink]="['/customer']">
+          <i class="reply icon"> </i>
+          Back
+        </a>
+        <a class="ui green compact button"
+           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/edit'} }]"
+           replaceUrl="true">
+          <i class="write icon"></i>
+          Edit
+        </a>
+        <a class="ui red compact button"
+           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/delete'} }]"
+           replaceUrl="true">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
 
-    <div class="ui mini buttons">
-      <a class="ui blue compact button" [routerLink]="['/customer']">
-        <i class="reply icon"> </i>
-        Back
-      </a>
-      <a class="ui green compact button"
-         [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/edit'} }]"
-         replaceUrl="true">
-        <i class="write icon"></i>
-        Edit
-      </a>
-      <a class="ui red compact button"
-         [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/delete'} }]"
-         replaceUrl="true">
-        <i class="remove icon"> </i>
-        Delete
-      </a>
+  <div class="column">
+    <h4 class="ui top attached block header">Leads</h4>
+    <div class="ui bottom attached segment">
+      <div *ngFor="let lead of leads | async" class="ui card">
+        <div class="content">
+          <div class="header">
+            {{lead.origin.address}} - {{lead.destination.address}}
+          </div>
+          <div class="meta">
+            <span class="category">{{lead.start | customDate}} - {{lead.end | customDate}}</span>
+          </div>
+        </div>
+        <div class="ui two mini bottom attached buttons">
+          <a [routerLink]="['/lead', lead.id]" class="ui blue button">
+            <i class="unhide icon"> </i>
+            View
+          </a>
+          <a class="ui red button">
+            <i class="remove icon"> </i>
+            Delete
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
