@@ -401,7 +401,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Fabrigas',
         email: 'sesk_fabrigas@gmail.com',
         phone: '+380-333-2013',
-        leadsIds: [1]
+        leadIds: [1]
       }),
       new Employee({
         id: 2,
@@ -409,7 +409,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Untity',
         email: 'samuel.untity@gmail.com',
         phone: '+380-624-9363',
-        leadsIds: [2]
+        leadIds: [2]
       }),
       new Employee({
         id: 3,
@@ -417,7 +417,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Ribery',
         email: 'frank.ribary@yahoo.com',
         phone: '+234-873-9992',
-        leadsIds: [3]
+        leadIds: [3]
       }),
       new Employee({
         id: 4,
@@ -425,7 +425,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Kokorin',
         email: 'alexands.kokorin@yandex.com',
         phone: '+563-314-9269',
-        leadsIds: [4]
+        leadIds: [4]
       }),
       new Employee({
         id: 5,
@@ -433,7 +433,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Shevchenko',
         email: 'andrey.shevchenko@gmail.com',
         phone: '+834-835-7242',
-        leadsIds: [5]
+        leadIds: [5]
       }),
       new Employee({
         id: 6,
@@ -441,7 +441,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Arshavin',
         email: 'andrey.arshavin@yandex.com',
         phone: '+324-723-1523',
-        leadsIds: [6]
+        leadIds: [6]
       }),
       new Employee({
         id: 7,
@@ -449,7 +449,7 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         lastName: 'Dost',
         email: 'bast.dost@yahoo.com',
         phone: '+678-936-9080',
-        leadsIds: [7]
+        leadIds: [7]
       })
     ];
     return {leads, customers, employees};
