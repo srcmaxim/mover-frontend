@@ -9,41 +9,41 @@
   <div class="column">
     <h4 class="ui top attached block header">Lead</h4>
     <div class="ui bottom attached segment">
-      <dl>
-        <dt><h3>Start</h3></dt>
-        <dd><span>{{((lead | async).start | customDate)}}</span></dd>
+      <table>
+        <tr>
+          <td><h3>Start</h3></td>
+          <td><span>{{((lead | async).start | customDate)}}</span></td>
+        </tr>
 
-        <dt><h3>End</h3></dt>
-        <dd><span>{{((lead | async).end | customDate)}}</span></dd>
+        <tr>
+          <td><h3>End</h3></td>
+          <td><span>{{((lead | async).end | customDate)}}</span></td>
+        </tr>
 
-        <dt><h3>Type</h3></dt>
-        <dd>
-          <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
-        </dd>
+        <tr>
+          <td><h3>Type</h3></td>
+          <td>
+            <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
+          </td>
+        </tr>
 
-        <dt><h3>Status</h3></dt>
-        <dd>
-          <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
-        </dd>
+        <tr>
+          <td><h3>Status</h3></td>
+          <td>
+            <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
+          </td>
+        </tr>
 
-        <dt><h3>Origin</h3></dt>
-        <dd><span>{{(lead | async).origin.address}}</span></dd>
-        <div class="nested">
-          <dt><h5>Location</h5></dt>
-          <dd><span>{{(lead | async).origin.longitude}}</span></dd>
-          <dd><span>{{(lead | async).origin.latitude}}</span></dd>
-        </div>
+        <tr>
+          <td><h3>Origin</h3></td>
+          <td><span>{{(lead | async).origin.address}}</span></td>
+        </tr>
 
-        <dt><h3>Destination</h3></dt>
-        <dd><span>{{(lead | async).destination.address}}</span></dd>
-        <div class="nested">
-          <dt><h5>Location</h5></dt>
-          <dd><span>{{(lead | async).destination.longitude}}</span></dd>
-          <dd><span>{{(lead | async).destination.latitude}}</span></dd>
-        </div>
-      </dl>
-
-      <br>
+        <tr>
+          <td><h3>Destination</h3></td>
+          <td><span>{{(lead | async).destination.address}}</span></td>
+        </tr>
+      </table>
 
       <div class="ui mini buttons">
         <a class="ui blue compact button" [routerLink]="['/lead']">
