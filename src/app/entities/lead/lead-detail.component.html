@@ -41,12 +41,6 @@
           <dd><span>{{(lead | async).destination.longitude}}</span></dd>
           <dd><span>{{(lead | async).destination.latitude}}</span></dd>
         </div>
-
-        <dt *ngIf="(lead | async).customerId"><h3>Customer</h3></dt>
-        <dd *ngIf="(lead | async).customerId"><span>{{(lead | async).customerId}}</span></dd>
-
-        <dt *ngIf="(lead | async).assignedToIds"><h3>Assigned to</h3></dt>
-        <dd *ngFor="let assignedToId of (lead | async).assignedToIds"><span>{{assignedToId}}</span></dd>
       </dl>
 
       <br>
@@ -68,6 +62,50 @@
           <i class="remove icon"> </i>
           Delete
         </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h4 class="ui top attached block header">Estimates</h4>
+    <div class="ui bottom attached segment">
+      <div *ngFor="let estimate of (lead | async).estimates" class="ui card">
+        <div class="content">
+          <div class="header">
+            {{estimate.name}}
+          </div>
+          <div class="meta">
+            <span class="category">{{estimate.quantity}}</span>
+            <span class="category">{{estimate.price}}</span>
+          </div>
+        </div>
+          <a class="ui red button">
+            <i class="remove icon"> </i>
+            Delete
+          </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h4 class="ui top attached block header">Inventories</h4>
+    <div class="ui bottom attached segment">
+      <div *ngFor="let inventory of (lead | async).inventories" class="ui card">
+        <div class="content">
+          <div class="header">
+            {{inventory.name}}
+          </div>
+          <div class="meta">
+            <span class="category">{{inventory.category}}</span>
+            <span class="category">{{inventory.quantity}}</span>
+            <span class="category">{{inventory.weight}}</span>
+            <span class="category">{{inventory.volume}}</span>
+          </div>
+        </div>
+          <a class="ui red button">
+            <i class="remove icon"> </i>
+            Delete
+          </a>
       </div>
     </div>
   </div>
