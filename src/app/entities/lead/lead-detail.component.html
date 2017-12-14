@@ -8,7 +8,7 @@
 <div class="ui three column grid">
   <div class="column">
     <h4 class="ui top attached block header">Lead</h4>
-    <div class="ui bottom attached segment">
+    <div class="ui middle attached segment">
       <table>
         <tr>
           <td><h3>Start</h3></td>
@@ -44,7 +44,8 @@
           <td><span>{{(lead | async).destination.address}}</span></td>
         </tr>
       </table>
-
+    </div>
+    <div class="ui bottom attached segment">
       <div class="ui mini buttons">
         <a class="ui blue compact button" [routerLink]="['/lead']">
           <i class="reply icon"> </i>
@@ -79,10 +80,16 @@
             <span class="category">{{estimate.price}}</span>
           </div>
         </div>
+        <div class="ui two mini bottom attached buttons">
+          <a class="ui green button">
+            <i class="write icon"> </i>
+            Edit
+          </a>
           <a class="ui red button">
             <i class="remove icon"> </i>
             Delete
           </a>
+        </div>
       </div>
     </div>
   </div>
@@ -102,37 +109,50 @@
             <span class="category">{{inventory.volume}}</span>
           </div>
         </div>
+        <div class="ui two mini bottom attached buttons">
+          <a class="ui green button">
+            <i class="write icon"> </i>
+            Edit
+          </a>
           <a class="ui red button">
             <i class="remove icon"> </i>
             Delete
           </a>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="column">
     <h4 class="ui top attached block header">Customer</h4>
+    <div class="ui middle attached segment">
+      <table>
+        <tr>
+          <td><h3>Name</h3></td>
+          <td><span>{{(customer | async).firstName}} {{(customer | async).lastName}}</span></td>
+        </tr>
+
+        <tr>
+          <td><h3>Phone</h3></td>
+          <td><span>{{(customer | async).phone}}</span></td>
+        </tr>
+
+        <tr>
+          <td><h3>Email</h3></td>
+          <td><span>{{(customer | async).email}}</span></td>
+        </tr>
+      </table>
+    </div>
     <div class="ui bottom attached segment">
-      <div class="ui card">
-        <div class="content">
-          <div class="header">
-            {{(customer | async).firstName}} {{(customer | async).lastName}}
-          </div>
-          <div class="meta">
-            <span class="category">{{(customer | async).phone}}</span>
-            <span class="category">{{(customer | async).email}}</span>
-          </div>
-        </div>
-        <div class="ui two mini bottom attached buttons">
-          <a [routerLink]="['/customer', (customer | async).id]" class="ui blue button">
-            <i class="unhide icon"> </i>
-            View
-          </a>
-          <a class="ui red button">
-            <i class="remove icon"> </i>
-            Delete
-          </a>
-        </div>
+      <div class="ui mini buttons">
+        <a [routerLink]="['/customer', (customer | async).id]" class="ui blue compact button">
+          <i class="unhide icon"> </i>
+          View
+        </a>
+        <a class="ui red compact button">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
       </div>
     </div>
   </div>
