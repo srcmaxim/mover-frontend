@@ -72,13 +72,20 @@
     <div class="ui bottom attached segment">
       <div *ngFor="let estimate of (lead | async).estimates" class="ui card">
         <div class="content">
-          <div class="header">
-            {{estimate.name}}
-          </div>
-          <div class="meta">
-            <span class="category">{{estimate.quantity}}</span>
-            <span class="category">{{estimate.price}}</span>
-          </div>
+          <table>
+            <tr>
+              <td><h3>Name</h3></td>
+              <td><span>{{estimate.name}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Quantity</h3></td>
+              <td><span>{{estimate.quantity}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Price</h3></td>
+              <td><span>{{estimate.price}}</span></td>
+            </tr>
+          </table>
         </div>
         <div class="ui two mini bottom attached buttons">
           <a class="ui green button">
@@ -99,15 +106,28 @@
     <div class="ui bottom attached segment">
       <div *ngFor="let inventory of (lead | async).inventories" class="ui card">
         <div class="content">
-          <div class="header">
-            {{inventory.name}}
-          </div>
-          <div class="meta">
-            <span class="category">{{inventory.category}}</span>
-            <span class="category">{{inventory.quantity}}</span>
-            <span class="category">{{inventory.weight}}</span>
-            <span class="category">{{inventory.volume}}</span>
-          </div>
+          <table>
+            <tr>
+              <td><h3>Name</h3></td>
+              <td><span>{{inventory.name}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Category</h3></td>
+              <td><span>{{inventory.category}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Quantity</h3></td>
+              <td><span>{{inventory.quantity}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Weight</h3></td>
+              <td><span>{{inventory.weight}}</span></td>
+            </tr>
+            <tr>
+              <td><h3>Volume</h3></td>
+              <td><span>{{inventory.volume}}</span></td>
+            </tr>
+          </table>
         </div>
         <div class="ui two mini bottom attached buttons">
           <a class="ui green button">
@@ -157,18 +177,27 @@
     </div>
   </div>
 
-  <div class="column">
+  <div class="column" >
     <h4 class="ui top attached block header">Employees</h4>
     <div class="ui bottom attached segment">
       <div *ngFor="let employee of employees | async" class="ui card">
         <div class="content">
-          <div class="header">
-            {{employee.firstName}} {{employee.lastName}}
-          </div>
-          <div class="meta">
-            <span class="category">{{employee.phone}}</span>
-            <span class="category">{{employee.email}}</span>
-          </div>
+          <table>
+            <tr>
+              <td><h3>Name</h3></td>
+              <td><span>{{employee.firstName}} {{employee.lastName}}</span></td>
+            </tr>
+
+            <tr>
+              <td><h3>Phone</h3></td>
+              <td><span>{{employee.phone}}</span></td>
+            </tr>
+
+            <tr>
+              <td><h3>Email</h3></td>
+              <td><span>{{employee.email}}</span></td>
+            </tr>
+          </table>
         </div>
         <div class="ui two mini bottom attached buttons">
           <a [routerLink]="['/employee', employee.id]" class="ui blue button">
