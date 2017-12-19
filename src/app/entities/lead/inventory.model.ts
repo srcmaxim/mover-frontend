@@ -1,5 +1,4 @@
 export class Inventory {
-  id: number;
   category: Category;
   name: string;
   quantity: number;
@@ -7,7 +6,6 @@ export class Inventory {
   volume: number;
 
   constructor(obj?: any) {
-    this.id         = obj && obj.id         || null;
     this.category   = obj && obj.category   || Category.ANY;
     this.name       = obj && obj.name       || '';
     this.quantity   = obj && obj.quantity   || 0;

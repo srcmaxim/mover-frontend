@@ -10,8 +10,6 @@ export class Lead {
   destination: Address;
   type: Type;
   status: Status;
-  customerId: number;
-  assignedToIds: number[];
   estimates: Estimate[];
   inventories: Inventory[];
 
@@ -23,8 +21,6 @@ export class Lead {
     this.destination    = obj && obj.destination    || new Address('', 0, 0);
     this.type           = obj && obj.type           || Type.LOCAL;
     this.status         = obj && obj.status         || Status.PENDING;
-    this.customerId     = obj && obj.customerId     || null;
-    this.assignedToIds  = obj && obj.assignedToIds  || [];
     this.estimates      = obj && obj.estimates      || [];
     this.inventories    = obj && obj.inventories    || [];
   }

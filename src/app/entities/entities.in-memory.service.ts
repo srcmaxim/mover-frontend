@@ -16,8 +16,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('123, Mac st., LA', 0, 0),
         type: Type.LOCAL,
         status: Status.ASSIGNED,
-        customerId: 1,
-        assignedToIds: [1],
         estimates: [
           new Estimate({
             id: 1,
@@ -26,7 +24,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             price: 120
           }),
           new Estimate({
-            id: 2,
             name: 'Big Box',
             quantity: 3,
             price: 175.50
@@ -34,7 +31,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.DINNING,
             name: 'Table',
             quantity: 1,
@@ -42,7 +38,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 2,
             category: Category.KITCHEN,
             name: 'Fridge',
             quantity: 1,
@@ -59,17 +54,13 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('413, Apple st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CONVERTED,
-        customerId: 2,
-        assignedToIds: [2],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Packing Stripe',
             quantity: 1,
             price: 100
           }),
           new Estimate({
-            id: 2,
             name: 'Small Box',
             quantity: 1,
             price: 125.50
@@ -77,7 +68,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.DINNING,
             name: 'Table',
             quantity: 1,
@@ -85,7 +75,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 2,
             category: Category.KITCHEN,
             name: 'Fridge',
             quantity: 1,
@@ -102,17 +91,13 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('413, Villon st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CLOSED,
-        customerId: 3,
-        assignedToIds: [3],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Velcro',
             quantity: 1,
             price: 10
           }),
           new Estimate({
-            id: 2,
             name: 'Big Box',
             quantity: 1,
             price: 200
@@ -120,7 +105,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.LIVING,
             name: 'Audio system',
             quantity: 4,
@@ -128,7 +112,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 5
           }),
           new Inventory({
-            id: 2,
             category: Category.LIVING,
             name: 'Shelves',
             quantity: 4,
@@ -145,11 +128,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('15, Cherry st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CONVERTED,
-        customerId: 3,
-        assignedToIds: [3],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Small Box',
             quantity: 3,
             price: 125.50
@@ -157,7 +137,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.OFFICE,
             name: 'Lamp',
             quantity: 1,
@@ -165,7 +144,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 2,
             category: Category.OFFICE,
             name: 'Computer',
             quantity: 10,
@@ -182,17 +160,13 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('413, Orange st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CONVERTED,
-        customerId: 4,
-        assignedToIds: [4],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Packing Stripe',
             quantity: 3,
             price: 100
           }),
           new Estimate({
-            id: 2,
             name: 'Small Box',
             quantity: 5,
             price: 125.50
@@ -200,7 +174,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.KITCHEN,
             name: 'Table',
             quantity: 1,
@@ -208,7 +181,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 2,
             category: Category.KITCHEN,
             name: 'Fridge',
             quantity: 1,
@@ -225,17 +197,13 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('73, Sand st., LA', 0, 0),
         type: Type.LOCAL,
         status: Status.ASSIGNED,
-        customerId: 5,
-        assignedToIds: [5],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Packing Stripe',
             quantity: 3,
             price: 100
           }),
           new Estimate({
-            id: 2,
             name: 'Small Box',
             quantity: 3,
             price: 125.50
@@ -243,7 +211,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.DINNING,
             name: 'Table',
             quantity: 2,
@@ -251,7 +218,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 1,
             category: Category.KITCHEN,
             name: 'Fridge',
             quantity: 3,
@@ -268,11 +234,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('413, Oak st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CONVERTED,
-        customerId: 6,
-        assignedToIds: [6],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Small Box',
             quantity: 1,
             price: 125.50
@@ -280,7 +243,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.DINNING,
             name: 'Table',
             quantity: 1,
@@ -288,7 +250,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 15
           }),
           new Inventory({
-            id: 2,
             category: Category.BED,
             name: 'Bed',
             quantity: 2,
@@ -296,7 +257,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 20
           }),
           new Inventory({
-            id: 3,
             category: Category.LIVING,
             name: 'Lamp',
             quantity: 5,
@@ -304,7 +264,6 @@ export class InMemoryEntitiesService implements InMemoryDbService {
             volume: 2
           }),
           new Inventory({
-            id: 4,
             category: Category.ANY,
             name: 'Weights',
             quantity: 1,
@@ -321,12 +280,9 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         destination: new Address('84, Oak st., LA', 0, 0),
         type: Type.DISTANCE,
         status: Status.CONVERTED,
-        customerId: 7,
-        assignedToIds: [7],
         estimates: [],
         inventories: [
           new Inventory({
-            id: 1,
             category: Category.KITCHEN,
             name: 'Fridge',
             quantity: 1,
@@ -342,56 +298,49 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         firstName: 'Duglas',
         lastName: 'Costa',
         email: 'duglas-costa@gmail.com',
-        phone: '+380-637-5413',
-        leadIds: [1]
+        phone: '+380-637-5413'
       }),
       new Customer({
         id: 2,
         firstName: 'Jerar',
         lastName: 'Pike',
         email: 'jerar.pike@gmail.com',
-        phone: '+380-512-1718',
-        leadIds: [2]
+        phone: '+380-512-1718'
       }),
       new Customer({
         id: 3,
         firstName: 'Andrey',
         lastName: 'Pyatov',
         email: 'andrey_pyatov@gmail.com',
-        phone: '+380-724-8251',
-        leadIds: [3]
+        phone: '+380-724-8251'
       }),
       new Customer({
         id: 4,
         firstName: 'David',
         lastName: 'Vilia',
         email: 'david.vilia@yahoo.com',
-        phone: '+380-624-9369',
-        leadIds: [4]
+        phone: '+380-624-9369'
       }),
       new Customer({
         id: 5,
         firstName: 'David',
         lastName: 'Alama',
         email: 'david.alama@gmail.com',
-        phone: '+926-168-8471',
-        leadIds: [5]
+        phone: '+926-168-8471'
       }),
       new Customer({
         id: 6,
         firstName: 'Tomas',
         lastName: 'Muller',
         email: 'tomas.muller@yandex.com',
-        phone: '+836-873-9573',
-        leadIds: [6]
+        phone: '+836-873-9573'
       }),
       new Customer({
         id: 7,
         firstName: 'Robert',
         lastName: 'Levandovski',
         email: 'robert.levandovski@gmail.com',
-        phone: '+343-888-1718',
-        leadIds: [7]
+        phone: '+343-888-1718'
       })
     ];
     let employees = [
@@ -400,56 +349,49 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         firstName: 'Sesk',
         lastName: 'Fabrigas',
         email: 'sesk_fabrigas@gmail.com',
-        phone: '+380-333-2013',
-        leadIds: [1]
+        phone: '+380-333-2013'
       }),
       new Employee({
         id: 2,
         firstName: 'Samuel',
         lastName: 'Untity',
         email: 'samuel.untity@gmail.com',
-        phone: '+380-624-9363',
-        leadIds: [2]
+        phone: '+380-624-9363'
       }),
       new Employee({
         id: 3,
         firstName: 'Frank',
         lastName: 'Ribery',
         email: 'frank.ribary@yahoo.com',
-        phone: '+234-873-9992',
-        leadIds: [3]
+        phone: '+234-873-9992'
       }),
       new Employee({
         id: 4,
         firstName: 'Alexandr',
         lastName: 'Kokorin',
         email: 'alexands.kokorin@yandex.com',
-        phone: '+563-314-9269',
-        leadIds: [4]
+        phone: '+563-314-9269'
       }),
       new Employee({
         id: 5,
         firstName: 'Andrey',
         lastName: 'Shevchenko',
         email: 'andrey.shevchenko@gmail.com',
-        phone: '+834-835-7242',
-        leadIds: [5]
+        phone: '+834-835-7242'
       }),
       new Employee({
         id: 6,
         firstName: 'Andrey',
         lastName: 'Arshavin',
         email: 'andrey.arshavin@yandex.com',
-        phone: '+324-723-1523',
-        leadIds: [6]
+        phone: '+324-723-1523'
       }),
       new Employee({
         id: 7,
         firstName: 'Bast',
         lastName: 'Dost',
         email: 'bast.dost@yahoo.com',
-        phone: '+678-936-9080',
-        leadIds: [7]
+        phone: '+678-936-9080'
       })
     ];
     return {leads, customers, employees};
