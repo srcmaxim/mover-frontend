@@ -7,7 +7,7 @@ import {Lead} from "./lead.model";
 @Injectable()
 export class LeadService {
 
-  private resourceUrl = 'api/leads';
+  private resourceUrl = '/api/leads';
   private collection: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
   private first: BehaviorSubject<Lead> = new BehaviorSubject(new Lead({}));
   public multiChange: Observable<Lead[]> = this.collection.asObservable();

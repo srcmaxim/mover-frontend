@@ -5,6 +5,14 @@ import {MoverEmployeeModule} from './employee/employee.module';
 import {SharedModule} from "../shared/index";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryEntitiesService} from "./entities.in-memory.service";
+import {environment} from '../../environments/environment';
+
+let InMemoryWebApi = [];
+if (environment.useInMemoryWebApi) {
+  InMemoryWebApi.push(
+    HttpClientInMemoryWebApiModule
+    .forRoot(InMemoryEntitiesService, {delay: 500}));
+}
 
 @NgModule({
   imports: [
@@ -12,7 +20,7 @@ import {InMemoryEntitiesService} from "./entities.in-memory.service";
     MoverLeadModule,
     MoverCustomerModule,
     MoverEmployeeModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryEntitiesService, {delay: 500}),
+    ...InMemoryWebApi,
   ],
   declarations: [],
   entryComponents: [],

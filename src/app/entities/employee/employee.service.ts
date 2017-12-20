@@ -7,7 +7,7 @@ import {Employee} from "./employee.model";
 @Injectable()
 export class EmployeeService {
 
-  private resourceUrl = 'api/employees';
+  private resourceUrl = '/api/employees';
   private collection: BehaviorSubject<Employee[]> = new BehaviorSubject([]);
   private first: BehaviorSubject<Employee> = new BehaviorSubject(new Employee({}));
   public multiChange: Observable<Employee[]> = this.collection.asObservable();
