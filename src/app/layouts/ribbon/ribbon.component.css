@@ -1,0 +1,26 @@
+.ribbon {
+  background-color: #a00;
+  overflow: hidden;
+  white-space: nowrap;
+  /* top left corner */
+  position: absolute;
+  left: -50px;
+  top: 25px;
+  /* for 45 deg rotation */
+  transform: rotate(-45deg);
+  /* for creating shadow */
+  box-shadow: -1px -1px #555, 1px 1px #555;
+}
+
+.ribbon a {
+  border: 1px solid #fff;
+  color: #fff;
+  display: block;
+  font: bold 100% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 1px 0;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  /* for creating shadow */
+  text-shadow: 0 0 5px #444;
+}

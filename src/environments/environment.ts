@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  useInMemoryWebApi: true
+  useInMemoryWebApi: true,
+  useRibbon: true
 };
