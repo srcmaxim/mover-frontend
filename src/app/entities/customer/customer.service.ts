@@ -1,112 +1,80 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Customer} from "./customer.model";
+import {EntityMapper} from "../entity.mapper.service";
+import {EntityUpdater} from "../entity.updater.service";
 
+/**
+ * REST API for working with Customer resource.
+ */
 @Injectable()
 export class CustomerService {
 
   private resourceUrl = '/api/customers';
-  private collection: BehaviorSubject<Customer[]> = new BehaviorSubject([]);
-  private first: BehaviorSubject<Customer> = new BehaviorSubject(new Customer({}));
-  public multiChange: Observable<Customer[]> = this.collection.asObservable();
-  public singleChange: Observable<Customer> = this.first.asObservable();
+  private customerUpdater: EntityUpdater<Customer> = new EntityUpdater();
+  private customerMapper: CustomerMapper = new CustomerMapper();
+
+  public multiChange: Observable<Customer[]> = this.customerUpdater.multiChange;
+  public singleChange: Observable<Customer> = this.customerUpdater.singleChange;
 
   constructor(private http: HttpClient) {
   }
 
   create(customer: Customer) {
-    const copy: Customer = Object.assign({}, customer);
+    let copy = this.customerMapper.fromEntityToService(customer);
     this.http.post<Customer>(this.resourceUrl, copy)
-      .subscribe((customer: Customer) => {
-        this.createSingle(customer);
-        this.createMulti(customer);
+      .subscribe((customer: any) => {
+        let newCustomer: Customer = this.customerMapper.fromServiceToEntity(customer);
+        this.customerUpdater.create(newCustomer);
       });
-  }
-
-  private createSingle(customer: Customer) {
-    this.first.next(new Customer(customer));
-  }
-
-  private createMulti(customer: Customer) {
-    customer = new Customer(customer);
-    const customers: Customer[] = this.collection.getValue();
-    customers.push(customer);
-    this.collection.next(customers);
   }
 
   update(customer: Customer) {
-    const copy: Customer = Object.assign({}, customer);
+    let copy = this.customerMapper.fromEntityToService(customer);
     this.http.put<Customer>(this.resourceUrl, copy)
       .subscribe(() => {
-        this.updateSingle(customer);
-        this.updateMulti(customer);
+        this.customerUpdater.update(customer);
       });
-  }
-
-  private updateSingle(customer: Customer) {
-    this.first.next(new Customer(customer));
-  }
-
-  private updateMulti(customer: Customer) {
-    customer = new Customer(customer);
-    const customers: Customer[] = this.collection.getValue();
-    for (let i = 0; i < customers.length; i++) {
-      if (customers[i].id == customer.id) {
-        customers[i] = customer;
-        break;
-      }
-    }
-    this.collection.next(customers);
   }
 
   find(id: number) {
     this.http.get<Customer>(`${this.resourceUrl}/${id}`)
-      .subscribe((customer: Customer) => {
-        this.findSingle(customer);
+      .subscribe((customer: any) => {
+        let newCustomer: Customer = this.customerMapper.fromServiceToEntity(customer);
+        this.customerUpdater.findSingle(newCustomer);
       });
-  }
-
-  private findSingle(customer: Customer) {
-    this.first.next(new Customer(customer));
   }
 
   query(req?: any) {
     this.http.get<Customer[]>(this.resourceUrl)
-      .subscribe((customers: Customer[]) => {
-        if (customers.length > 1) {
-          this.queryMulti(customers);
-        } else {
-          this.querySingle(new Customer(customers[0]));
-        }
+      .subscribe((customers: any[]) => {
+        let newCustomers: Customer[] = customers.map((customer: any) => this.customerMapper.fromServiceToEntity(customer));
+        this.customerUpdater.query(newCustomers);
       });
-  }
-
-  private querySingle(customer: Customer) {
-    this.first.next(new Customer(customer));
-  }
-
-  private queryMulti(customers: Customer[]) {
-    customers.forEach((customer: Customer, i) => customers[i] = new Customer(customers[i]));
-    this.collection.next(customers);
   }
 
   delete(id: number) {
     this.http.delete<Response>(`${this.resourceUrl}/${id}`)
       .subscribe(() => {
-        this.deleteMulti(id);
-        this.deleteSingle();
+        this.customerUpdater.delete(id);
       });
   }
+}
 
-  private deleteSingle() {
-    this.first.next(new Customer({}));
+/**
+ * Maps Customer REST API to Customer entity and vice versa.
+ */
+export class CustomerMapper implements EntityMapper {
+
+  fromServiceToEntity(customer: any): Customer {
+    let copy = Object.assign({}, customer);
+    return new Customer(copy);
   }
 
-  private deleteMulti(id: number) {
-    let customers: Customer[] = this.collection.getValue();
-    customers = customers.filter((customer: Customer) => customer.id != id);
-    this.collection.next(customers);
+  fromEntityToService(customer: Customer): any {
+    let copy: any = Object.assign({}, customer);
+    return copy;
   }
 }
+

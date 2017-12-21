@@ -5,6 +5,10 @@ import {Category, Inventory} from "./lead/inventory.model";
 import {Employee} from "./employee/employee.model";
 import {Customer} from "./customer/customer.model";
 
+/**
+ * Holds in-memory DB for development purposes.
+ * Disables in production environment.
+ */
 export class InMemoryEntitiesService implements InMemoryDbService {
   createDb() {
     let leads = [
@@ -14,11 +18,10 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('123, Brick st., LA', 0, 0),
         destination: new Address('123, Mac st., LA', 0, 0),
-        type: Type.LOCAL,
-        status: Status.ASSIGNED,
+        type: Type[Type.LOCAL],
+        status: Status[Status.ASSIGNED],
         estimates: [
           new Estimate({
-            id: 1,
             name: 'Packing Paper',
             quantity: 1,
             price: 120
@@ -31,14 +34,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.DINNING,
+            category: Category[Category.DINNING],
             name: 'Table',
             quantity: 1,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Fridge',
             quantity: 1,
             weight: 100.2,
@@ -52,8 +55,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('27, Tree st., LA', 0, 0),
         destination: new Address('413, Apple st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CONVERTED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CONVERTED],
         estimates: [
           new Estimate({
             name: 'Packing Stripe',
@@ -68,14 +71,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.DINNING,
+            category: Category[Category.DINNING],
             name: 'Table',
             quantity: 1,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Fridge',
             quantity: 1,
             weight: 100.2,
@@ -89,8 +92,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('27, Cherry st., LA', 0, 0),
         destination: new Address('413, Villon st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CLOSED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CLOSED],
         estimates: [
           new Estimate({
             name: 'Velcro',
@@ -105,14 +108,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.LIVING,
+            category: Category[Category.LIVING],
             name: 'Audio system',
             quantity: 4,
             weight: 5,
             volume: 5
           }),
           new Inventory({
-            category: Category.LIVING,
+            category: Category[Category.LIVING],
             name: 'Shelves',
             quantity: 4,
             weight: 75,
@@ -126,8 +129,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('42, Marshmallow st., LA', 0, 0),
         destination: new Address('15, Cherry st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CONVERTED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CONVERTED],
         estimates: [
           new Estimate({
             name: 'Small Box',
@@ -137,14 +140,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.OFFICE,
+            category: Category[Category.OFFICE],
             name: 'Lamp',
             quantity: 1,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.OFFICE,
+            category: Category[Category.OFFICE],
             name: 'Computer',
             quantity: 10,
             weight: 3,
@@ -158,8 +161,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('27, Pine st., LA', 0, 0),
         destination: new Address('413, Orange st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CONVERTED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CONVERTED],
         estimates: [
           new Estimate({
             name: 'Packing Stripe',
@@ -174,14 +177,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Table',
             quantity: 1,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Fridge',
             quantity: 1,
             weight: 100.2,
@@ -195,8 +198,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('15, Glass st., LA', 0, 0),
         destination: new Address('73, Sand st., LA', 0, 0),
-        type: Type.LOCAL,
-        status: Status.ASSIGNED,
+        type: Type[Type.LOCAL],
+        status: Status[Status.ASSIGNED],
         estimates: [
           new Estimate({
             name: 'Packing Stripe',
@@ -211,14 +214,14 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.DINNING,
+            category: Category[Category.DINNING],
             name: 'Table',
             quantity: 2,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Fridge',
             quantity: 3,
             weight: 100.2,
@@ -232,8 +235,8 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('27, Tree st., LA', 0, 0),
         destination: new Address('413, Oak st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CONVERTED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CONVERTED],
         estimates: [
           new Estimate({
             name: 'Small Box',
@@ -243,28 +246,28 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         ],
         inventories: [
           new Inventory({
-            category: Category.DINNING,
+            category: Category[Category.DINNING],
             name: 'Table',
             quantity: 1,
             weight: 20,
             volume: 15
           }),
           new Inventory({
-            category: Category.BED,
+            category: Category[Category.BED],
             name: 'Bed',
             quantity: 2,
             weight: 50,
             volume: 20
           }),
           new Inventory({
-            category: Category.LIVING,
+            category: Category[Category.LIVING],
             name: 'Lamp',
             quantity: 5,
             weight: 3,
             volume: 2
           }),
           new Inventory({
-            category: Category.ANY,
+            category: Category[Category.ANY],
             name: 'Weights',
             quantity: 1,
             weight: 3,
@@ -278,12 +281,12 @@ export class InMemoryEntitiesService implements InMemoryDbService {
         end: new Date(),
         origin: new Address('51, Pineapple st., LA', 0, 0),
         destination: new Address('84, Oak st., LA', 0, 0),
-        type: Type.DISTANCE,
-        status: Status.CONVERTED,
+        type: Type[Type.DISTANCE],
+        status: Status[Status.CONVERTED],
         estimates: [],
         inventories: [
           new Inventory({
-            category: Category.KITCHEN,
+            category: Category[Category.KITCHEN],
             name: 'Fridge',
             quantity: 1,
             weight: 100.2,

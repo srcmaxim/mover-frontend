@@ -58,7 +58,7 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
     if (this.startDateSubscription) {
       this.startDateSubscription.unsubscribe();
     }
-    if (this.startDateSubscription) {
+    if (this.endDateSubscription) {
       this.endDateSubscription.unsubscribe();
     }
   }
