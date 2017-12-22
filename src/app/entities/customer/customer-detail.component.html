@@ -12,22 +12,22 @@
       <table>
         <tr>
           <td><h3>First Name</h3></td>
-          <td><span>{{(customer | async).firstName}}</span></td>
+          <td><span>{{(customer | async)?.firstName}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Last Name</h3></td>
-          <td><span>{{(customer | async).lastName}}</span></td>
+          <td><span>{{(customer | async)?.lastName}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Email</h3></td>
-          <td><span>{{(customer | async).email}}</span></td>
+          <td><span>{{(customer | async)?.email}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Phone</h3></td>
-          <td><span>{{(customer | async).phone}}</span></td>
+          <td><span>{{(customer | async)?.phone}}</span></td>
         </tr>
       </table>
     </div>
@@ -38,13 +38,13 @@
           Back
         </a>
         <a class="ui green compact button"
-           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/edit'} }]"
+           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async)?.id + '/edit'} }]"
            replaceUrl="true">
           <i class="write icon"></i>
           Edit
         </a>
         <a class="ui red compact button"
-           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async).id + '/delete'} }]"
+           [routerLink]="['/', { outlets: { popup: 'customer/'+ (customer | async)?.id + '/delete'} }]"
            replaceUrl="true">
           <i class="remove icon"> </i>
           Delete

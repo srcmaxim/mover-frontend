@@ -2,16 +2,16 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
 /**
- * The main class for working with single and multi reactive updates
- * for collection of elements.
+ * The main class for working with single and multi casting
+ * for collection of elements or single values.
  */
-export class EntityUpdater<T> {
+export class Cast<T> {
 
   private collection: BehaviorSubject<T[]> = new BehaviorSubject([]);
-  private first: BehaviorSubject<T> = new BehaviorSubject(null);
+  private singleton: BehaviorSubject<T> = new BehaviorSubject(null);
 
-  public multiChange: Observable<T[]> = this.collection.asObservable();
-  public singleChange: Observable<T> = this.first.asObservable();
+  public multiCast: Observable<T[]> = this.collection.asObservable();
+  public singleCast: Observable<T> = this.singleton.asObservable();
 
   /**
    * Adds created entity to collection
@@ -20,7 +20,7 @@ export class EntityUpdater<T> {
    * @param {T} entity to create
    */
   public create(entity: T) {
-    this.first.next(entity);
+    this.singleton.next(entity);
 
     const entities: T[] = this.collection.getValue();
     entities.push(entity);
@@ -31,10 +31,10 @@ export class EntityUpdater<T> {
    * Updates entity in collection
    * and evicts multiChange and singleChange events.
    *
-   * @param {T} entity
+   * @param {T} entity to update
    */
   public update(entity: T) {
-    this.first.next(entity);
+    this.singleton.next(entity);
 
     const entities: T[] = this.collection.getValue();
     for (let i = 0; i < entities.length; i++) {
@@ -49,22 +49,25 @@ export class EntityUpdater<T> {
   /**
    * Evicts singleChange event with given entity.
    *
-   * @param {T} entity
+   * @param {T} entity to find
    */
-  public findSingle(entity: T) {
-    this.first.next(entity);
+  public find(entity: T) {
+    this.singleton.next(entity);
   }
 
   /**
    * Evicts multiChange event with given entities
    * and singleChange event if there is only one entity.
    *
-   * @param {T[]} entities
+   * @param {T[]} entities to query
    */
   public query(entities: T[]) {
     if (entities.length == 1) {
-      this.first.next(entities[0]);
+      this.singleton.next(entities[0]);
+    } else if (entities.length == 0) {
+      this.singleton.next(null);
     }
+
     this.collection.next(entities);
   }
 
@@ -72,10 +75,10 @@ export class EntityUpdater<T> {
    * Deletes entity in collection
    * and evicts multiChange and singleChange events.
    *
-   * @param {number} id of the entity
+   * @param {number} id of the entity to delete
    */
   public delete(id: number) {
-    this.first.next(null);
+    this.singleton.next(null);
 
     let entities: T[] = this.collection.getValue();
     entities = entities.filter((entity: T) => entity['id'] != id);

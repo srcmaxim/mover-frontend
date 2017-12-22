@@ -12,22 +12,22 @@
       <table>
         <tr>
           <td><h3>First Name</h3></td>
-          <td><span>{{(employee | async).firstName}}</span></td>
+          <td><span>{{(employee | async)?.firstName}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Last Name</h3></td>
-          <td><span>{{(employee | async).lastName}}</span></td>
+          <td><span>{{(employee | async)?.lastName}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Email</h3></td>
-          <td><span>{{(employee | async).email}}</span></td>
+          <td><span>{{(employee | async)?.email}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Phone</h3></td>
-          <td><span>{{(employee | async).phone}}</span></td>
+          <td><span>{{(employee | async)?.phone}}</span></td>
         </tr>
       </table>
     </div>
@@ -37,18 +37,7 @@
           <i class="reply icon"> </i>
           Back
         </a>
-        <a class="ui green compact button"
-           [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/edit'} }]"
-           replaceUrl="true">
-          <i class="write icon"></i>
-          Edit
-        </a>
-        <a class="ui red compact button"
-           [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async).id + '/delete'} }]"
-           replaceUrl="true">
-          <i class="remove icon"> </i>
-          Delete
-        </a>
+
       </div>
     </div>
   </div>

@@ -12,36 +12,36 @@
       <table>
         <tr>
           <td><h3>Start</h3></td>
-          <td><span>{{((lead | async).start | customDate)}}</span></td>
+          <td><span>{{((lead | async)?.start | customDate)}}</span></td>
         </tr>
 
         <tr>
           <td><h3>End</h3></td>
-          <td><span>{{((lead | async).end | customDate)}}</span></td>
+          <td><span>{{((lead | async)?.end | customDate)}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Type</h3></td>
           <td>
-            <div class="ui blue label">{{(lead | async).getTypeToString()}}</div>
+            <div class="ui blue label">{{(lead | async)?.getTypeToString()}}</div>
           </td>
         </tr>
 
         <tr>
           <td><h3>Status</h3></td>
           <td>
-            <div class="ui green label">{{(lead | async).getStatusToString()}}</div>
+            <div class="ui green label">{{(lead | async)?.getStatusToString()}}</div>
           </td>
         </tr>
 
         <tr>
           <td><h3>Origin</h3></td>
-          <td><span>{{(lead | async).origin.address}}</span></td>
+          <td><span>{{(lead | async)?.origin.address}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Destination</h3></td>
-          <td><span>{{(lead | async).destination.address}}</span></td>
+          <td><span>{{(lead | async)?.destination.address}}</span></td>
         </tr>
       </table>
     </div>
@@ -52,13 +52,13 @@
           Back
         </a>
         <button class="ui green compact button"
-                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/edit'} }]"
+                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async)?.id + '/edit'} }]"
                 replaceUrl="true">
           <i class="write icon"></i>
           Edit
         </button>
         <button class="ui red compact button"
-                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async).id + '/delete'} }]"
+                [routerLink]="['/', { outlets: { popup: 'lead/'+ (lead | async)?.id + '/delete'} }]"
                 replaceUrl="true">
           <i class="remove icon"> </i>
           Delete
@@ -70,7 +70,7 @@
   <div class="column">
     <h4 class="ui top attached block header">Estimates</h4>
     <div class="ui bottom attached segment">
-      <div *ngFor="let estimate of (lead | async).estimates" class="ui card">
+      <div *ngFor="let estimate of (lead | async)?.estimates" class="ui card">
         <div class="content">
           <table>
             <tr>
@@ -104,7 +104,7 @@
   <div class="column">
     <h4 class="ui top attached block header">Inventories</h4>
     <div class="ui bottom attached segment">
-      <div *ngFor="let inventory of (lead | async).inventories" class="ui card">
+      <div *ngFor="let inventory of (lead | async)?.inventories" class="ui card">
         <div class="content">
           <table>
             <tr>
@@ -149,23 +149,23 @@
       <table>
         <tr>
           <td><h3>Name</h3></td>
-          <td><span>{{(customer | async).firstName}} {{(customer | async).lastName}}</span></td>
+          <td><span>{{(customer | async)?.firstName}} {{(customer | async)?.lastName}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Phone</h3></td>
-          <td><span>{{(customer | async).phone}}</span></td>
+          <td><span>{{(customer | async)?.phone}}</span></td>
         </tr>
 
         <tr>
           <td><h3>Email</h3></td>
-          <td><span>{{(customer | async).email}}</span></td>
+          <td><span>{{(customer | async)?.email}}</span></td>
         </tr>
       </table>
     </div>
     <div class="ui bottom attached segment">
       <div class="ui mini buttons">
-        <a [routerLink]="['/customer', (customer | async).id]" class="ui blue compact button">
+        <a [routerLink]="['/customer', (customer | async)?.id]" class="ui blue compact button">
           <i class="unhide icon"> </i>
           View
         </a>

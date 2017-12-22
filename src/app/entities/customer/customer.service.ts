@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
 import {Customer} from "./customer.model";
 import {EntityMapper} from "../entity.mapper.service";
-import {EntityUpdater} from "../entity.updater.service";
+import {Cast} from "../entity.cast.service";
 
 /**
  * REST API for working with Customer resource.
@@ -12,53 +12,46 @@ import {EntityUpdater} from "../entity.updater.service";
 export class CustomerService {
 
   private resourceUrl = '/api/customers';
-  private customerUpdater: EntityUpdater<Customer> = new EntityUpdater();
-  private customerMapper: CustomerMapper = new CustomerMapper();
+  private cast: Cast<Customer> = new Cast();
+  private mapper: EntityMapper = new CustomerMapper();
 
-  public multiChange: Observable<Customer[]> = this.customerUpdater.multiChange;
-  public singleChange: Observable<Customer> = this.customerUpdater.singleChange;
+  public multiCast: Observable<Customer[]> = this.cast.multiCast;
+  public singleCast: Observable<Customer> = this.cast.singleCast;
 
   constructor(private http: HttpClient) {
   }
 
-  create(customer: Customer) {
-    let copy = this.customerMapper.fromEntityToService(customer);
-    this.http.post<Customer>(this.resourceUrl, copy)
-      .subscribe((customer: any) => {
-        let newCustomer: Customer = this.customerMapper.fromServiceToEntity(customer);
-        this.customerUpdater.create(newCustomer);
-      });
+  create(customer: Customer): Observable<Customer> {
+    let copy = this.mapper.fromEntityToService(customer);
+    return this.http.post<Customer>(this.resourceUrl, copy)
+      .map((customer: any) => this.mapper.fromServiceToEntity(customer))
+      .do((customer: Customer) => this.cast.create(customer));
   }
 
-  update(customer: Customer) {
-    let copy = this.customerMapper.fromEntityToService(customer);
-    this.http.put<Customer>(this.resourceUrl, copy)
-      .subscribe(() => {
-        this.customerUpdater.update(customer);
-      });
+  update(customer: Customer): Observable<Customer> {
+    let copy = this.mapper.fromEntityToService(customer);
+    return this.http.put<Customer>(this.resourceUrl, copy)
+      .map(() => customer)
+      .do((customer: Customer) => this.cast.update(customer));
   }
 
-  find(id: number) {
-    this.http.get<Customer>(`${this.resourceUrl}/${id}`)
-      .subscribe((customer: any) => {
-        let newCustomer: Customer = this.customerMapper.fromServiceToEntity(customer);
-        this.customerUpdater.findSingle(newCustomer);
-      });
+  find(id: number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.resourceUrl}/${id}`)
+      .map((customer: any) => this.mapper.fromServiceToEntity(customer))
+      .do((customer: Customer) => this.cast.find(customer));
   }
 
-  query(req?: any) {
-    this.http.get<Customer[]>(this.resourceUrl)
-      .subscribe((customers: any[]) => {
-        let newCustomers: Customer[] = customers.map((customer: any) => this.customerMapper.fromServiceToEntity(customer));
-        this.customerUpdater.query(newCustomers);
-      });
+  query(req?: any): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.resourceUrl)
+      .map((customers: any[]) => customers
+        .map((customer: any) => this.mapper.fromServiceToEntity(customer)))
+      .do((customers: Customer[]) => this.cast.query(customers));
   }
 
-  delete(id: number) {
-    this.http.delete<Response>(`${this.resourceUrl}/${id}`)
-      .subscribe(() => {
-        this.customerUpdater.delete(id);
-      });
+  delete(id: number): Observable<number> {
+    return this.http.delete<Response>(`${this.resourceUrl}/${id}`)
+      .map(() => id)
+      .do((id: number) => this.cast.delete(id));
   }
 }
 

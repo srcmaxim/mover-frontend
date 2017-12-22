@@ -10,11 +10,9 @@ import {Employee} from "./employee.model";
   templateUrl: './employee-dialog.component.html',
   styleUrls: ['./employee-dialog.component.css']
 })
-export class EmployeeDialogComponent implements OnInit, OnDestroy {
+export class EmployeeDialogComponent implements OnInit {
 
   private employee: FormGroup;
-  private routeSubscription: any;
-  private editSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
@@ -22,21 +20,18 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
               private router: Router,
               private employeeService: EmployeeService,
               private formBuilder: FormBuilder) {
+    this.initForm(new Employee({}));
   }
 
   ngOnInit() {
     this.dropdownLoader.load();
     this.calendarLoader.load();
 
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.employeeService.find(id);
-        this.employeeService.singleChange.subscribe((employee: Employee) => {
-          this.initForm(employee);
-        });
-      } else {
-        this.initForm(new Employee({}));
+        this.employeeService.find(id).first()
+          .subscribe((employee: Employee) => this.initForm(employee));
       }
     });
   }
@@ -51,24 +46,17 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.editSubscription) {
-      this.editSubscription.unsubscribe();
-    }
-  }
-
   onDeny() {
     this.router.navigate([{outlets: {popup: null}}]);
   }
 
   onApprove() {
     if (this.employee.value.id) {
-      this.employeeService.update(this.employee.value);
+      this.employeeService.update(this.employee.value)
+        .first().subscribe(() => this.onDeny());
     } else {
-      this.employeeService.create(this.employee.value);
+      this.employeeService.create(this.employee.value)
+        .first().subscribe(() => this.onDeny());
     }
-    this.editSubscription = this.employeeService.singleChange.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

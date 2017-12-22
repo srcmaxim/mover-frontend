@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
 import {Employee} from "./employee.model";
 import {EntityMapper} from "../entity.mapper.service";
-import {EntityUpdater} from "../entity.updater.service";
+import {Cast} from "../entity.cast.service";
 
 /**
  * REST API for working with Employee resource.
@@ -12,53 +12,47 @@ import {EntityUpdater} from "../entity.updater.service";
 export class EmployeeService {
 
   private resourceUrl = '/api/employees';
-  private employeeUpdater: EntityUpdater<Employee> = new EntityUpdater();
-  private employeeMapper: EmployeeMapper = new EmployeeMapper();
+  private cast: Cast<Employee> = new Cast();
+  private mapper: EntityMapper = new EmployeeMapper();
 
-  public multiChange: Observable<Employee[]> = this.employeeUpdater.multiChange;
-  public singleChange: Observable<Employee> = this.employeeUpdater.singleChange;
+
+  public multiCast: Observable<Employee[]> = this.cast.multiCast;
+  public singleCast: Observable<Employee> = this.cast.singleCast;
 
   constructor(private http: HttpClient) {
   }
 
-  create(employee: Employee) {
-    let copy = this.employeeMapper.fromEntityToService(employee);
-    this.http.post<Employee>(this.resourceUrl, copy)
-      .subscribe((employee: any) => {
-        let newEmployee: Employee = this.employeeMapper.fromServiceToEntity(employee);
-        this.employeeUpdater.create(newEmployee);
-      });
+  create(employee: Employee): Observable<Employee> {
+    let copy = this.mapper.fromEntityToService(employee);
+    return this.http.post<Employee>(this.resourceUrl, copy)
+      .map((employee: any) => this.mapper.fromServiceToEntity(employee))
+      .do((employee: Employee) => this.cast.create(employee));
   }
 
-  update(employee: Employee) {
-    let copy = this.employeeMapper.fromEntityToService(employee);
-    this.http.put<Employee>(this.resourceUrl, copy)
-      .subscribe(() => {
-        this.employeeUpdater.update(employee);
-      });
+  update(employee: Employee): Observable<Employee> {
+    let copy = this.mapper.fromEntityToService(employee);
+    return this.http.put<Employee>(this.resourceUrl, copy)
+      .map(() => employee)
+      .do((employee: Employee) => this.cast.update(employee));
   }
 
-  find(id: number) {
-    this.http.get<Employee>(`${this.resourceUrl}/${id}`)
-      .subscribe((employee: any) => {
-        let newEmployee: Employee = this.employeeMapper.fromServiceToEntity(employee);
-        this.employeeUpdater.findSingle(newEmployee);
-      });
+  find(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.resourceUrl}/${id}`)
+      .map((employee: any) => this.mapper.fromServiceToEntity(employee))
+      .do((employee: Employee) => this.cast.find(employee));
   }
 
-  query(req?: any) {
-    this.http.get<Employee[]>(this.resourceUrl)
-      .subscribe((employees: any[]) => {
-        let newEmployees: Employee[] = employees.map((employee: any) => this.employeeMapper.fromServiceToEntity(employee));
-        this.employeeUpdater.query(newEmployees);
-      });
+  query(req?: any): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.resourceUrl)
+      .map((employees: any[]) => employees
+        .map((employee: any) => this.mapper.fromServiceToEntity(employee)))
+      .do((employees: Employee[]) => this.cast.query(employees));
   }
 
-  delete(id: number) {
-    this.http.delete<Response>(`${this.resourceUrl}/${id}`)
-      .subscribe(() => {
-        this.employeeUpdater.delete(id);
-      });
+  delete(id: number): Observable<number> {
+    return this.http.delete<Response>(`${this.resourceUrl}/${id}`)
+      .map(() => id)
+      .do((id: number) => this.cast.delete(id));
   }
 }
 

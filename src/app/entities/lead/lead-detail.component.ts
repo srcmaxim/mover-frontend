@@ -14,12 +14,11 @@ import {EmployeeService} from "../employee/employee.service";
   templateUrl: './lead-detail.component.html',
   styleUrls: ['./lead-detail.component.css']
 })
-export class LeadDetailComponent implements OnInit, OnDestroy {
+export class LeadDetailComponent implements OnInit {
 
   private lead: Observable<Lead>;
   private customer: Observable<Customer>;
   private employees: Observable<Employee[]>;
-  private routeSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService,
@@ -28,25 +27,18 @@ export class LeadDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.lead = this.leadService.singleChange;
-    this.customer = this.customerService.singleChange;
-    this.employees = this.employeeService.multiChange;
-
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.take(1).subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.leadService.find(id);
+        this.lead = this.leadService.singleCast;
+        this.customer = this.customerService.singleCast;
+        this.employees = this.employeeService.multiCast;
+
+        this.leadService.find(id).first().subscribe();
+        //todo: fetch lead customer, employees
+        this.customerService.find(id).first().subscribe();
+        this.employeeService.query().first().subscribe();
       }
     });
-
-    this.lead.subscribe((lead: Lead) => {
-      let params = new HttpParams().set('leadId', String(lead.id));
-      this.customerService.query({params});
-      this.employeeService.query({params});
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
   }
 }

@@ -6,11 +6,9 @@ import {CustomerService} from "./customer.service";
   selector: 'app-customer-delete-dialog',
   templateUrl: './customer-delete-dialog.component.html'
 })
-export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
+export class CustomerDeleteDialogComponent implements OnInit {
 
   private customerId: number;
-  private routeSubscription: any;
-  private deleteSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -18,7 +16,7 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.customerId = id;
@@ -26,20 +24,12 @@ export class CustomerDeleteDialogComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.deleteSubscription) {
-      this.deleteSubscription.unsubscribe();
-    }
-  }
-
   onDeny() {
     this.router.navigate([{outlets: {popup: null}}]);
   }
 
   onApprove() {
-    this.customerService.delete(this.customerId);
-    this.deleteSubscription = this.customerService.multiChange.subscribe(() =>
+    this.customerService.delete(this.customerId).first().subscribe(() =>
       this.router.navigateByUrl('/customer'));
   }
 }

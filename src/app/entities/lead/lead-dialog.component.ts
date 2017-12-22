@@ -16,8 +16,6 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   private lead: FormGroup;
   private origin: FormGroup;
   private destination: FormGroup;
-  private routeSubscription: any;
-  private editSubscription: any;
   private startDateSubscription: any;
   private endDateSubscription: any;
 
@@ -27,6 +25,7 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
               private router: Router,
               private leadService: LeadService,
               private formBuilder: FormBuilder) {
+    this.fromEntityToForm(new Lead({}));
   }
 
   ngOnInit() {
@@ -37,24 +36,16 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
     this.endDateSubscription = this.calendarLoader.endDateChange
       .subscribe((date) => this.lead.value.end = date);
 
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.leadService.find(id);
-        this.leadService.singleChange.subscribe((lead: Lead) => {
-          this.fromEntityToForm(lead);
-        });
-      } else {
-        this.fromEntityToForm(new Lead({}));
+        this.leadService.find(id).first()
+          .subscribe((lead: Lead) => this.fromEntityToForm(lead));
       }
     });
   }
 
   ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.editSubscription) {
-      this.editSubscription.unsubscribe();
-    }
     if (this.startDateSubscription) {
       this.startDateSubscription.unsubscribe();
     }
@@ -70,12 +61,12 @@ export class LeadDialogComponent implements OnInit, OnDestroy {
   onApprove() {
     let lead = this.fromFormToEntity();
     if (lead.id) {
-      this.leadService.update(lead);
+      this.leadService.update(lead)
+        .first().subscribe(() => this.onDeny());
     } else {
-      this.leadService.create(lead);
+      this.leadService.create(lead)
+        .first().subscribe(() => this.onDeny());
     }
-    this.editSubscription = this.leadService.singleChange.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
   }
 
   fromEntityToForm(lead: Lead) {

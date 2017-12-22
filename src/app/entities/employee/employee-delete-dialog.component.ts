@@ -6,11 +6,9 @@ import {EmployeeService} from "./employee.service";
   selector: 'app-employee-delete-dialog',
   templateUrl: './employee-delete-dialog.component.html'
 })
-export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
+export class EmployeeDeleteDialogComponent  implements OnInit {
 
   private employeeId: number;
-  private routeSubscription: any;
-  private deleteSubscription: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -18,7 +16,7 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.employeeId = id;
@@ -26,20 +24,12 @@ export class EmployeeDeleteDialogComponent  implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.deleteSubscription) {
-      this.deleteSubscription.unsubscribe();
-    }
-  }
-
   onDeny() {
     this.router.navigate([{outlets: {popup: null}}]);
   }
 
   onApprove() {
-    this.employeeService.delete(this.employeeId);
-    this.deleteSubscription = this.employeeService.multiChange.subscribe(() =>
-      this.router.navigateByUrl('/employee'));
+    this.employeeService.delete(this.employeeId).first().subscribe(() =>
+      this.router.navigateByUrl('/customer'));
   }
 }

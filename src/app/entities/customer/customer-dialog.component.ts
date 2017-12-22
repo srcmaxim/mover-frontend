@@ -10,11 +10,9 @@ import {Customer} from "./customer.model";
   templateUrl: './customer-dialog.component.html',
   styleUrls: ['./customer-dialog.component.css']
 })
-export class CustomerDialogComponent implements OnInit, OnDestroy {
+export class CustomerDialogComponent implements OnInit {
 
   private customer: FormGroup;
-  private routeSubscription: any;
-  private editSubscription: any;
 
   constructor(private dropdownLoader: SemanticDropdownLoader,
               private calendarLoader: SemanticCalendarLoader,
@@ -22,21 +20,18 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
               private router: Router,
               private customerService: CustomerService,
               private formBuilder: FormBuilder) {
+    this.initForm(new Customer({}));
   }
 
   ngOnInit() {
     this.dropdownLoader.load();
     this.calendarLoader.load();
 
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.customerService.find(id);
-        this.customerService.singleChange.subscribe((customer: Customer) => {
-          this.initForm(customer);
-        });
-      } else {
-        this.initForm(new Customer({}));
+        this.customerService.find(id).first()
+          .subscribe((customer: Customer) => this.initForm(customer));
       }
     });
   }
@@ -51,24 +46,17 @@ export class CustomerDialogComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.editSubscription) {
-      this.editSubscription.unsubscribe();
-    }
-  }
-
   onDeny() {
     this.router.navigate([{outlets: {popup: null}}]);
   }
 
   onApprove() {
     if (this.customer.value.id) {
-      this.customerService.update(this.customer.value);
+      this.customerService.update(this.customer.value)
+        .first().subscribe(() => this.onDeny());
     } else {
-      this.customerService.create(this.customer.value);
+      this.customerService.create(this.customer.value)
+        .first().subscribe(() => this.onDeny());
     }
-    this.editSubscription = this.customerService.singleChange.subscribe(() =>
-      this.router.navigate([{outlets: {popup: null}}]));
   }
 }

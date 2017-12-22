@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {LeadService} from "./lead.service";
 import {Lead, Type, Status} from "./lead.model";
+import "rxjs/add/operator/first";
 
 @Component({
   selector: 'app-lead',
@@ -17,7 +18,7 @@ export class LeadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.leads = this.leadService.multiChange;
-    this.leadService.query();
+    this.leads = this.leadService.multiCast;
+    this.leadService.query().first().subscribe();
   }
 }

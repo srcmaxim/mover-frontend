@@ -15,7 +15,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employees = this.employeeService.multiChange;
-    this.employeeService.query();
+    this.employees = this.employeeService.multiCast;
+    this.employeeService.query().first().subscribe();
   }
 }

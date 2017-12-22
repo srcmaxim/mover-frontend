@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Lead, Status, Type} from "./lead.model";
 import {Iso8601Date} from "../../shared/pipes/date.pipe";
 import {EntityMapper} from "../entity.mapper.service";
-import {EntityUpdater} from "../entity.updater.service";
 import {Observable} from "rxjs/Observable";
+import {Cast} from "../entity.cast.service";
 
 /**
  * REST API for working with Lead resource.
@@ -13,53 +13,46 @@ import {Observable} from "rxjs/Observable";
 export class LeadService {
 
   private resourceUrl = '/api/leads';
-  private leadUpdater: EntityUpdater<Lead> = new EntityUpdater();
-  private leadMapper: LeadMapper = new LeadMapper(new Iso8601Date());
+  private cast: Cast<Lead> = new Cast();
+  private mapper: EntityMapper = new LeadMapper(new Iso8601Date());
 
-  public multiChange: Observable<Lead[]> = this.leadUpdater.multiChange;
-  public singleChange: Observable<Lead> = this.leadUpdater.singleChange;
+  public multiCast: Observable<Lead[]> = this.cast.multiCast;
+  public singleCast: Observable<Lead> = this.cast.singleCast;
 
   constructor(private http: HttpClient) {
   }
 
-  create(lead: Lead) {
-    let copy = this.leadMapper.fromEntityToService(lead);
-    this.http.post<Lead>(this.resourceUrl, copy)
-      .subscribe((lead: any) => {
-        let newLead: Lead = this.leadMapper.fromServiceToEntity(lead);
-        this.leadUpdater.create(newLead);
-      });
+  create(lead: Lead): Observable<Lead> {
+    let copy = this.mapper.fromEntityToService(lead);
+    return this.http.post<Lead>(this.resourceUrl, copy)
+      .map((lead: any) => this.mapper.fromServiceToEntity(lead))
+      .do((lead: Lead) => this.cast.create(lead));
   }
 
-  update(lead: Lead) {
-    let copy = this.leadMapper.fromEntityToService(lead);
-    this.http.put<Lead>(this.resourceUrl, copy)
-      .subscribe(() => {
-        this.leadUpdater.update(lead);
-      });
+  update(lead: Lead): Observable<Lead> {
+    let copy = this.mapper.fromEntityToService(lead);
+    return this.http.put<Lead>(this.resourceUrl, copy)
+      .map(() => lead)
+      .do((lead: Lead) => this.cast.update(lead));
   }
 
-  find(id: number) {
-    this.http.get<Lead>(`${this.resourceUrl}/${id}`)
-      .subscribe((lead: any) => {
-        let newLead: Lead = this.leadMapper.fromServiceToEntity(lead);
-        this.leadUpdater.findSingle(newLead);
-      });
+  find(id: number): Observable<Lead> {
+    return this.http.get<Lead>(`${this.resourceUrl}/${id}`)
+      .map((lead: any) => this.mapper.fromServiceToEntity(lead))
+      .do((lead: Lead) => this.cast.find(lead));
   }
 
-  query(req?: any) {
-    this.http.get<Lead[]>(this.resourceUrl)
-      .subscribe((leads: any[]) => {
-        let newLeads: Lead[] = leads.map((lead: any) => this.leadMapper.fromServiceToEntity(lead));
-        this.leadUpdater.query(newLeads);
-      });
+  query(req?: any): Observable<Lead[]> {
+    return this.http.get<Lead[]>(this.resourceUrl)
+      .map((leads: any[]) => leads
+        .map((lead: any) => this.mapper.fromServiceToEntity(lead)))
+      .do((leads: Lead[]) => this.cast.query(leads));
   }
 
-  delete(id: number) {
-    this.http.delete<Response>(`${this.resourceUrl}/${id}`)
-      .subscribe(() => {
-        this.leadUpdater.delete(id);
-      });
+  delete(id: number): Observable<number> {
+    return this.http.delete<Response>(`${this.resourceUrl}/${id}`)
+      .map(() => id)
+      .do((id: number) => this.cast.delete(id));
   }
 }
 
