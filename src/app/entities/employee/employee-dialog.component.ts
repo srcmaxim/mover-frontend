@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {EmployeeService} from "./employee.service";
 import {Employee} from "./employee.model";
@@ -14,9 +13,7 @@ export class EmployeeDialogComponent implements OnInit {
 
   private employee: FormGroup;
 
-  constructor(private dropdownLoader: SemanticDropdownLoader,
-              private calendarLoader: SemanticCalendarLoader,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private employeeService: EmployeeService,
               private formBuilder: FormBuilder) {
@@ -24,9 +21,6 @@ export class EmployeeDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dropdownLoader.load();
-    this.calendarLoader.load();
-
     this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {

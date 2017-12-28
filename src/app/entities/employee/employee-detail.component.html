@@ -37,7 +37,18 @@
           <i class="reply icon"> </i>
           Back
         </a>
-
+        <a class="ui green compact button"
+           [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async)?.id + '/edit'} }]"
+           replaceUrl="true">
+          <i class="write icon"></i>
+          Edit
+        </a>
+        <a class="ui red compact button"
+           [routerLink]="['/', { outlets: { popup: 'employee/'+ (employee | async)?.id + '/delete'} }]"
+           replaceUrl="true">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
       </div>
     </div>
   </div>

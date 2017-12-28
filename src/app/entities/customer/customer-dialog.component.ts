@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SemanticCalendarLoader, SemanticDropdownLoader} from '../../layouts';
 import {CustomerService} from "./customer.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Customer} from "./customer.model";
@@ -14,9 +13,7 @@ export class CustomerDialogComponent implements OnInit {
 
   private customer: FormGroup;
 
-  constructor(private dropdownLoader: SemanticDropdownLoader,
-              private calendarLoader: SemanticCalendarLoader,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private customerService: CustomerService,
               private formBuilder: FormBuilder) {
@@ -24,9 +21,6 @@ export class CustomerDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dropdownLoader.load();
-    this.calendarLoader.load();
-
     this.route.params.first().subscribe((params) => {
       const id = params['id'];
       if (id) {
