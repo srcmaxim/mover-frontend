@@ -30,6 +30,6 @@ export class EmployeeDeleteDialogComponent  implements OnInit {
 
   onApprove() {
     this.employeeService.delete(this.employeeId).first().subscribe(() =>
-      this.router.navigateByUrl('/customer'));
+      this.router.navigateByUrl('/employee'));
   }
 }

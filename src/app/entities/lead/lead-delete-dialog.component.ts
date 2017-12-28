@@ -30,7 +30,7 @@ export class LeadDeleteDialogComponent implements OnInit {
 
   onApprove() {
     this.leadService.delete(this.leadId).first().subscribe(() =>
-      this.router.navigateByUrl('/customer'));
+      this.router.navigateByUrl('/lead'));
   }
 }
 
