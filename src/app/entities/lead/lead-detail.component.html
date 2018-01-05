@@ -70,7 +70,7 @@
   <div class="column">
     <h4 class="ui top attached block header">Estimates</h4>
     <div class="ui bottom attached segment">
-      <div *ngFor="let estimate of (lead | async)?.estimates" class="ui card">
+      <div *ngFor="let estimate of estimates | async" class="ui card">
         <div class="content">
           <table>
             <tr>
@@ -104,7 +104,7 @@
   <div class="column">
     <h4 class="ui top attached block header">Inventories</h4>
     <div class="ui bottom attached segment">
-      <div *ngFor="let inventory of (lead | async)?.inventories" class="ui card">
+      <div *ngFor="let inventory of inventories | async" class="ui card">
         <div class="content">
           <table>
             <tr>
@@ -113,7 +113,7 @@
             </tr>
             <tr>
               <td><h3>Category</h3></td>
-              <td><span>{{inventory.category}}</span></td>
+              <td><span>{{inventory.getCategoryToString()}}</span></td>
             </tr>
             <tr>
               <td><h3>Quantity</h3></td>

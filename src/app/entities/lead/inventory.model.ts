@@ -12,6 +12,10 @@ export class Inventory {
     this.weight     = obj && obj.weight     || 0;
     this.volume     = obj && obj.volume     || 0;
   }
+
+  getCategoryToString(): string {
+    return Category[this.category];
+  }
 }
 
 export enum Category {

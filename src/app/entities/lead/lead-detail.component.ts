@@ -8,6 +8,8 @@ import {HttpParams} from "@angular/common/http";
 import {Lead} from "./lead.model";
 import {Employee} from "../employee/employee.model";
 import {EmployeeService} from "../employee/employee.service";
+import {Estimate} from "./estimate.model";
+import {Inventory} from "./inventory.model";
 
 @Component({
   selector: 'app-lead-detail',
@@ -17,6 +19,8 @@ import {EmployeeService} from "../employee/employee.service";
 export class LeadDetailComponent implements OnInit {
 
   private lead: Observable<Lead>;
+  private estimates: Observable<Estimate[]>;
+  private inventories: Observable<Inventory[]>;
   private customer: Observable<Customer>;
   private employees: Observable<Employee[]>;
 
@@ -31,11 +35,14 @@ export class LeadDetailComponent implements OnInit {
       const id = params['id'];
       if (id) {
         this.lead = this.leadService.singleCast;
+        this.estimates = this.leadService.multiCastEstimates;
+        this.inventories = this.leadService.multiCastInventories;
         this.customer = this.customerService.singleCast;
         this.employees = this.employeeService.multiCast;
 
         this.leadService.find(id).first().subscribe();
-        //todo: fetch lead customer, employees
+        this.leadService.findEstimates(id).first().subscribe();
+        this.leadService.findInventories(id).first().subscribe();
         this.customerService.find(id).first().subscribe();
         this.employeeService.query().first().subscribe();
       }
