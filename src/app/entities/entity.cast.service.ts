@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
  * The main class for working with single and multi casting
  * for collection of elements or single values.
  */
-export class Cast<T> {
+export class EntityCast<T> {
 
   private collection: BehaviorSubject<T[]> = new BehaviorSubject([]);
   private singleton: BehaviorSubject<T> = new BehaviorSubject(null);

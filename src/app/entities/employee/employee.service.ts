@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs/Observable';
 import {Employee} from "./employee.model";
 import {EntityMapper} from "../entity.mapper.service";
-import {Cast} from "../entity.cast.service";
+import {EntityCast} from "../entity.cast.service";
 
 /**
  * REST API for working with Employee resource.
@@ -12,7 +12,7 @@ import {Cast} from "../entity.cast.service";
 export class EmployeeService {
 
   private resourceUrl = '/api/employees';
-  private cast: Cast<Employee> = new Cast();
+  private cast: EntityCast<Employee> = new EntityCast();
   private mapper: EntityMapper = new EmployeeMapper();
 
 

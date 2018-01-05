@@ -67,81 +67,8 @@
     </div>
   </div>
 
-  <div class="column">
-    <h4 class="ui top attached block header">Estimates</h4>
-    <div class="ui bottom attached segment">
-      <div *ngFor="let estimate of estimates | async" class="ui card">
-        <div class="content">
-          <table>
-            <tr>
-              <td><h3>Name</h3></td>
-              <td><span>{{estimate.name}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Quantity</h3></td>
-              <td><span>{{estimate.quantity}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Price</h3></td>
-              <td><span>{{estimate.price}}</span></td>
-            </tr>
-          </table>
-        </div>
-        <div class="ui two mini bottom attached buttons">
-          <a class="ui green button">
-            <i class="write icon"> </i>
-            Edit
-          </a>
-          <a class="ui red button">
-            <i class="remove icon"> </i>
-            Delete
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <h4 class="ui top attached block header">Inventories</h4>
-    <div class="ui bottom attached segment">
-      <div *ngFor="let inventory of inventories | async" class="ui card">
-        <div class="content">
-          <table>
-            <tr>
-              <td><h3>Name</h3></td>
-              <td><span>{{inventory.name}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Category</h3></td>
-              <td><span>{{inventory.getCategoryToString()}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Quantity</h3></td>
-              <td><span>{{inventory.quantity}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Weight</h3></td>
-              <td><span>{{inventory.weight}}</span></td>
-            </tr>
-            <tr>
-              <td><h3>Volume</h3></td>
-              <td><span>{{inventory.volume}}</span></td>
-            </tr>
-          </table>
-        </div>
-        <div class="ui two mini bottom attached buttons">
-          <a class="ui green button">
-            <i class="write icon"> </i>
-            Edit
-          </a>
-          <a class="ui red button">
-            <i class="remove icon"> </i>
-            Delete
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-estimate-detail  class="column" [leadId]="(lead | async)?.id"></app-estimate-detail>
+  <app-inventory-detail class="column" [leadId]="(lead | async)?.id"></app-inventory-detail>
 
   <div class="column">
     <h4 class="ui top attached block header">Customer</h4>

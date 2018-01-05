@@ -1,0 +1,39 @@
+<div class="column">
+  <div class="ui top attached block header">
+    <h4>Estimates
+      <i class="repeat link icon" style="float: right" (click)="query()"></i>
+    </h4>
+  </div>
+  <div class="ui bottom attached segment">
+    <div *ngFor="let estimate of estimates | async; index as i" class="ui card">
+      <div class="content">
+        <table>
+          <tr>
+            <td><h3>Name</h3></td>
+            <td><span>{{estimate.name}}</span></td>
+          </tr>
+          <tr>
+            <td><h3>Quantity</h3></td>
+            <td><span>{{estimate.quantity}}</span></td>
+          </tr>
+          <tr>
+            <td><h3>Price</h3></td>
+            <td><span>{{estimate.price}}</span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ui two mini bottom attached buttons">
+        <button class="ui green button"
+                (click)="edit(i)">
+          <i class="write icon"> </i>
+          Edit
+        </button>
+        <button class="ui red button"
+                (click)="delete(i)">
+          <i class="remove icon"> </i>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
