@@ -3,6 +3,8 @@ import {LeadComponent} from "./lead.component";
 import {LeadDetailComponent} from "./lead-detail.component";
 import {LeadDialogComponent} from "./lead-dialog.component";
 import {LeadDeleteDialogComponent} from "./lead-delete-dialog.component";
+import {EstimateDialogComponent} from "./embedded/estimate-dialog.component";
+import {InventoryDialogComponent} from "./embedded/inventory-dialog.component";
 
 
 export const leadRoute: Routes = [
@@ -29,6 +31,26 @@ export const leadPopupRoute: Routes = [
   {
     path: 'lead/:id/delete',
     component: LeadDeleteDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'lead/:id/estimate/:index/edit',
+    component: EstimateDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'lead/:id/estimate/new',
+    component: EstimateDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'lead/:id/inventory/:index/edit',
+    component: InventoryDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'lead/:id/inventory/new',
+    component: InventoryDialogComponent,
     outlet: 'popup'
   }
 ];

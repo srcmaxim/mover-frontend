@@ -1,0 +1,38 @@
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui fullscreen modal transition visible active"
+       style="margin-top: -20em; display: block !important;">
+
+    <div class="header">
+      Create or edit a Estimate: {{estimate.value | json}} -- {{estimate.status | json}}
+    </div>
+    <div class="content">
+
+      <form [formGroup]="estimate" class="ui equal width form">
+
+        <div class="field">
+          <label>Name</label>
+          <input formControlName="name" type="text" placeholder="Name">
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <input formControlName="quantity" type="text" placeholder="Quantity">
+        </div>
+        <div class="field">
+          <label>Price</label>
+          <input formControlName="price" type="text" placeholder="Price">
+        </div>
+
+      </form>
+
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" (click)="onDeny()">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button" (click)="onApprove()">
+        Save
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
+</div>

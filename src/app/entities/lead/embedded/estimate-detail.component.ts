@@ -24,10 +24,6 @@ export class EstimateDetailComponent implements OnInit {
     this.leadService.queryEstimates(this.leadId).first().subscribe();
   }
 
-  edit(index: number) {
-    alert("edit " + index);
-  }
-
   delete(index: number) {
     this.leadService.deleteEstimate(this.leadId, index).first().subscribe();
   }

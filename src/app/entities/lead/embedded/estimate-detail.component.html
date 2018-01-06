@@ -1,6 +1,9 @@
 <div class="column">
   <div class="ui top attached block header">
     <h4>Estimates
+      <i class="plus link icon"
+         [routerLink]="['/', { outlets: {  popup: 'lead/'+ leadId + '/estimate/new'} }]"
+         replaceUrl="true"></i>
       <i class="repeat link icon" style="float: right" (click)="query()"></i>
     </h4>
   </div>
@@ -23,9 +26,10 @@
         </table>
       </div>
       <div class="ui two mini bottom attached buttons">
-        <button class="ui green button"
-                (click)="edit(i)">
-          <i class="write icon"> </i>
+        <button class="ui green compact button"
+                [routerLink]="['/', { outlets: {  popup: 'lead/'+ leadId + '/estimate/' + i + '/edit'} }]"
+                replaceUrl="true">
+          <i class="write icon"></i>
           Edit
         </button>
         <button class="ui red button"

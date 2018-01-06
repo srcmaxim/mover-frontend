@@ -10,6 +10,8 @@ import {LeadDeleteDialogComponent} from "./lead-delete-dialog.component";
 import {LeadService} from "./lead.service";
 import {EstimateDetailComponent} from "./embedded/estimate-detail.component";
 import {InventoryDetailComponent} from "./embedded/inventory-detail.component";
+import {EstimateDialogComponent} from "./embedded/estimate-dialog.component";
+import {InventoryDialogComponent} from "./embedded/inventory-dialog.component";
 
 const ENTITY_STATES = [
   ...leadRoute,
@@ -26,6 +28,8 @@ const ENTITY_STATES = [
     LeadDetailComponent,
     EstimateDetailComponent,
     InventoryDetailComponent,
+    EstimateDialogComponent,
+    InventoryDialogComponent,
     LeadDialogComponent,
     LeadDeleteDialogComponent
   ],
@@ -34,6 +38,8 @@ const ENTITY_STATES = [
     LeadDetailComponent,
     EstimateDetailComponent,
     InventoryDetailComponent,
+    EstimateDialogComponent,
+    InventoryDialogComponent,
     LeadDialogComponent,
     LeadDeleteDialogComponent
   ],

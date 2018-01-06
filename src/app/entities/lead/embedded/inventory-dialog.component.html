@@ -1,0 +1,61 @@
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui fullscreen modal transition visible active"
+       style="margin-top: -20em; display: block !important;">
+
+    <div class="header">
+      Create or edit a Inventory: {{inventory.value | json}} -- {{inventory.status | json}}
+    </div>
+    <div class="content">
+
+      <form [formGroup]="inventory" class="ui equal width form">
+
+        <div class="field">
+          <label>Category</label>
+          <div class="ui selection dropdown" appDropdown>
+            <input formControlName="category" type="hidden" name="type">
+            <i class="dropdown icon"></i>
+            <div class="default text">Category</div>
+            <div class="menu">
+              <div class="item" data-value="0" (click)="inventory.value.category = 0">ANY</div>
+              <div class="item" data-value="1" (click)="inventory.value.category = 1">LIVING</div>
+              <div class="item" data-value="2" (click)="inventory.value.category = 2">BED</div>
+              <div class="item" data-value="3" (click)="inventory.value.category = 3">OFFICE</div>
+              <div class="item" data-value="4" (click)="inventory.value.category = 4">KITCHEN</div>
+              <div class="item" data-value="5" (click)="inventory.value.category = 5">BATH</div>
+              <div class="item" data-value="6" (click)="inventory.value.category = 6">ATTIC</div>
+              <div class="item" data-value="7" (click)="inventory.value.category = 7">DINNING</div>
+              <div class="item" data-value="8" (click)="inventory.value.category = 8">BASEMENT</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Name</label>
+          <input formControlName="name" type="text" placeholder="Name">
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <input formControlName="quantity" type="text" placeholder="Quantity">
+        </div>
+        <div class="field">
+          <label>Weight</label>
+          <input formControlName="weight" type="text" placeholder="Weight">
+        </div>
+        <div class="field">
+          <label>Volume</label>
+          <input formControlName="volume" type="text" placeholder="Volume">
+        </div>
+
+      </form>
+
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" (click)="onDeny()">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button" (click)="onApprove()">
+        Save
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
+</div>

@@ -76,20 +76,26 @@ export class LeadService {
       .do((estimates: Estimate[]) => this.castEstimate.query(estimates));
   }
 
+  createEstimate(leadId: number, estimate: Estimate): Observable<Estimate[]> {
+    const cast =  this.castEstimate.create(estimate);
+    return this.updateEstimatesResource(leadId, cast);
+  }
+
   updateEstimate(leadId: number, index: number, estimate: Estimate): Observable<Estimate[]> {
-    return this.castEstimate.update(index, estimate)
-      .map((estimates: Estimate[]) => estimates
-        .map((estimate: Estimate) => this.estimateMapper.fromEntityToService(estimate)))
-      .do((copy: any) => this.http.put<Estimate[]>(`${this.resourceUrl}/${leadId}/estimates`, copy));
+    const cast =  this.castEstimate.update(index, estimate);
+    return this.updateEstimatesResource(leadId, cast);
   }
 
   deleteEstimate(leadId: number, index: number): Observable<Estimate[]> {
-    return this.castEstimate.delete(index)
-      .map((estimates: Estimate[]) => estimates
-        .map((estimate: Estimate) => this.estimateMapper.fromEntityToService(estimate)))
-      .do((copy: any) => this.http.put<Estimate[]>(`${this.resourceUrl}/${leadId}/estimates`, copy).first().subscribe());
+    const cast = this.castEstimate.delete(index);
+    return this.updateEstimatesResource(leadId, cast);
   }
 
+  private updateEstimatesResource(leadId: number, estimates: Observable<Estimate[]> ): Observable<Estimate[]>  {
+    return estimates.map((estimates: Estimate[]) => estimates
+      .map((estimate: Estimate) => this.estimateMapper.fromEntityToService(estimate)))
+      .do((copy: any) => this.http.put<Estimate[]>(`${this.resourceUrl}/${leadId}/estimates`, copy).first().subscribe());
+  }
 
   queryInventories(leadId: number): Observable<Inventory[]> {
     return this.http.get<Inventory[]>(`${this.resourceUrl}/${leadId}/inventories`)
@@ -98,18 +104,25 @@ export class LeadService {
       .do((inventories: Inventory[]) => this.castInventory.query(inventories));
   }
 
+  createInventory(leadId: number, inventory: Inventory): Observable<Inventory[]> {
+    const cast = this.castInventory.create(inventory);
+    return this.updateInventoriesResource(leadId, cast);
+  }
+
   updateInventory(leadId: number, index: number, inventory: Inventory): Observable<Inventory[]> {
-    return this.castInventory.update(index, inventory)
-      .map((inventories: Inventory[]) => inventories
-        .map((inventory: Inventory) => this.inventoryMapper.fromEntityToService(inventory)))
-      .do((copy: any) => this.http.put<Estimate[]>(`${this.resourceUrl}/${leadId}/inventories`, copy));
+    const cast =  this.castInventory.update(index, inventory);
+    return this.updateInventoriesResource(leadId, cast);
   }
 
   deleteInventory(leadId: number, index: number): Observable<Inventory[]> {
-    return this.castInventory.delete(index)
-      .map((inventories: Inventory[]) => inventories
-        .map((inventory: Inventory) => this.inventoryMapper.fromEntityToService(inventory)))
-      .do((copy: any) => this.http.put<Estimate[]>(`${this.resourceUrl}/${leadId}/inventories`, copy).first().subscribe());
+    const cast = this.castInventory.delete(index);
+    return this.updateInventoriesResource(leadId, cast);
+  }
+
+  private updateInventoriesResource(leadId: number, inventories: Observable<Inventory[]> ): Observable<Inventory[]>  {
+    return inventories.map((inventories: Inventory[]) => inventories
+      .map((inventory: Inventory) => this.inventoryMapper.fromEntityToService(inventory)))
+      .do((copy: any) => this.http.put<Inventory[]>(`${this.resourceUrl}/${leadId}/inventories`, copy).first().subscribe());
   }
 }
 

@@ -24,10 +24,6 @@ export class InventoryDetailComponent implements OnInit {
     this.leadService.queryInventories(this.leadId).first().subscribe();
   }
 
-  edit(index: number) {
-    alert("edit " + index);
-  }
-
   delete(index: number) {
     this.leadService.deleteInventory(this.leadId, index).first().subscribe();
   }
