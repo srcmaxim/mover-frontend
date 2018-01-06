@@ -124,6 +124,22 @@ export class LeadService {
       .map((inventory: Inventory) => this.inventoryMapper.fromEntityToService(inventory)))
       .do((copy: any) => this.http.put<Inventory[]>(`${this.resourceUrl}/${leadId}/inventories`, copy).first().subscribe());
   }
+
+  /* ENTITY */
+
+  queryByCustomerId(req?: any): Observable<Lead[]> {
+    return this.http.get<Lead[]>(`/api/customers/${req.id}/leads`)
+      .map((leads: any[]) => leads
+        .map((lead: any) => this.mapper.fromServiceToEntity(lead)))
+      .do((leads: Lead[]) => this.cast.query(leads));
+  }
+
+  queryByEmployeeId(req?: any): Observable<Lead[]> {
+    return this.http.get<Lead[]>(`/api/employees/${req.id}/leads`)
+      .map((leads: any[]) => leads
+        .map((lead: any) => this.mapper.fromServiceToEntity(lead)))
+      .do((leads: Lead[]) => this.cast.query(leads));
+  }
 }
 
 /**

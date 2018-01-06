@@ -54,6 +54,15 @@ export class EmployeeService {
       .map(() => id)
       .do((id: number) => this.cast.delete(id));
   }
+
+  /* ENTITY */
+
+  queryByLeadId(req?: any): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`/api/leads/${req.id}/employees`)
+      .map((employees: any[]) => employees
+        .map((employee: any) => this.mapper.fromServiceToEntity(employee)))
+      .do((employees: Employee[]) => this.cast.query(employees));
+  }
 }
 
 /**

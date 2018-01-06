@@ -36,8 +36,8 @@ export class LeadDetailComponent implements OnInit {
         this.leadService.find(id).first().subscribe();
         this.leadService.queryEstimates(id).first().subscribe();
         this.leadService.queryInventories(id).first().subscribe();
-        this.customerService.find(id).first().subscribe();
-        this.employeeService.query().first().subscribe();
+        this.customerService.findByLeadId({id: id}).first().subscribe();
+        this.employeeService.queryByLeadId({id: id}).first().subscribe();
       }
     });
   }

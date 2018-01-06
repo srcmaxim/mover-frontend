@@ -30,8 +30,7 @@ export class EmployeeDetailComponent implements OnInit {
         this.leads = this.leadService.multiCast;
 
         this.employeeService.find(id).first().subscribe();
-        //todo: fetch employee leads
-        this.leadService.query().first().subscribe();
+        this.leadService.queryByEmployeeId({id: id}).first().subscribe();
       }
     });
   }

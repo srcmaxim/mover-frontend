@@ -31,8 +31,7 @@ export class CustomerDetailComponent implements OnInit {
         this.leads = this.leadService.multiCast;
 
         this.customerService.find(id).first().subscribe();
-        //todo: fetch customer leads
-        this.leadService.query().first().subscribe();
+        this.leadService.queryByCustomerId({id: id}).first().subscribe();
       }
     });
   }
