@@ -16,7 +16,7 @@ import "rxjs/add/operator/do";
 export class CustomerDetailComponent implements OnInit {
 
   private customer: Observable<Customer>;
-  private leads: Observable<Lead[]>;
+  private customerId: number;
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService,
@@ -25,13 +25,10 @@ export class CustomerDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.take(1).subscribe((params) => {
-      const id = params['id'];
-      if (id) {
+      this.customerId = params['id'];
+      if (this.customerId) {
         this.customer = this.customerService.singleCast;
-        this.leads = this.leadService.multiCast;
-
-        this.customerService.find(id).first().subscribe();
-        this.leadService.queryByCustomerId({id: id}).first().subscribe();
+        this.customerService.find(this.customerId).first().subscribe();
       }
     });
   }

@@ -3,6 +3,7 @@ import {CustomerComponent} from "./customer.component";
 import {CustomerDetailComponent} from "./customer-detail.component";
 import {CustomerDialogComponent} from "./customer-dialog.component";
 import {CustomerDeleteDialogComponent} from "./customer-delete-dialog.component";
+import {LeadAddDialogComponent} from "./entity/lead-add-dialog.component";
 
 export const customerRoute: Routes = [
   {
@@ -28,6 +29,11 @@ export const customerPopupRoute: Routes = [
   {
     path: 'customer/:id/delete',
     component: CustomerDeleteDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'customer/:id/lead/add',
+    component: LeadAddDialogComponent,
     outlet: 'popup'
   }
 ];

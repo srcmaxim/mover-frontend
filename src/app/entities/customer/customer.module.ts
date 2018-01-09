@@ -8,6 +8,8 @@ import {CustomerDetailComponent} from "./customer-detail.component";
 import {CustomerDialogComponent} from "./customer-dialog.component";
 import {CustomerDeleteDialogComponent} from "./customer-delete-dialog.component";
 import {CustomerService} from "./customer.service";
+import {LeadEntityDetailComponent} from "./entity/lead-detail.component";
+import {LeadAddDialogComponent} from "./entity/lead-add-dialog.component";
 
 const ENTITY_STATES = [
   ...customerRoute,
@@ -24,11 +26,16 @@ const ENTITY_STATES = [
     CustomerDetailComponent,
     CustomerDialogComponent,
     CustomerDeleteDialogComponent,
+    LeadEntityDetailComponent,
+    LeadAddDialogComponent
   ],
   entryComponents: [
     CustomerComponent,
+    CustomerDetailComponent,
     CustomerDialogComponent,
     CustomerDeleteDialogComponent,
+    LeadEntityDetailComponent,
+    LeadAddDialogComponent
   ],
   providers: [
     CustomerService

@@ -1,0 +1,61 @@
+<div class="column">
+  <div class="ui top attached block header">
+    <h4>Leads
+      <i class="plus link icon"
+         [routerLink]="['/', { outlets: {  popup: 'customer/' + customerId + '/lead/add'} }]"
+         replaceUrl="true"></i>
+      <i class="repeat link icon" style="float: right" (click)="query()"></i>
+    </h4>
+  </div>
+  <div class="ui bottom attached segment">
+    <div *ngFor="let lead of leads" class="ui card">
+      <div class="content">
+        <table>
+          <tr>
+            <td><h3>Start</h3></td>
+            <td><span>{{(lead.start | customDate)}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>End</h3></td>
+            <td><span>{{(lead.end | customDate)}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Type</h3></td>
+            <td>
+              <div class="ui blue label">{{lead.getTypeToString()}}</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><h3>Status</h3></td>
+            <td>
+              <div class="ui green label">{{lead.getStatusToString()}}</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><h3>Origin</h3></td>
+            <td><span>{{lead.origin.address}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Destination</h3></td>
+            <td><span>{{lead.destination.address}}</span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ui two mini bottom attached buttons">
+        <a [routerLink]="['/lead', lead.id]" class="ui blue button">
+          <i class="unhide icon"> </i>
+          View
+        </a>
+        <a class="ui red button" (click)="remove(lead.id)">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

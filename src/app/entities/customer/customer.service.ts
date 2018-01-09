@@ -61,6 +61,14 @@ export class CustomerService {
       .map((customer: any) => this.mapper.fromServiceToEntity(customer))
       .do((customer: Customer) => this.cast.find(customer));
   }
+
+  addConnectionCustomerLead(customerId: number, leadId: number): Observable<any> {
+    return this.http.put(`/api/customers/${customerId}/leads/${leadId}`, null);
+  }
+
+  removeConnectionCustomerLead(customerId: number, leadId: number): Observable<any> {
+    return this.http.delete(`/api/customers/${customerId}/leads/${leadId}`);
+  }
 }
 
 /**
