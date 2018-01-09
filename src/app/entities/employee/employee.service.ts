@@ -63,6 +63,14 @@ export class EmployeeService {
         .map((employee: any) => this.mapper.fromServiceToEntity(employee)))
       .do((employees: Employee[]) => this.cast.query(employees));
   }
+
+  addConnectionEmployeeLead(employeeId: number, leadId: number): Observable<any> {
+    return this.http.put(`/api/employees/${employeeId}/leads/${leadId}`, null);
+  }
+
+  removeConnectionEmployeeLead(employeeId: number, leadId: number): Observable<any> {
+    return this.http.delete(`/api/employees/${employeeId}/leads/${leadId}`);
+  }
 }
 
 /**

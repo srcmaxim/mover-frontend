@@ -15,7 +15,7 @@ import {Employee} from "./employee.model";
 export class EmployeeDetailComponent implements OnInit {
 
   private employee: Observable<Employee>;
-  private leads: Observable<Lead[]>;
+  private employeeId: number;
 
   constructor(private route: ActivatedRoute,
               private employeeService: EmployeeService,
@@ -24,13 +24,10 @@ export class EmployeeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.take(1).subscribe((params) => {
-      const id = params['id'];
-      if (id) {
+      this.employeeId = params['id'];
+      if (this.employeeId) {
         this.employee = this.employeeService.singleCast;
-        this.leads = this.leadService.multiCast;
-
-        this.employeeService.find(id).first().subscribe();
-        this.leadService.queryByEmployeeId({id: id}).first().subscribe();
+        this.employeeService.find(this.employeeId).first().subscribe();
       }
     });
   }

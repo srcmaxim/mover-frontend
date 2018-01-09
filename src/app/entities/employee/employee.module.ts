@@ -8,6 +8,8 @@ import {EmployeeDetailComponent} from "./employee-detail.component";
 import {EmployeeDialogComponent} from "./employee-dialog.component";
 import {EmployeeDeleteDialogComponent} from "./employee-delete-dialog.component";
 import {EmployeeService} from "./employee.service";
+import {LeadEntityDetailComponent} from "./entity/lead-detail.component";
+import {LeadAddDialogComponent} from "./entity/lead-add-dialog.component";
 
 const ENTITY_STATES = [
   ...employeeRoute,
@@ -24,11 +26,16 @@ const ENTITY_STATES = [
     EmployeeDetailComponent,
     EmployeeDialogComponent,
     EmployeeDeleteDialogComponent,
+    LeadEntityDetailComponent,
+    LeadAddDialogComponent
   ],
   entryComponents: [
     EmployeeComponent,
+    EmployeeDetailComponent,
     EmployeeDialogComponent,
     EmployeeDeleteDialogComponent,
+    LeadEntityDetailComponent,
+    LeadAddDialogComponent
   ],
   providers: [
     EmployeeService
