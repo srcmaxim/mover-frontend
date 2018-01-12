@@ -1,0 +1,42 @@
+<div class="column" >
+  <h4 class="ui top attached block header">
+    <h4>Employees
+      <i class="plus link icon"
+         [routerLink]="['/', { outlets: {  popup: 'lead/' + leadId + '/employee/add'} }]"
+         replaceUrl="true"></i>
+      <i class="repeat link icon" style="float: right" (click)="query()"></i>
+    </h4>
+  </h4>
+  <div class="ui bottom attached segment">
+    <div *ngFor="let employee of employees" class="ui card">
+      <div class="content">
+        <table>
+          <tr>
+            <td><h3>Name</h3></td>
+            <td><span>{{employee.firstName}} {{employee.lastName}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Phone</h3></td>
+            <td><span>{{employee.phone}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Email</h3></td>
+            <td><span>{{employee.email}}</span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ui two mini bottom attached buttons">
+        <a [routerLink]="['/employee', employee.id]" class="ui blue button">
+          <i class="unhide icon"> </i>
+          View
+        </a>
+        <a class="ui red button" (click)="remove(employee.id)">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

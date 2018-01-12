@@ -17,7 +17,7 @@ export class LeadDetailComponent implements OnInit {
 
   private lead: Observable<Lead>;
   private customer: Observable<Customer>;
-  private employees: Observable<Employee[]>;
+  private leadId: number;
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService,
@@ -27,17 +27,15 @@ export class LeadDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.take(1).subscribe((params) => {
-      const id = params['id'];
-      if (id) {
+      this.leadId = params['id'];
+      if (this.leadId) {
         this.lead = this.leadService.singleCast;
         this.customer = this.customerService.singleCast;
-        this.employees = this.employeeService.multiCast;
 
-        this.leadService.find(id).first().subscribe();
-        this.leadService.queryEstimates(id).first().subscribe();
-        this.leadService.queryInventories(id).first().subscribe();
-        this.customerService.findByLeadId({id: id}).first().subscribe();
-        this.employeeService.queryByLeadId({id: id}).first().subscribe();
+        this.leadService.find(this.leadId).first().subscribe();
+        this.leadService.queryEstimates(this.leadId).first().subscribe();
+        this.leadService.queryInventories(this.leadId).first().subscribe();
+        this.customerService.findByLeadId({id: this.leadId}).first().subscribe();
       }
     });
   }

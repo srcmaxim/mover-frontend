@@ -1,0 +1,50 @@
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui fullscreen modal transition visible active"
+       style="margin-top: -20em; display: block !important;">
+
+    <div class="content">
+
+      <form [formGroup]="query" class="ui equal width form" class="ui form">
+        <div class="field">
+          <label>Query Employees</label>
+          <input (keyup)="onChange()" formControlName="employee" type="text" placeholder="Query">
+        </div>
+      </form>
+
+      <div class="list">
+
+        <div *ngFor="let employee of employees | async" class="ui card">
+          <div class="content">
+            <table>
+              <tr>
+                <td><h3>Name</h3></td>
+                <td><span>{{employee.firstName}} {{employee.lastName}}</span></td>
+              </tr>
+
+              <tr>
+                <td><h3>Phone</h3></td>
+                <td><span>{{employee.phone}}</span></td>
+              </tr>
+
+              <tr>
+                <td><h3>Email</h3></td>
+                <td><span>{{employee.email}}</span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="ui mini bottom attached buttons">
+            <a class="ui green button" (click)="add(employee.id)">
+              <i class="plus icon"> </i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" (click)="onClose()">
+        Close
+      </div>
+    </div>
+  </div>
+</div>

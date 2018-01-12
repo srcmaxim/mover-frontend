@@ -104,39 +104,5 @@
     </div>
   </div>
 
-  <div class="column" >
-    <h4 class="ui top attached block header">Employees</h4>
-    <div class="ui bottom attached segment">
-      <div *ngFor="let employee of employees | async" class="ui card">
-        <div class="content">
-          <table>
-            <tr>
-              <td><h3>Name</h3></td>
-              <td><span>{{employee.firstName}} {{employee.lastName}}</span></td>
-            </tr>
-
-            <tr>
-              <td><h3>Phone</h3></td>
-              <td><span>{{employee.phone}}</span></td>
-            </tr>
-
-            <tr>
-              <td><h3>Email</h3></td>
-              <td><span>{{employee.email}}</span></td>
-            </tr>
-          </table>
-        </div>
-        <div class="ui two mini bottom attached buttons">
-          <a [routerLink]="['/employee', employee.id]" class="ui blue button">
-            <i class="unhide icon"> </i>
-            View
-          </a>
-          <a class="ui red button">
-            <i class="remove icon"> </i>
-            Delete
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-employee-entity-detail  class="column" [leadId]="leadId"></app-employee-entity-detail>
 </div>
