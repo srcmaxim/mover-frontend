@@ -67,42 +67,9 @@
     </div>
   </div>
 
-  <app-estimate-detail  class="column" [leadId]="(lead | async)?.id"></app-estimate-detail>
-  <app-inventory-detail class="column" [leadId]="(lead | async)?.id"></app-inventory-detail>
+  <app-estimate-detail  class="column" [leadId]="leadId"></app-estimate-detail>
+  <app-inventory-detail class="column" [leadId]="leadId"></app-inventory-detail>
 
-  <div class="column">
-    <h4 class="ui top attached block header">Customer</h4>
-    <div class="ui middle attached segment">
-      <table>
-        <tr>
-          <td><h3>Name</h3></td>
-          <td><span>{{(customer | async)?.firstName}} {{(customer | async)?.lastName}}</span></td>
-        </tr>
-
-        <tr>
-          <td><h3>Phone</h3></td>
-          <td><span>{{(customer | async)?.phone}}</span></td>
-        </tr>
-
-        <tr>
-          <td><h3>Email</h3></td>
-          <td><span>{{(customer | async)?.email}}</span></td>
-        </tr>
-      </table>
-    </div>
-    <div class="ui bottom attached segment">
-      <div class="ui mini buttons">
-        <a [routerLink]="['/customer', (customer | async)?.id]" class="ui blue compact button">
-          <i class="unhide icon"> </i>
-          View
-        </a>
-        <a class="ui red compact button">
-          <i class="remove icon"> </i>
-          Delete
-        </a>
-      </div>
-    </div>
-  </div>
-
+  <app-customer-entity-detail  class="column" [leadId]="leadId"></app-customer-entity-detail>
   <app-employee-entity-detail  class="column" [leadId]="leadId"></app-employee-entity-detail>
 </div>

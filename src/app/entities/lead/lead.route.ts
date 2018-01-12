@@ -6,6 +6,7 @@ import {LeadDeleteDialogComponent} from "./lead-delete-dialog.component";
 import {EstimateDialogComponent} from "./embedded/estimate-dialog.component";
 import {InventoryDialogComponent} from "./embedded/inventory-dialog.component";
 import {EmployeeAddDialogComponent} from "./entities/employee-add-dialog.component";
+import {CustomerChangeDialogComponent} from "./entities/customer-change-dialog.component";
 
 
 export const leadRoute: Routes = [
@@ -57,6 +58,11 @@ export const leadPopupRoute: Routes = [
   {
     path: 'lead/:id/employee/add',
     component: EmployeeAddDialogComponent,
+    outlet: 'popup'
+  },
+  {
+    path: 'lead/:id/customer/change',
+    component: CustomerChangeDialogComponent,
     outlet: 'popup'
   }
 ];

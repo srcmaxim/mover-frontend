@@ -56,7 +56,7 @@ export class CustomerService {
 
   /* ENTITY */
 
-  findByLeadId(req?: any): Observable<Customer[]> {
+  findByLeadId(req?: any): Observable<Customer> {
     return this.http.get<Customer>(`/api/leads/${req.id}/customer`)
       .map((customer: any) => this.mapper.fromServiceToEntity(customer))
       .do((customer: Customer) => this.cast.find(customer));

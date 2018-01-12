@@ -1,0 +1,42 @@
+<div class="column" >
+  <h4 class="ui top attached block header">
+    <h4>Customer
+      <i class="exchange link icon"
+         [routerLink]="['/', { outlets: {  popup: 'lead/' + leadId + '/customer/change'} }]"
+         replaceUrl="true"></i>
+      <i class="repeat link icon" style="float: right" (click)="query()"></i>
+    </h4>
+  </h4>
+  <div class="ui bottom attached segment">
+    <div *ngIf="customer != null" class="ui card">
+      <div class="content">
+        <table>
+          <tr>
+            <td><h3>Name</h3></td>
+            <td><span>{{customer.firstName}} {{customer.lastName}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Phone</h3></td>
+            <td><span>{{customer.phone}}</span></td>
+          </tr>
+
+          <tr>
+            <td><h3>Email</h3></td>
+            <td><span>{{customer.email}}</span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ui two mini bottom attached buttons">
+        <a [routerLink]="['/customer', customer.id]" class="ui blue button">
+          <i class="unhide icon"> </i>
+          View
+        </a>
+        <a class="ui red button" (click)="remove(customer.id)">
+          <i class="remove icon"> </i>
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

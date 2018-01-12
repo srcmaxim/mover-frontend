@@ -16,12 +16,9 @@ import {EmployeeService} from "../employee/employee.service";
 export class LeadDetailComponent implements OnInit {
 
   private lead: Observable<Lead>;
-  private customer: Observable<Customer>;
   private leadId: number;
 
   constructor(private route: ActivatedRoute,
-              private customerService: CustomerService,
-              private employeeService: EmployeeService,
               private leadService: LeadService) {
   }
 
@@ -30,13 +27,10 @@ export class LeadDetailComponent implements OnInit {
       this.leadId = params['id'];
       if (this.leadId) {
         this.lead = this.leadService.singleCast;
-        this.customer = this.customerService.singleCast;
-
         this.leadService.find(this.leadId).first().subscribe();
         this.leadService.queryEstimates(this.leadId).first().subscribe();
         this.leadService.queryInventories(this.leadId).first().subscribe();
-        this.customerService.findByLeadId({id: this.leadId}).first().subscribe();
-      }
+       }
     });
   }
 }

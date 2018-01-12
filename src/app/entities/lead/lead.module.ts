@@ -14,6 +14,8 @@ import {EstimateDialogComponent} from "./embedded/estimate-dialog.component";
 import {InventoryDialogComponent} from "./embedded/inventory-dialog.component";
 import {EmployeeEntityDetailComponent} from "./entities/employee-detail.component";
 import {EmployeeAddDialogComponent} from "./entities/employee-add-dialog.component";
+import {CustomerEntityDetailComponent} from "./entities/customer-detail.component";
+import {CustomerChangeDialogComponent} from "./entities/customer-change-dialog.component";
 
 const ENTITY_STATES = [
   ...leadRoute,
@@ -35,7 +37,9 @@ const ENTITY_STATES = [
     LeadDialogComponent,
     LeadDeleteDialogComponent,
     EmployeeEntityDetailComponent,
-    EmployeeAddDialogComponent
+    EmployeeAddDialogComponent,
+    CustomerEntityDetailComponent,
+    CustomerChangeDialogComponent
   ],
   entryComponents: [
     LeadComponent,
@@ -47,7 +51,9 @@ const ENTITY_STATES = [
     LeadDialogComponent,
     LeadDeleteDialogComponent,
     EmployeeEntityDetailComponent,
-    EmployeeAddDialogComponent
+    EmployeeAddDialogComponent,
+    CustomerEntityDetailComponent,
+    CustomerChangeDialogComponent
   ],
   providers: [
     LeadService
