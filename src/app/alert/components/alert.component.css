@@ -1,0 +1,18 @@
+.icon {
+  right: 1em !important;
+}
+
+.row {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  z-index: 100000;
+}
+
+.message {
+  opacity: 0.8;
+}
+
+ul {
+  margin: 0
+}

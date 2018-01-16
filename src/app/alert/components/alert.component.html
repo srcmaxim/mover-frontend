@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="column">
+    <div *ngFor="let alert of alerts"
+         class="ui tiny message"
+         [ngClass]="alert.type">
+      <i class="close icon" (click)="remove(alert)"></i>
+
+      <!--info-->
+      <div *ngIf="alert.type === 'info'">
+        <div class="header">
+          Alert: '{{alert.message}}' Params: '{{alert.params}}'
+        </div>
+        {{JSON.stringify(alert)}}
+      </div>
+      <!--info-->
+
+      <!--error-->
+      <div *ngIf="alert.type === 'error'">
+        <div class="header">
+          Error: '{{alert.message}}' StatusText: '{{alert.statusText}}'
+        </div>
+        <span *ngIf="alert.fieldErrors">FieldErrors:</span>
+        <ul *ngFor="let err of alert.fieldErrors">
+          <li>Object: '{{err.objectName}}' Field: '{{err.field}}' Message: '{{err.message}}'</li>
+        </ul>
+        <span *ngIf="alert.paramMap">Params: {{JSON.stringify(alert.paramMap)}} </span>
+        {{JSON.stringify(alert)}}
+      </div>
+      <!--error-->
+
+    </div>
+  </div>
+</div>
