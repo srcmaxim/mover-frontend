@@ -1,15 +1,18 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {SharedCommonModule, SharedLibsModule} from './';
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   imports: [
     SharedLibsModule,
-    SharedCommonModule
+    SharedCommonModule,
+    AuthModule
   ],
   declarations: [],
   providers: [],
   exports: [
-    SharedCommonModule
+    SharedCommonModule,
+    AuthModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

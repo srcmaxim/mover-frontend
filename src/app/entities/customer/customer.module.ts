@@ -10,6 +10,8 @@ import {CustomerDeleteDialogComponent} from "./customer-delete-dialog.component"
 import {CustomerService} from "./customer.service";
 import {LeadEntityDetailComponent} from "./entity/lead-detail.component";
 import {LeadAddDialogComponent} from "./entity/lead-add-dialog.component";
+import {AuthService} from "../../shared/auth/services/auth.service";
+import {AuthGuard} from "../../shared/auth/auth.guard";
 
 const ENTITY_STATES = [
   ...customerRoute,
@@ -38,7 +40,9 @@ const ENTITY_STATES = [
     LeadAddDialogComponent
   ],
   providers: [
-    CustomerService
+    CustomerService,
+    AuthGuard,
+    AuthService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

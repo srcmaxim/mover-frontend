@@ -10,6 +10,8 @@ import {EmployeeDeleteDialogComponent} from "./employee-delete-dialog.component"
 import {EmployeeService} from "./employee.service";
 import {LeadEntityDetailComponent} from "./entity/lead-detail.component";
 import {LeadAddDialogComponent} from "./entity/lead-add-dialog.component";
+import {AuthGuard} from "../../shared/auth/auth.guard";
+import {AuthService} from "../../shared/auth/services/auth.service";
 
 const ENTITY_STATES = [
   ...employeeRoute,
@@ -38,7 +40,9 @@ const ENTITY_STATES = [
     LeadAddDialogComponent
   ],
   providers: [
-    EmployeeService
+    EmployeeService,
+    AuthGuard,
+    AuthService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

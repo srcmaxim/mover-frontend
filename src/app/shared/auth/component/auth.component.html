@@ -1,0 +1,33 @@
+<div class="ui dimmer modals page transition visible active" style="display: block !important;">
+  <div appmodal class="ui modal transition visible active"
+       style="margin-top: -20em; display: block !important;">
+
+    <div class="header">
+      Login User: {{credentials.value | json}} -- {{credentials.status | json}}
+    </div>
+    <div class="content">
+
+      <form [formGroup]="credentials" class="ui equal width form">
+
+        <div class="field">
+          <label>Username</label>
+          <input formControlName="username" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input formControlName="password" type="text" placeholder="Password">
+        </div>
+      </form>
+
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" (click)="onClose()">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button" (click)="onLogin()">
+        Login
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
+</div>

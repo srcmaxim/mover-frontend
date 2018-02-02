@@ -16,6 +16,8 @@ import {EmployeeEntityDetailComponent} from "./entities/employee-detail.componen
 import {EmployeeAddDialogComponent} from "./entities/employee-add-dialog.component";
 import {CustomerEntityDetailComponent} from "./entities/customer-detail.component";
 import {CustomerChangeDialogComponent} from "./entities/customer-change-dialog.component";
+import {AuthGuard} from "../../shared/auth/auth.guard";
+import {AuthService} from "../../shared/auth/services/auth.service";
 
 const ENTITY_STATES = [
   ...leadRoute,
@@ -56,7 +58,9 @@ const ENTITY_STATES = [
     CustomerChangeDialogComponent
   ],
   providers: [
-    LeadService
+    LeadService,
+    AuthGuard,
+    AuthService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
