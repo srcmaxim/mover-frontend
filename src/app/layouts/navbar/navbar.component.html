@@ -1,9 +1,9 @@
 <div class="ui secondary  menu">
   <a class="item" [routerLink]="['/']"         [routerLinkActive]="['active']"
-     [routerLinkActiveOptions]="{exact: true}"> Mover </a>
-  <a class="item" [routerLink]="['/lead']"     [routerLinkActive]="['active']"> Leads </a>
-  <a class="item" [routerLink]="['/customer']" [routerLinkActive]="['active']"> Customers </a>
-  <a class="item" [routerLink]="['/employee']" [routerLinkActive]="['active']"> Employees </a>
+     [routerLinkActiveOptions]="{exact: true}" translate>Mover</a>
+  <a class="item" [routerLink]="['/lead']"     [routerLinkActive]="['active']" translate>Leads</a>
+  <a class="item" [routerLink]="['/customer']" [routerLinkActive]="['active']" translate>Customers</a>
+  <a class="item" [routerLink]="['/employee']" [routerLinkActive]="['active']" translate>Employees</a>
 
   <div class="right menu">
     <div class="ui text menu">
@@ -19,11 +19,11 @@
       </div>
 
       <div class="ui right dropdown item" appDropdown tabindex="0">
-        <i class="us flag"></i>
+        <i class="flag" ngClass="{{lang}}"></i>
         <i class="dropdown icon"></i>
         <div class="menu left transition hidden" tabindex="-1">
-          <div class="item"><i class="us flag"></i></div>
-          <div class="item"><i class="ru flag"></i></div>
+          <div class="item" (click)="switchLanguage('us')"><i class="us flag"></i></div>
+          <div class="item" (click)="switchLanguage('ru')"><i class="ru flag"></i></div>
         </div>
       </div>
 

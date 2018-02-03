@@ -1,16 +1,11 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {SharedCommonModule, SharedLibsModule} from './';
 import {AuthModule} from "./auth/auth.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  imports: [
-    SharedLibsModule,
-    SharedCommonModule,
-    AuthModule
-  ],
-  declarations: [],
-  providers: [],
   exports: [
+    SharedLibsModule,
     SharedCommonModule,
     AuthModule
   ],
